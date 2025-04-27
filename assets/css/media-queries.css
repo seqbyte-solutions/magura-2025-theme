@@ -1,0 +1,13 @@
+@media only screen and (max-width: 768px) {
+  .maintenance-content {
+    flex-direction: column;
+  }
+  .maintenance-content-text {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+  }
+  .maintenance-image-container {
+    display: none;
+  }
+}/*# sourceMappingURL=media-queries.css.map */

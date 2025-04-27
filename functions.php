@@ -1,19 +1,25 @@
 <?php
 
+namespace Magura2025;
+
 if ( ! defined( 'ABSPATH' ) ) {
     exit; // Exit if accessed directly
 }
 
-namespace Magura2025;
-
 class Magura2025Theme{
     // Singleton instance
     private static $instance = null;
+
+    private Magura2025ThemeSetup $setup;
+    private Magura2025TemplateHandler $template_handler;
     
     // Make constructor private to prevent direct instantiation
     private function __construct() {
         $this->load_dependencies();
         $this->set_constants();
+
+        $this->setup = new Magura2025ThemeSetup();
+        $this->template_handler = new Magura2025TemplateHandler();
     }
     
     /**
@@ -29,6 +35,8 @@ class Magura2025Theme{
     }
 
     private function load_dependencies() {
+        require_once get_theme_file_path('/includes/classes/pages.class.php');
+        require_once get_theme_file_path('/includes/classes/menus.class.php');
         require_once get_theme_file_path('/includes/classes/setup.class.php');
         require_once get_theme_file_path('/includes/classes/template-handler.class.php');
     }
@@ -40,6 +48,11 @@ class Magura2025Theme{
         if ( ! defined( 'MAGURA_2025_THEME_PATH' ) ) {
             define( 'MAGURA_2025_THEME_PATH', get_template_directory() );
         }
+    }
+
+    public function get_template_handler(): Magura2025TemplateHandler
+    {
+        return $this->template_handler;
     }
 }
 

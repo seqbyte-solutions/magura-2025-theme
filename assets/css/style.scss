@@ -1,0 +1,34 @@
+.hero-section{
+    padding-top: 100px;
+    padding-bottom: 120px;
+    position: relative;
+    background: linear-gradient(180deg, var(--red) 05%, var(--white) 100%);
+    // min-height: 100vh;
+}
+
+.hero-map-container{
+    // padding: 0px 50px;
+    filter: drop-shadow(0px 0px 35px rgba(255, 255, 255, 0.8));
+}
+
+.hero-cta{
+    font-family: 'Baloo2';
+    color: var(--white);
+    width: max-content;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.3rem;    
+    position: relative;
+    display: block;
+    border-radius: 100px;
+    padding: 8px 35px;
+    border: 2px solid var(--white);
+    background: var(--red);
+    margin-inline: auto;
+    transition: 0.2s ease;
+
+    &:hover{
+        background: var(--light-red);
+        color: var(--red);
+    }
+}
