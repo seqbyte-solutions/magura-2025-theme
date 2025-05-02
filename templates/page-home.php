@@ -83,11 +83,21 @@
             get_template_part('parts/hero-map');
             ?>
         </div>
+        <div class="hero-map-container">
+            <?php
+            get_template_part('parts/hero-map-2');
+            ?>
+        </div>
+        <div class="hero-map-container">
+            <?php
+            get_template_part('parts/hero-map-3');
+            ?>
+        </div>
     </div>
-    
+
 </section>
 
 <section style="min-height: 200vh;">
-<div class="content-box content-centered">
+    <div class="content-box content-centered">
     </div>
 </section>
