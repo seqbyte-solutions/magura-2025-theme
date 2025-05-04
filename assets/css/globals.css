@@ -152,4 +152,26 @@ html {
   padding-top: var(--hero-section-padding-top);
   background: linear-gradient(180deg, var(--red) 5%, var(--white) 100%);
   min-height: 100vh;
+}
+
+.heading-red {
+  color: var(--red);
+}
+
+.heading-white {
+  color: var(--white);
+}
+
+.heading-container {
+  padding-block: 15px 25px;
+}
+.heading-container h2 {
+  font-family: "Baloo2";
+  font-size: 3.5rem;
+  line-height: 4rem;
+  font-weight: 700;
+}
+
+.heading-container-centered h2 {
+  text-align: center;
 }/*# sourceMappingURL=globals.css.map */

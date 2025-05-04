@@ -3,6 +3,7 @@
   width: 100%;
   padding-inline: 10px;
   color: var(--white);
+  font-family: "Baloo2";
 }
 
 .footer-content {
@@ -12,4 +13,14 @@
 
 .footer-copyrights {
   padding-block: 15px;
+}
+
+.footer-row {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+.footer-row-column {
+  width: 25%;
 }/*# sourceMappingURL=footer.css.map */

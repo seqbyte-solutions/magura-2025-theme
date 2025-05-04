@@ -1,1 +1,1 @@
-.footer{background:var(--red);width:100%;padding-inline:10px;color:var(--white)}.footer-content{padding-top:30px;padding-bottom:20px}.footer-copyrights{padding-block:15px}/*# sourceMappingURL=footer.min.css.map */
+.footer{background:var(--red);width:100%;padding-inline:10px;color:var(--white);font-family:"Baloo2"}.footer-content{padding-top:30px;padding-bottom:20px}.footer-copyrights{padding-block:15px}.footer-row{display:flex;flex-direction:row;gap:10px}.footer-row-column{width:25%}/*# sourceMappingURL=footer.min.css.map */

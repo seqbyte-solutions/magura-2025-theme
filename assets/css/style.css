@@ -164,4 +164,10 @@
 }
 .prize-item:hover svg path:nth-of-type(2) {
   transform: rotate(-18deg);
+}
+
+.prizes-section {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  position: relative;
 }/*# sourceMappingURL=style.css.map */

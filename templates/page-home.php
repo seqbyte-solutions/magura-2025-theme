@@ -1,5 +1,6 @@
 <?php
-wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontpage.js', ['gsap']);
+wp_enqueue_script('gsap-scrollTrigger', MAGURA_2025_THEME_URL . '/assets/js/gsap-public/minified/ScrollTrigger.min.js', ['gsap']);
+wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontpage.js', ['gsap', 'gsap-scrollTrigger']);
 ?>
 
 <section class="hero-section section-lateral-padding">
@@ -82,27 +83,26 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
 
 <section class="magura-map-section section-lateral-padding">
     <div class="content-box content-centered">
-        <div class="magura-map-container">
+        <!-- <div class="magura-map-container">
             <?php
-            get_template_part('parts/hero-map');
+            // get_template_part('parts/hero-map');
             ?>
-        </div>
-        <div class="hero-map-container">
+        </div> -->
+        <div class="magura-map-container">
             <?php
             get_template_part('parts/hero-map-2');
             ?>
         </div>
-        <div class="hero-map-container">
-            <?php
-            get_template_part('parts/hero-map-3');
-            ?>
-        </div>
+
     </div>
 </section>
 
 <section class="prizes-section section-lateral-padding">
     <div class="content-box content-centered">
-        <div class=prizes-container>
+        <div class="heading-container heading-container-centered heading-red">
+            <h2>Ce poți câștiga</h2>
+        </div>
+        <div id="prizes-container" class=prizes-container>
             <div class="prize-item">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
                     <path d="m239.01,341.86c-120.53-4.38-179.69-122.72-173.12-201.61C71.87,68.58,87.81,0,197.38,0c135.87,0,258.58,116.14,262.97,181.89,3.07,46.12-111.69,163.96-221.33,159.97Z" style="fill: #F9BAC5; opacity: .45;" />
@@ -111,8 +111,8 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                 <div class="prize-item-content">
                     <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_ghiozdan.png" alt="">
                     <div class="prize-item-content-text">
-                    <h4>1500x</h4>
-                    <p>Rucsac Măgura<br/>[Diverse culori]</p>
+                        <h4>1500x</h4>
+                        <p>Rucsac Măgura<br />[Diverse culori]</p>
                     </div>
                 </div>
             </div>
@@ -124,8 +124,8 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                 <div class="prize-item-content">
                     <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_vacanta.png" alt="">
                     <div class="prize-item-content-text">
-                    <h4>5x</h4>
-                    <h3>Marele<br/>premiu</h3>
+                        <h4>5x</h4>
+                        <h3>Marele<br />premiu</h3>
                     </div>
                 </div>
             </div>
@@ -138,7 +138,7 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                     <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_cani.png" alt="">
                     <div class="prize-item-content-text">
                         <h4>750x</h4>
-                        <p>Set Măgura<br/>2 cești + 2 prăjituri</p>
+                        <p>Set Măgura<br />2 cești + 2 prăjituri</p>
                     </div>
                 </div>
             </div>
@@ -146,8 +146,16 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
     </div>
 </section>
 
-<section class="section-lateral-padding">
+<section class="section-lateral-padding how-to-win-section">
     <div class="content-box content-centered">
-        
+        <div class="heading-container heading-container-centered heading-red">
+            <h2>Cum poți câștiga</h2>
+        </div>
+        <div>
+
+        </div>
+        <div>
+            
+        </div>
     </div>
 </section>

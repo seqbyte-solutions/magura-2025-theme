@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
+    // Check if GSAP is loaded
+    if (typeof gsap === 'undefined') {
+        console.error('GSAP library is not loaded. Please include the GSAP script.');
+        return;
+    }
+
     const headingTl = gsap.timeline();
     headingTl.from("#headliner-text-castiga", {
         duration: 0.3,
@@ -37,5 +43,39 @@ document.addEventListener("DOMContentLoaded", function () {
         delay: 0.2,
         duration: 0.2,
         ease: "power2.out",
-    })
+    });
+
+    gsap.registerPlugin(ScrollTrigger);
+    
+    gsap.from(".magura-map-container", {
+        scrollTrigger: {
+            trigger: ".magura-map-section",
+            start: "40% center",
+            end: "bottom 20%",
+            onEnter: function() {
+                const mapVisibleEvent = new CustomEvent('mapSectionVisible', {
+                    detail: {
+                        timestamp: Date.now(),
+                        triggerElement: ".magura-map-section"
+                    }
+                });
+                document.dispatchEvent(mapVisibleEvent);
+                console.log('Map section is now visible - event dispatched');
+            }
+        },
+    });
+
+    gsap.from('.prize-item', {
+        scrollTrigger: {
+            trigger: ".prizes-container",
+            start: "30% 70%",
+            end: "80% 80%",
+            scrub: 1,
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
 });
