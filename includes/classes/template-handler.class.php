@@ -11,10 +11,15 @@ class Magura2025TemplateHandler {
         add_action('wp_head', [$this, 'set_head']);
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
     public function set_head() {
         include get_theme_file_path('/parts/head.php');
+    }
+
+    public function enqueue_scripts() {
+        wp_enqueue_script('gsap', MAGURA_2025_THEME_URL . '/assets/js/gsap-public/minified/gsap.min.js', [], '3.13.0');
     }
 
     public function enqueue_styles() {
@@ -48,7 +53,15 @@ class Magura2025TemplateHandler {
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+            <title>
+               <?php
+                if(is_front_page()) {
+                    echo 'Câștigă cu Măgura dintr-o îmbratișare! | Măgura';
+                } else {
+                    echo get_the_title($post->ID) . ' | Măgura';
+                }
+               ?> 
+            </title>
 
             <?php
             wp_head();

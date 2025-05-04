@@ -4,6 +4,7 @@
   --light-red: #F9BAC5;
   --blaack: #1a1a1a;
   --box-width: 1360px;
+  --hero-section-padding-top: 100px;
 }
 
 @font-face {
@@ -141,4 +142,14 @@ html {
 
 .maintenance-countdown {
   margin-top: 35px;
+}
+
+.section-lateral-padding {
+  padding-inline: 10px;
+}
+
+.page-hero-section {
+  padding-top: var(--hero-section-padding-top);
+  background: linear-gradient(180deg, var(--red) 5%, var(--white) 100%);
+  min-height: 100vh;
 }/*# sourceMappingURL=globals.css.map */
