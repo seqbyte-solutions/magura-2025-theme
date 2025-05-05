@@ -7,6 +7,9 @@
   z-index: 9999;
   transition: 0.3s ease;
 }
+.header.header-other-pages {
+  background: var(--red);
+}
 
 .header-with-admin-bar {
   top: 32px;

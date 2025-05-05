@@ -4,7 +4,7 @@
 
 <section class="section-lateral-padding page-hero-section">
     <div class="content-box content-centered">
-        <div class="heading-container heading-container-centered heading-white">
+        <div class="heading-container heading-container-centered heading-red">
             <h2><?php echo get_the_title($post->ID); ?></h2>
         </div>
         <div class="utils-page-content">

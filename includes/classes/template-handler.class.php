@@ -72,7 +72,7 @@ class Magura2025TemplateHandler {
             get_template_part('parts/header');
             ?>
 
-            <main>
+            <main class="page-main">
                 <?php
                     $this->render_page_template();
                 ?>

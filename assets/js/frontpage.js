@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     gsap.registerPlugin(ScrollTrigger);
+    gsap.registerPlugin(DrawSVGPlugin) 
     
     gsap.from(".magura-map-container", {
         scrollTrigger: {
@@ -74,6 +75,112 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         opacity: 0,
         y: 50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+
+
+    gsap.from('.how-to-win-cart', {
+        scrollTrigger: {
+            trigger: ".how-to-win-first-row",
+            start: "0% 70%",
+            end: "10% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        x: -50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+    gsap.from('.how-to-win-first-row-line', {
+        scrollTrigger: {
+            trigger: ".how-to-win-first-row",
+            start: "10% 70%",
+            end: "50% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        drawSVG: 0,
+    });
+    gsap.from('.how-to-win-first-row-text', {
+        scrollTrigger: {
+            trigger: ".how-to-win-first-row",
+            start: "30% 70%",
+            end: "40% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+    gsap.from('.how-to-win-laptop', {
+        scrollTrigger: {
+            trigger: ".how-to-win-first-row",
+            start: "40% 70%",
+            end: "50% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        x: 50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+    gsap.from('.how-to-win-pin', {
+        scrollTrigger: {
+            trigger: ".how-to-win-second-row",
+            start: "0% 70%",
+            end: "10% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        y: -50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+    gsap.from('.how-to-win-second-row-line', {
+        scrollTrigger: {
+            trigger: ".how-to-win-second-row",
+            start: "10% 70%",
+            end: "50% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        drawSVG: 0,
+    });
+    gsap.from('.how-to-win-second-row-text', {
+        scrollTrigger: {
+            trigger: ".how-to-win-second-row",
+            start: "30% 70%",
+            end: "40% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        y: 50,
+        duration: 0.6,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+    gsap.from('.how-to-win-gift', {
+        scrollTrigger: {
+            trigger: ".how-to-win-second-row",
+            start: "40% 70%",
+            end: "50% 70%",
+            scrub: 1,
+            markers: false,
+        },
+        opacity: 0,
+        x: 50,
         duration: 0.6,
         stagger: 0.2,
         ease: "power2.out"

@@ -1,4 +1,4 @@
-<header class="header <?php if (is_admin_bar_showing()) echo 'header-with-admin-bar'; ?>">
+<header class="header <?php if (is_admin_bar_showing()) echo 'header-with-admin-bar'; ?> <?php if (!is_front_page()) echo 'header-other-pages'; ?>">
     <div class="header-content-container">
         <div class="header-content content-box content-centered">
             <div class="header-logo-container">

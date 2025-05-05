@@ -150,7 +150,7 @@ html {
 
 .page-hero-section {
   padding-top: var(--hero-section-padding-top);
-  background: linear-gradient(180deg, var(--red) 5%, var(--white) 100%);
+  background: var(--white);
   min-height: 100vh;
 }
 
@@ -171,7 +171,24 @@ html {
   line-height: 4rem;
   font-weight: 700;
 }
+.heading-container h3 {
+  font-family: "Baloo2";
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 700;
+}
 
-.heading-container-centered h2 {
+.heading-container-centered h2, .heading-container-centered h3 {
   text-align: center;
+}
+
+.utils-page-content {
+  font-family: "Gotham Round Book";
+}
+.utils-page-content p {
+  margin-bottom: 15px;
+}
+
+.page-main {
+  padding-bottom: 100px;
 }/*# sourceMappingURL=globals.css.map */
