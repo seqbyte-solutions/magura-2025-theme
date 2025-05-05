@@ -316,4 +316,40 @@
   font-size: 1.2rem;
   line-height: 1.5rem;
   color: var(--black);
+}
+
+#headliner-text-castiga {
+  opacity: 0;
+  transform: translateY(100px);
+  transform-box: fill-box;
+}
+
+#headliner-text-cu {
+  opacity: 0;
+  transform: scaleX(0.5) translateX(-50px);
+  transform-origin: left center;
+  transform-box: fill-box;
+}
+
+#headliner-logo {
+  opacity: 0;
+}
+
+#headliner-text-dintr-o {
+  opacity: 0;
+  transform: scaleY(0.5) translateY(-50px) rotateX(90deg);
+  transform-origin: center top;
+  transform-box: fill-box;
+}
+
+#headliner-text-imbratisare {
+  opacity: 0;
+  transform: translateY(-100px);
+  transform-origin: center top;
+  transform-box: fill-box;
+}
+
+.hero-cta {
+  opacity: 0;
+  transform: translateY(50px);
 }/*# sourceMappingURL=style.css.map */

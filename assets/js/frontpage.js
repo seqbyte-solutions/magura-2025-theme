@@ -6,40 +6,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const headingTl = gsap.timeline();
-    headingTl.from("#headliner-text-castiga", {
+    headingTl.to("#headliner-text-castiga", {
         duration: 0.3,
-        opacity: 0,
-        y: 100,
+        opacity: 1,
+        y: 0,
         ease: "power2.out",
         delay: 0.4,
-    }).from("#headliner-text-cu", {
+    }).to("#headliner-text-cu", {
         duration: 0.2,
-        scaleX: 0.5,
-        opacity: 0,
-        x:-50,
+        scaleX: 1,
+        opacity: 1,
+        x: 0,
         transformOrigin: "left",
         ease: "power2.out",
-    }).from("#headliner-logo", {
-        opacity: 0,
-        duration:0.2,
+    }).to("#headliner-logo", {
+        opacity: 1,
+        duration: 0.2,
         ease: "power2.out",
-    }).from("#headliner-text-dintr-o", {
-        opacity: 0,
-        duration:0.3,
-        scaleY: 0.5,
-        y:-50,
-        rotateX: 90,
+    }).to("#headliner-text-dintr-o", {
+        opacity: 1,
+        duration: 0.3,
+        scaleY: 1,
+        y: 0,
+        rotateX: 0,
         transformOrigin: "top",
         ease: "power2.out",
-    },"=+0.1").from("#headliner-text-imbratisare", {
-        opacity: 0,
-        duration:0.3,
-        y:-100,
+    },"=+0.1").to("#headliner-text-imbratisare", {
+        opacity: 1,
+        duration: 0.3,
+        y: 0,
         transformOrigin: "top",
         ease: "power2.out",
-    }).from(".hero-cta", {
-        y: 50,
-        opacity: 0,
+    }).to(".hero-cta", {
+        y: 0,
+        opacity: 1,
         delay: 0.2,
         duration: 0.2,
         ease: "power2.out",
