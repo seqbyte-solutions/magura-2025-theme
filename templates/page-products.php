@@ -1,4 +1,6 @@
 <?php
+wp_enqueue_script('gsap-scrollTrigger', MAGURA_2025_THEME_URL . '/assets/js/gsap-public/minified/ScrollTrigger.min.js', ['gsap']);
+wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/products.js', ['gsap', 'gsap-scrollTrigger']);
 
 $cakes = [
     'Lapte' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Lapte.png',
