@@ -20,6 +20,11 @@ class Magura2025TemplateHandler {
 
     public function enqueue_scripts() {
         wp_enqueue_script('gsap', MAGURA_2025_THEME_URL . '/assets/js/gsap-public/minified/gsap.min.js', [], '3.13.0');
+
+        wp_enqueue_script('magura-script', MAGURA_2025_THEME_URL . '/assets/js/script.js', ['gsap']);
+        wp_localize_script('magura-script', 'maguraScript', [
+            'mouseImagePath' => MAGURA_2025_THEME_URL . '/assets/img/fluture_mouse.svg'
+        ]);
     }
 
     public function enqueue_styles() {
