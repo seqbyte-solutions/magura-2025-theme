@@ -4,7 +4,7 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/produc
 
 $cakes = [
     'Lapte' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Lapte.png',
-    'Cacao' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Cacao.png',
+    'Ciocolată' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Cacao.png',
     'Căpșuni' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Capsuni.png',
     'Rom' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Rom.png',
     'Alune' => MAGURA_2025_THEME_URL . '/assets/img/products/Magura-Prajitura-Alune.png',
@@ -12,12 +12,14 @@ $cakes = [
     'Mascarpone & Rodie' => MAGURA_2025_THEME_URL . '/assets/img/products/magura-red-rodie.png',
     'Bubblegum' => MAGURA_2025_THEME_URL . '/assets/img/products/magura-red-bubble.png',
     'Caise și Lavanda' => MAGURA_2025_THEME_URL . '/assets/img/products/magura_caise_si_lavanda.png',
-    'Coacăze și lămâie' => MAGURA_2025_THEME_URL . '/assets/img/products/magura_coacaze_si_lamaie.png',
+    'Coacăze și Lămâie' => MAGURA_2025_THEME_URL . '/assets/img/products/magura_coacaze_si_lamaie.png',
 ];
 
 $cakes_multipack = [
     '6 buc Lapte' => MAGURA_2025_THEME_URL . '/assets/img/products/magura-6-buc-lapte.png',
-    '6 buc Ciocolata' => MAGURA_2025_THEME_URL . '/assets/img/products/magura-6-buc-ciocolata.png',
+    '6 buc Ciocolată' => MAGURA_2025_THEME_URL . '/assets/img/products/magura-6-buc-ciocolata.png',
+    '8 buc Lapte' => MAGURA_2025_THEME_URL . '/assets/img/products/magura_8buc_lapte.png',
+    '8 buc Ciocolată' => MAGURA_2025_THEME_URL . '/assets/img/products/magura_8buc_ciocolata.png',
 ];
 
 $rulade = [

@@ -365,13 +365,77 @@
   transform-origin: center top;
   transform-box: fill-box;
 }
+
 #headliner-text-imbratisare{
   opacity: 0;
   transform: translateY(-100px);
   transform-origin: center top;
   transform-box: fill-box;
 }
+
 .hero-cta{
   opacity: 0;
   transform: translateY(50px);
+}
+.hero-scrolldown-btn{
+  opacity: 0;
+  transform: translateY(50px);
+
+}
+.hero-scrolldown-btn-content{
+  margin-top: 10px;
+  border-radius: 50px;
+  width: 32px;
+  height: 60px;
+  border: 2px solid var(--white);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  svg{
+    position: absolute;
+    width: 28px;
+    height: max-content;
+    display: block;
+    fill: var(--white);
+  }
+
+  .initial-arrow{
+    transform: translateY(-50px);
+    &.initial-arrow-1{
+      top: 5px;
+    }
+    &.initial-arrow-2{
+      top: 15px;
+    }
+      &.initial-arrow-3{
+      top: 25px;
+    }
+  }
+  .clone-arrow{
+    // display: none;
+    transform: translateY(-50px);
+    &.clone-arrow-1{
+      top: 5px;
+    }
+    &.clone-arrow-2{
+      top: 15px;
+    }
+      &.clone-arrow-3{
+      top: 25px;
+    }
+  }
+}
+
+.magura-map-container{
+  height: calc(100dvh - 120px);
+  display: block;
+  img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+  }
 }

@@ -76,13 +76,25 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                 </span>
             </a>
 
+            <a href="#harta-imbratisarilor" class="hero-scrolldown-btn" id="hero-scrolldown-btn">
+                <div class="hero-scrolldown-btn-content">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-1" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-2" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-3" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-1" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-2" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-3" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+
+                </div>
+            </a>
+
         </div>
 
     </div>
 
 </section>
 
-<section class="magura-map-section section-lateral-padding">
+<section class="magura-map-section section-lateral-padding" id="harta-imbratisarilor">
     <div class="content-box content-centered">
         <!-- <div class="magura-map-container">
             <?php

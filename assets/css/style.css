@@ -352,4 +352,64 @@
 .hero-cta {
   opacity: 0;
   transform: translateY(50px);
+}
+
+.hero-scrolldown-btn {
+  opacity: 0;
+  transform: translateY(50px);
+}
+
+.hero-scrolldown-btn-content {
+  margin-top: 10px;
+  border-radius: 50px;
+  width: 32px;
+  height: 60px;
+  border: 2px solid var(--white);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.hero-scrolldown-btn-content svg {
+  position: absolute;
+  width: 28px;
+  height: max-content;
+  display: block;
+  fill: var(--white);
+}
+.hero-scrolldown-btn-content .initial-arrow {
+  transform: translateY(-50px);
+}
+.hero-scrolldown-btn-content .initial-arrow.initial-arrow-1 {
+  top: 5px;
+}
+.hero-scrolldown-btn-content .initial-arrow.initial-arrow-2 {
+  top: 15px;
+}
+.hero-scrolldown-btn-content .initial-arrow.initial-arrow-3 {
+  top: 25px;
+}
+.hero-scrolldown-btn-content .clone-arrow {
+  transform: translateY(-50px);
+}
+.hero-scrolldown-btn-content .clone-arrow.clone-arrow-1 {
+  top: 5px;
+}
+.hero-scrolldown-btn-content .clone-arrow.clone-arrow-2 {
+  top: 15px;
+}
+.hero-scrolldown-btn-content .clone-arrow.clone-arrow-3 {
+  top: 25px;
+}
+
+.magura-map-container {
+  height: calc(100dvh - 120px);
+  display: block;
+}
+.magura-map-container img {
+  height: 100%;
+  width: 100%;
+  object-fit: contain;
+  display: block;
 }/*# sourceMappingURL=style.css.map */
