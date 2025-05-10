@@ -55,7 +55,7 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
     <div class="prizes-details-modal-box">
         <div class="prizes-details-modal-header">
             <h2>
-                Rucsac Măgura, Diverse culori
+                Rucsac Măgura, Diverse culori*
             </h2>
             <button type="button" onclick="closeModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -65,8 +65,11 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
         </div>
         <div class="prizes-details-modal-content">
             <p>
-                Rucsac XD Design personalizat Magura, antifurt, material rPET , Volum 16L , buzunar captusit pentru Laptop/Tableta, dimensiune 15,6" , multiple buzunare cu protectie RFID, port USB, material sustenabil rezistent la apa, bretele reglabile, Diverse Culori: visiniu (100 bucați), bej (100 bucați), model fluturi Magura (1300 bucați).<br /><br />
-                Dimensiuni: 30 (h) x 18 (w) x 45 (d) cm, Greutate 645g;</p>
+                Rucsac XD Design personalizat Măgura, antifurt, material rPET, Volum 16L, buzunar căptușit pentru Laptop/Tabletă, dimensiune 15,6", multiple buzunare cu protecție RFID, port USB, material sustenabil rezistent la apă, bretele reglabile, Diverse Culori: vișiniu (100 bucăți), bej (100 bucăți), model fluturi Măgura (1300 bucăți).<br /><br />
+                Dimensiuni: 30 (h) x 18 (l) x 45 (a) cm, Greutate 645g;
+                <br/><br />
+                * Colorile se livreaza aleator.
+            </p>
         </div>
     </div>
 </div>
@@ -86,7 +89,8 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
             <p>
                 Voucherul de vacanță poate fi utilizat exclusiv prin intermediul agenției de turism ACH CUSTOM EVENTS.<br /><br />
                 Valoarea nominală a voucherului este de 4.000 lei, TVA inclus. <br /><br />
-                Voucherul este valabil în perioada 15 mai 2025 – 15 august 2026, respectiv timp de 1 (un) an de la data de start a campaniei.</p>
+                Voucherul este valabil în perioada 15 mai 2025 – 15 august 2026, respectiv timp de 1 (un) an de la data de start a campaniei.
+            </p>
         </div>
     </div>
 </div>
@@ -94,7 +98,7 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
     <div class="prizes-details-modal-box">
         <div class="prizes-details-modal-header">
             <h2>
-                Set Măgura, 2 cești+2 prăjituri
+                Set Măgura, 2 cești + 2 prăjituri
             </h2>
             <button type="button" onclick="closeModal()">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512">
@@ -104,11 +108,11 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
         </div>
         <div class="prizes-details-modal-content">
             <p>
-                Ceasca Espresso double 100ml, model flat bottom, fara toarta, rosu mat exterior/ rosu lucios interior, personalizare logo Magura.<br /><br />
-                Ceasca Americano 150 ml, model flat bottom, fara toarta, rosu mat exterior/ rosu lucios interior, personalizare logo Magur
-                Prajitura Magura Lapte: blat cacao, crema Lapte si glazura de cacao, 35g.<br /><br />
-                Prajitura Magura Ciocolata: blat vanilie, crema ciocolata si glazura de cacao si lapte 35g .<br /><br />
-                Cutie ambalare, carton nature.</p>
+                Ceașcă Espresso double 100ml, model flat bottom, fără toartă, roșu mat exterior/ roșu lucios interior, personalizare logo Măgura.<br /><br />
+                Ceașcă Americano 150 ml, model flat bottom, fără toartă, roșu mat exterior/ roșu lucios interior, personalizare logo Măgura.<br /><br />
+                Măgura PRĂJITURĂ LAPTE, Prăjitură cu 25% cremă lapte și 34% glazură cacao.<br /><br />
+                Măgura PRĂJITURĂ CIOCOLATĂ, Prăjitură cu 25% cremă de ciocolată și 34% glazură cacao și lapte.<br /><br />
+                Cutie ambalare, carton natur.</p>
         </div>
     </div>
 </div>

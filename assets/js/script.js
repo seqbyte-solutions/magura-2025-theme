@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add styles to the image
         Object.assign(followerImage.style, {
             position: 'fixed',
-            width: '50px',
-            height: '50px',
+            width: '30px',
+            height: '30px',
             pointerEvents: 'none',
             zIndex: '9999',
             transform: 'translate(-50%, -50%)'

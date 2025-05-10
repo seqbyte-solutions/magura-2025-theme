@@ -3,11 +3,19 @@
 $campaigns = [
     [
         'title' => '',
+        'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2021.jpg',
+    ],
+    [
+        'title' => '',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2022.jpg',
     ],
     [
         'title' => '',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2023.jpg',
+    ],
+    [
+        'title' => '',
+        'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2024.jpg',
     ]
 ]
 

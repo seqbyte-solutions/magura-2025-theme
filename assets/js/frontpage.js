@@ -104,22 +104,16 @@ document.addEventListener("DOMContentLoaded", function () {
   gsap.registerPlugin(ScrollTrigger);
   gsap.registerPlugin(DrawSVGPlugin);
 
-  gsap.from(".magura-map-container", {
+  gsap.to(".magura-map-container", {
     scrollTrigger: {
       trigger: ".magura-map-section",
-      start: "40% center",
-      end: "bottom 20%",
-      onEnter: function () {
-        const mapVisibleEvent = new CustomEvent("mapSectionVisible", {
-          detail: {
-            timestamp: Date.now(),
-            triggerElement: ".magura-map-section",
-          },
-        });
-        document.dispatchEvent(mapVisibleEvent);
-        console.log("Map section is now visible - event dispatched");
-      },
+      start: "0% center",
+      end: "25% center",
+      scrub: 1,
+      // markers: true
     },
+    opacity: 1,
+    y: 0,
   });
 
   gsap.from(".prize-item", {

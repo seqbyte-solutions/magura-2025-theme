@@ -431,12 +431,74 @@
 
 .magura-map-container{
   height: calc(100dvh - 120px);
-  display: block;
-  img{
-    height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(50px);
+  opacity: 0;
+}
+
+.map-app{
+  width: 100%;
+  height: 100%;
+
+  svg{
     width: 100%;
-    object-fit: contain;
+    height: 100%;
     display: block;
+    overflow: visible;
+  }
+}
+
+.fluture {
+  transform-box: fill-box;
+  transform-origin: center center;
+  transition: 0.3s ease;
+}
+.county-pin{
+  pointer-events: none;
+  .fluture-pin{
+    transform-box: fill-box;
+    transition: 0.3s ease;
+    opacity: 0;
+    transform: scaleY(0);
+    transform-origin: bottom center;
+  }
+  &.isActive{
+    .fluture-pin{
+      transform: scaleY(1);
+       opacity: 1;
+
+    }
+  }
+}
+
+.tooltip-arrow-down{
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid var(--white);
+}
+
+.county-pin-tooltip-el{
+  background: var(--white);
+  border-radius: 8px;
+  font-family: 'Baloo2';
+  color: var(--black);
+  padding: 6px 12px;
+  font-size: 1rem;
+
+  h3{
+    text-align: center;
+    color: var(--red);
+  }
+  p{
+    text-align: center;
   }
 }
 

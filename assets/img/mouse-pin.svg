@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_2" data-name="Layer 2" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 231.72 331.04">
+  <defs>
+    <linearGradient id="linear-gradient" x1="115.86" y1="-164.96" x2="115.86" y2="-496" gradientTransform="translate(0 496)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="0" stop-color="#fdfefe"/>
+      <stop offset=".08" stop-color="#c9ecf8"/>
+      <stop offset=".17" stop-color="#9bdbf3"/>
+      <stop offset=".25" stop-color="#73cdee"/>
+      <stop offset=".35" stop-color="#50c1ea"/>
+      <stop offset=".45" stop-color="#34b7e6"/>
+      <stop offset=".55" stop-color="#1fafe4"/>
+      <stop offset=".67" stop-color="#0faae2"/>
+      <stop offset=".8" stop-color="#06a6e1"/>
+      <stop offset="1" stop-color="#04a6e1"/>
+    </linearGradient>
+  </defs>
+  <g id="maguraMap">
+    <g id="sibiu-2">
+      <path id="pin-33" d="m115.86,0C51.82,0,0,51.82,0,115.86c0,86.9,115.86,215.18,115.86,215.18,0,0,115.86-128.28,115.86-215.18C231.72,51.82,179.91,0,115.86,0h0Zm0,157.28c-22.85,0-41.38-18.53-41.38-41.38s18.53-41.38,41.38-41.38,41.38,18.53,41.38,41.38-18.53,41.38-41.38,41.38Z" style="fill: url(#linear-gradient);"/>
+    </g>
+  </g>
+</svg>

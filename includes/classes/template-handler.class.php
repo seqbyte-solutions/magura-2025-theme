@@ -23,7 +23,7 @@ class Magura2025TemplateHandler {
 
         wp_enqueue_script('magura-script', MAGURA_2025_THEME_URL . '/assets/js/script.js', ['gsap']);
         wp_localize_script('magura-script', 'maguraScript', [
-            'mouseImagePath' => MAGURA_2025_THEME_URL . '/assets/img/fluture_mouse.svg'
+            'mouseImagePath' => MAGURA_2025_THEME_URL . '/assets/img/mouse-pin.svg'
         ]);
     }
 
