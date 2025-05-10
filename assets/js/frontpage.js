@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
     scrollTrigger: {
       trigger: ".prizes-container",
       start: "30% 70%",
-      end: "50% 70%",
+      end: "50% 60%",
       scrub: 1,
     },
     opacity: 0,
