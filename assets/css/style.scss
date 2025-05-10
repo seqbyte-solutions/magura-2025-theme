@@ -211,6 +211,8 @@
 
 .product-item {
   width: calc(100% / 4 - 35px);
+  opacity: 0;
+  transform: translateY(60px);
   &.wider {
     width: calc(100% / 3 - 20px);
   }
