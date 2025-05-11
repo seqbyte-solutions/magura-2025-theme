@@ -5,7 +5,7 @@ wp_localize_script(
     'campaignData',
     []
 );
-wp_enqueue_style('campaign-form', MAGURA_2025_THEME_URL . '/assets/js/campaign-form.css');
+// wp_enqueue_style('campaign-form', MAGURA_2025_THEME_URL . '/assets/js/campaign-form.css');
 ?>
 
 <section class="section-lateral-padding page-hero-section">
