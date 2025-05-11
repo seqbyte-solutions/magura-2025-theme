@@ -78,12 +78,30 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
 
             <a href="#harta-imbratisarilor" class="hero-scrolldown-btn" id="hero-scrolldown-btn">
                 <div class="hero-scrolldown-btn-content">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-1" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-2" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-3" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-1" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-2" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-3" viewBox="0 0 24 24" ><path d="M24 24H0V0h24v24z" fill='none' opacity=".87"/><path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-1" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-2" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="initial-arrow initial-arrow-3" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-1" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-2" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="clone-arrow clone-arrow-3" viewBox="0 0 24 24">
+                        <path d="M24 24H0V0h24v24z" fill='none' opacity=".87" />
+                        <path d="M15.88 9.29L12 13.17 8.12 9.29c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l4.59 4.59c.39.39 1.02.39 1.41 0l4.59-4.59c.39-.39.39-1.02 0-1.41-.39-.38-1.03-.39-1.42 0z" />
+                    </svg>
 
                 </div>
             </a>
@@ -96,6 +114,9 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
 
 <section class="magura-map-section section-lateral-padding" id="harta-imbratisarilor">
     <div class="content-box content-centered">
+        <div class="heading-container heading-container-centered heading-white">
+            <h2>Harta îmbtățișărilor Măgura</h2>
+        </div>
         <div class="magura-map-container">
             <?php
             get_template_part('parts/hero-map');
@@ -194,10 +215,10 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                 <g>
                     <polyline class="how-to-win-second-row-line" points="30.86 90.68 70.03 161 25.03 239 691.28 238.75 722.03 186" style="fill: none; stroke: #DB0632; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" />
 
-                    <g  class="how-to-win-pin">
+                    <g class="how-to-win-pin">
                         <path d="m55.51,11.6h0c-6.07-6.06-14.01-9.1-21.96-9.1h0c-7.95,0-15.9,3.03-21.96,9.1h0c-6.34,6.35-9.08,14.75-9.08,23.06,0,17.14,28.25,58.44,31.04,58.46h0c2.79-.02,31.04-41.32,31.04-58.46,0-8.32-2.73-16.72-9.08-23.06h0Zm-8.88,35.05h0c-7.22,7.22-18.94,7.22-26.16,0h0c-7.22-7.22-7.22-18.94,0-26.16h0c7.22-7.22,18.94-7.22,26.16,0h0c7.22,7.22,7.22,18.94,0,26.16Z" style="fill: none; stroke: #DB0632; stroke-linecap: round; stroke-linejoin: round; stroke-width: 5px;" />
                     </g>
-                    <g  class="how-to-win-gift">
+                    <g class="how-to-win-gift">
                         <path d="m760.88,130.03h-17.03c2.33-2.51,3.75-5.86,3.75-9.54,0-7.74-6.29-14.03-14.03-14.03-5.38,0-10.06,3.04-12.41,7.5-2.31-2.8-5.8-4.58-9.7-4.58-6.93,0-12.57,5.64-12.57,12.57,0,3.07,1.11,5.89,2.95,8.08h-19.08c-1.24,0-2.24,1-2.24,2.24v18.85c0,1.24,1,2.24,2.24,2.24h3.37v33.89c0,1.24,1,2.24,2.24,2.24h32.78c.21.07.44.1.67.1s.46-.04.67-.1h32.78c1.24,0,2.24-1,2.24-2.24v-33.89h3.37c1.24,0,2.24-1,2.24-2.24v-18.85c0-1.24-1-2.24-2.24-2.24h0Zm-36.84-9.54c0-5.26,4.28-9.54,9.54-9.54s9.54,4.28,9.54,9.54-4.28,9.54-9.54,9.54h-9.54v-9.54h0Zm-20.65,1.46c0-4.46,3.62-8.08,8.08-8.08s8.08,3.62,8.08,8.08v8.08h-8.08c-4.46,0-8.08-3.62-8.08-8.08h0Zm-18.37,12.57h34.56v14.36h-34.56v-14.36h0Zm5.61,18.85h28.95v31.65h-28.95v-31.65h0Zm62.4,31.65h-28.95v-31.65h28.95v31.65Zm5.61-36.14h-34.56v-14.36h34.56v14.36Z" style="fill: #DB0632;" />
                     </g>
                 </g>
