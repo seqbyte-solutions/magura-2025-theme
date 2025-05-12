@@ -9,30 +9,14 @@ $winners = [
         'title' => 'Rucsac Măgura [Diverse culori]',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/prize_ghiozdan.png',
         'winners' => [
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
+           
         ]
     ],
     'cesti' => [
         'title' => 'Set Măgura 2 cești + 2 prăjituri',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/prize_cani.png',
         'winners' => [
-            'Nume 1',
-            'Nume 2',
-            'Nume 3',
+           
         ]
     ],
 ];
@@ -99,7 +83,7 @@ $bg_index = 0;
                                     <?php endforeach; ?>
                                 </ul>
                             <?php else : ?>
-                                <p>Nu sunt câștigători pentru acest premiu.</p>
+                                <p>Momentan nu sunt câștigători pentru acest premiu.</p>
                             <?php endif; ?>
                         </div>
                     </div>
