@@ -23,7 +23,7 @@
         <div class="content-box content-centered">
             <div class="maintenance-content">
                 <div class="maintenance-content-text">
-                    <img  src="<?= MAGURA_2025_THEME_URL ?>/assets/img/logo_magura_white.svg" class="maintenance-logo" />
+                    <img  src="<?= MAGURA_2025_THEME_URL ?>/assets/img/magura_logo_white.svg" class="maintenance-logo" />
                     <h1>Suntem la o îmbrățișare distanță de o nouă călătorie Măgura. Ne revedem cu mii de premii, din 15 Mai!</h1>
                     <div id="countdown" class="maintenance-countdown simply-countdown"></div>
                 </div>
