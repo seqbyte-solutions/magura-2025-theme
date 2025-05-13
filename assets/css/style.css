@@ -617,6 +617,9 @@
   color: var(--black);
   font-weight: bold;
 }
+.form-input-container label.error {
+  color: var(--red);
+}
 .form-input-container input {
   width: 100%;
   padding: 8px 10px;
@@ -644,6 +647,57 @@
 .form-input-container button:focus {
   border-color: var(--red);
   background: var(--white);
+}
+.form-input-container button:disabled input {
+  border-color: var(--light-red);
+}
+
+.form-attachment-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  position: relative;
+}
+.form-attachment-container label {
+  font-family: "Baloo2";
+  font-size: 1.1rem;
+  line-height: 1rem;
+  color: var(--black);
+  font-weight: bold;
+}
+.form-attachment-container label.error {
+  color: var(--red);
+}
+.form-attachment-container input {
+  display: none;
+}
+
+.form-submit-container button {
+  width: 100%;
+  text-align: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 2px solid var(--red);
+  background: var(--red);
+  color: var(--white);
+  font-family: "Baloo2";
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.5rem;
+  transition: 0.2s ease;
+  cursor: pointer;
+}
+.form-submit-container button:hover {
+  background: var(--light-red);
+  border-color: var(--light-red);
+  color: var(--red);
+}
+.form-submit-container button:disabled {
+  background: var(--light-red);
+  border-color: var(--light-red);
+  color: var(--red);
+  cursor: wait;
 }
 
 .autocomplete-options-container {
@@ -712,7 +766,7 @@
 
 .form-image-dropzone {
   position: relative;
-  border: 2px dashed #fafafa;
+  border: 2px dashed var(--red);
   border-radius: 7px;
   padding: 15px;
   display: flex;
@@ -720,9 +774,13 @@
   align-items: center;
   gap: 10px;
   overflow: hidden;
+  font-family: "Baloo2";
+  color: var(--black);
 }
 
 .form-image-dropzone p {
+  font-family: "Baloo2";
+  color: var(--black);
   font-size: 1.15rem;
   pointer-events: none;
 }
@@ -738,6 +796,9 @@
   line-height: 50px;
   pointer-events: none;
 }
+.form-image-dropzone-icon svg {
+  fill: var(--red);
+}
 
 .form-image-dropzone-preview {
   width: 100px;
@@ -745,7 +806,6 @@
   pointer-events: none;
   position: relative;
 }
-
 .form-image-dropzone-preview img {
   width: 100%;
   height: 100%;
@@ -769,11 +829,17 @@
   background: #d00d11;
   color: #fafafa;
 }
+.form-image-dropzone-remove svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  fill: var(--white);
+}
 
 .form-image-dropzone-overlay {
   opacity: 0;
   pointer-events: none;
-  background-color: rgba(208, 13, 17, 0.6);
+  background-color: var(--light-red);
   position: absolute;
   top: 0;
   left: 0;
@@ -785,7 +851,43 @@
   align-content: center;
   transition: 0.3s ease;
 }
-
 .form-image-dropzone-overlay.is-visible {
+  opacity: 0.8;
+}
+
+.form-checkbox-container label {
+  font-family: "Baloo2";
+  font-size: 1.1rem;
+  line-height: 1rem;
+  color: var(--black);
+  font-weight: bold;
+}
+.form-checkbox-container label.error {
+  color: var(--red);
+}
+.form-checkbox-container label a {
+  color: var(--red);
+}
+.form-checkbox-container input {
+  display: none;
+}
+.form-checkbox-container .checkbox-icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--red);
+  padding: 2px;
+  border-radius: 4px;
+  transition: 0.1s ease;
+}
+.form-checkbox-container .checkbox-icon svg {
+  fill: var(--white);
+  opacity: 0;
+  transition: 0.1s ease;
+}
+.form-checkbox-container:has(input:checked) .checkbox-icon {
+  background: var(--red);
+}
+.form-checkbox-container:has(input:checked) .checkbox-icon svg {
   opacity: 1;
 }/*# sourceMappingURL=style.css.map */

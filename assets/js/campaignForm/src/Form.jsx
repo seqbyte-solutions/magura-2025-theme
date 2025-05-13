@@ -1,20 +1,26 @@
 import React, { useEffect, useState } from "react";
 import Autocomplete from "./Autocomplete";
+import AttachmentInput from "./AttachmentInput";
+import countiesAndCities from "./counties-and-cities.json";
+import { toast } from "react-toastify";
 
-function Form() {
-  const counties = [{ label: "Alba", value: "AB" }];
+function Form({handleEntrySubmit}) {
+  const counties = countiesAndCities.map((county) => ({
+    label: county.nume,
+    value: county.nume,
+  }));
 
-  const localities = {
-    AB: [
-      { label: "Alba Iulia", value: "AB" },
-      { label: "Aiud", value: "AI" },
-      { label: "Cugir", value: "CU" },
-      { label: "Ocna Mureș", value: "OM" },
-      { label: "Sebeș", value: "SE" },
-      { label: "Teiuș", value: "TE" },
-    ],
-  };
+  const localities = countiesAndCities.reduce((acc, county) => {
+    const countyName = county.nume;
+    const cities = county.localitati.map((city) => ({
+      label: city,
+      value: city,
+    }));
+    acc[countyName] = cities;
+    return acc;
+  }, {});
 
+  const [formSubmitIsLoading, setFormSubmitIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     last_name: "",
     first_name: "",
@@ -23,6 +29,17 @@ function Form() {
     county: "",
     locality: "",
     reciep_image: null,
+    tc: false,
+  });
+  const [formErrors, setFormErrors] = useState({
+    last_name: false,
+    first_name: false,
+    email: false,
+    phone: false,
+    county: false,
+    locality: false,
+    reciep_image: false,
+    tc: false,
   });
 
   useEffect(() => {
@@ -30,20 +47,88 @@ function Form() {
   }, [formData]);
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
+    const { name, value, type, checked } = e.target;
+    if (type === "checkbox") {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: checked,
+      }));
+    } else {
+      setFormData((prevData) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
+    setFormErrors((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: false,
     }));
   };
 
-  const handleSubmit = async (e) => {};
+  const handleFileInputChange = (file, name) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: file,
+    }));
+    setFormErrors((prevData) => ({
+      ...prevData,
+      [name]: false,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setFormSubmitIsLoading(true);
+
+    let formIsValid = true;
+    for (const key in formData) {
+      if (formData[key] === "") {
+        setFormErrors((prevData) => ({
+          ...prevData,
+          [key]: true,
+        }));
+        formIsValid = false;
+      }
+    }
+    if (!formIsValid) {
+      toast.error("Vă rugăm să completați toate câmpurile.");
+    }
+    if (formData.reciep_image === null) {
+      toast.error("Vă rugăm să atașați o imagine a bonului fiscal.");
+      setFormErrors((prevData) => ({
+        ...prevData,
+        reciep_image: true,
+      }));
+      formIsValid = false;
+    }
+    if (!formData.tc) {
+      toast.error("Vă rugăm să bifați acordul regulamentului.");
+      setFormErrors((prevData) => ({
+        ...prevData,
+        tc: true,
+      }));
+      formIsValid = false;
+    }
+    if (!formIsValid) {
+      setFormSubmitIsLoading(false);
+      return;
+    }
+
+
+    await handleEntrySubmit(formData);
+    setFormSubmitIsLoading(false);
+  };
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <div className="form-content">
           <div className="form-input-container">
-            <label htmlFor="form_field_last_name">Nume</label>
+            <label
+              htmlFor="form_field_last_name"
+              className={`${formErrors.last_name && "error"}`}
+            >
+              Nume
+            </label>
             <input
               type="text"
               name="last_name"
@@ -54,7 +139,12 @@ function Form() {
             />
           </div>
           <div className="form-input-container">
-            <label htmlFor="form_field_first_name">Prenume</label>
+            <label
+              className={`${formErrors.first_name && "error"}`}
+              htmlFor="form_field_first_name"
+            >
+              Prenume
+            </label>
             <input
               type="text"
               name="first_name"
@@ -65,7 +155,12 @@ function Form() {
             />
           </div>
           <div className="form-input-container">
-            <label htmlFor="form_field_email">Adresa de email</label>
+            <label
+              className={`${formErrors.email && "error"}`}
+              htmlFor="form_field_email"
+            >
+              Adresa de email
+            </label>
             <input
               type="email"
               name="email"
@@ -76,7 +171,12 @@ function Form() {
             />
           </div>
           <div className="form-input-container">
-            <label htmlFor="form_field_phone">Număr de telefon</label>
+            <label
+              className={`${formErrors.phone && "error"}`}
+              htmlFor="form_field_phone"
+            >
+              Număr de telefon
+            </label>
             <input
               type="tel"
               name="phone"
@@ -87,7 +187,12 @@ function Form() {
             />
           </div>
           <div className="form-input-container">
-            <label htmlFor="form_field_county">Județ</label>
+            <label
+              className={`${formErrors.county && "error"}`}
+              htmlFor="form_field_county"
+            >
+              Județ
+            </label>
             <Autocomplete
               id="form_field_county"
               value={formData.county}
@@ -98,7 +203,12 @@ function Form() {
             />
           </div>
           <div className="form-input-container">
-            <label htmlFor="form_field_locality">Localitate</label>
+            <label
+              className={`${formErrors.locality && "error"}`}
+              htmlFor="form_field_locality"
+            >
+              Localitate
+            </label>
             <Autocomplete
               id="form_field_locality"
               value={formData.locality}
@@ -106,23 +216,51 @@ function Form() {
               placeholder={"Selectează o localitate"}
               onChange={handleInputChange}
               options={
-                formData.county !== "" ? localities[formData.county] : []
+                formData.county !== "" ? [...localities[formData.county]] : []
               }
               disabled={formData.county === ""}
             />
           </div>
 
-          <div className="form-attachment-container"></div>
+          <div className="form-attachment-container">
+            <label className={`${formErrors.reciep_image && "error"}`}>
+              Poza bonului fiscal
+            </label>
+            <AttachmentInput
+              name="reciep_image"
+              value={formData.reciep_image}
+              onChange={handleFileInputChange}
+            />
+          </div>
 
           <div className="form-checkbox-container">
-            <label>
-              <input type="checkbox" name="" /> Sunt de acord cu Termenii și
-              Condițiile campaniei
+            <label className={`${formErrors.tc && "error"}`}>
+              <div className="checkbox-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                  <path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z" />
+                </svg>
+              </div>
+              <input
+                type="checkbox"
+                name="tc"
+                checked={formData.tc}
+                onChange={handleInputChange}
+              />
+              &nbsp;&nbsp;Sunt de acord cu{" "}
+              <a href="/concurs/regulament/" target="_blank">
+                regulamentul
+              </a>{" "}
+              campaniei și cu{" "}
+              <a href="https://gdpr-info.eu/" target="_blank">
+                reglementările GDPR
+              </a>
             </label>
           </div>
 
           <div className="form-submit-container">
-            <button>Trimite</button>
+            <button disabled={formSubmitIsLoading}>
+              {formSubmitIsLoading ? <>Se încarcă</> : <>Trimite</>}
+            </button>
           </div>
         </div>
       </form>

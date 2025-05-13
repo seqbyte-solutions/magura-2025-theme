@@ -15,10 +15,10 @@ function Autocomplete({
   const [isOpen, setIsOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
-  const [filteredOptions, setFilteredOptions] = useState(options);
+  const [filteredOptions, setFilteredOptions] = useState([...options]);
 
   useEffect(() => {
-    if (searchValue) {
+    if (searchValue !== "") {
       const normalize = (str) =>
         str
           .normalize("NFD")
@@ -31,7 +31,7 @@ function Autocomplete({
     } else {
       setFilteredOptions(options);
     }
-  }, [searchValue]);
+  }, [searchValue, options]);
 
   const handleSelectOption = (e) => {
     onChange(e);
@@ -51,9 +51,6 @@ function Autocomplete({
     };
   }, []);
 
-    useEffect(() => {
-        console.log('isOpen', isOpen);
-    },[isOpen]);
   return (
     <div ref={autocompleteRef}>
       <button className="autocomplete-trigger" type="button" onClick={() => setIsOpen(true)} disabled={disabled}>
