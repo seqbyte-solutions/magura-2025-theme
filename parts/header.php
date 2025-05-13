@@ -50,13 +50,23 @@
     function toggleMobileMenu() {
         const mobileMenu = document.querySelector('.header-mobile-menu');
         const bars = document.querySelector('.mobile-menu-button-bars');
+        const header = document.querySelector('.header');
 
         if (mobileMenu.classList.contains('is-opened')) {
             mobileMenu.classList.remove('is-opened');
             bars.classList.remove('is-opened');
+            document.body.style.overflow = 'auto';
+            if (window.scrollY > 50) {
+            header.classList.add('header-sticky');
         } else {
+            header.classList.remove('header-sticky');
+        }
+        } else {
+            header.classList.add('header-sticky');
+
             mobileMenu.classList.add('is-opened');
             bars.classList.add('is-opened');
+            document.body.style.overflow = 'hidden';
         }
     }
 

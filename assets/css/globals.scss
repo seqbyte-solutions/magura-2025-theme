@@ -133,7 +133,8 @@ html {
     z-index: -1;
 }
 
-.maintenance-content-text{
+.maintenance-content-text,
+.notfound-content-text{
     width: 60%;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -143,6 +144,56 @@ html {
     justify-content: center;
     color: var(--white);
     font-family: 'Baloo2';
+}
+.notfound-title{
+    font-size:200px;
+    line-height: 200px;
+    font-weight: 700;
+}
+
+.notfound-back-to-home {
+    margin-top: 20px;
+    overflow: visible;
+  margin-inline: auto;
+  position: relative;
+  font-family: "Baloo2";
+  text-decoration: none;
+  color: var(--white);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: var(--red);
+  width: 200px;
+
+  svg {
+    overflow: visible;
+    position: relative;
+    width: 100%;
+
+    .hero-cta-bubble-1,
+    .hero-cta-bubble-2 {
+      transition: 0.2s ease;
+      transform-origin: center;
+    }
+  }
+
+  span {
+    position: absolute;
+  }
+
+  &:hover {
+    svg {
+      .hero-cta-bubble-1 {
+        transform: rotate(8deg);
+      }
+      .hero-cta-bubble-2 {
+        transform: rotate(-28deg) scale(1.1);
+      }
+    }
+  }
 }
 
 .maintenance-logo{

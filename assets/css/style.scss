@@ -204,7 +204,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 35px;
   margin-top: 20px;
 }
@@ -608,9 +608,7 @@
   margin-top: 20px;
 
   li {
-    width: calc(100% / 3 - 20px);
     text-align: center;
-
     font-family: "Baloo2";
     font-size: 1.1rem;
     line-height: 1.1rem;

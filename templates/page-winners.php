@@ -3,7 +3,9 @@ $winners = [
     'vacanta' => [
         'title' => 'Circuit Turistic "Îmbrățișează România"',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/prize_vacanta.png',
-        'winners' => []
+        'winners' => [
+           
+        ]
     ],
     'ghiozdan' => [
         'title' => 'Rucsac Măgura [Diverse culori]',

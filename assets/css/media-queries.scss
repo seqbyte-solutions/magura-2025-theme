@@ -50,7 +50,7 @@
   .prizes-container {
     flex-direction: column;
     align-items: center;
-    gap: 50px;
+    gap: 100px;
   }
   .prize-item {
     width: 100%;
@@ -68,15 +68,49 @@
     height: max-content;
     padding-block: 25px;
   }
+  
+  .products-list{
+    gap: 50px;
+  }
+  .product-item{
+    width: calc(50% - 50px);
+    &.wider{
+      width: calc(50% - 50px);
+    }
+  }
+
+  .campaigns-history-list{
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .winners-list-group{
+    background: linear-gradient(180deg, var(--white) 20%, var(--red) 100%)
+  }
+  .winners-list-group-content{
+    flex-direction: column;
+  }
+  .winners-list-group-image-container{
+    margin-inline:auto ;
+  }
+  .winners-list-group-winners{
+    width: 100%;
+  }
+
 }
 @media only screen and (max-width: 768px) {
   .maintenance-content {
     flex-direction: column;
   }
-  .maintenance-content-text {
+  .maintenance-content-text,
+  .notfound-content-text {
     width: 100%;
     height: 100%;
     align-items: center;
+  }
+  .notfound-title{
+    font-size: 135px;
+    line-height: 135px;
   }
   .maintenance-image-container {
     display: none;
@@ -90,6 +124,50 @@
     font-size: 1.5rem;
     line-height: 1.8rem;
 }
+
+.product-item{
+  width: 100%;
+  &.wider{
+    width: 100%;
+  }
+}
+
+ .campaigns-history-list{
+    gap: 20px;
+  }
+
+  .how-to-win-row{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column-reverse;
+  }
+  .how-to-win-second-row{
+    
+  }
+  .how-to-win-first-row{
+  
+  
+    margin-bottom: 20px;
+  }
+  .how-to-win-text{
+    position: relative
+    ;
+    font-size: 1.2rem;
+    line-height: 1.5rem;
+    width: 100%;
+    text-align: center;
+    top: unset;
+    left: unset;
+  }
 }
 @media only screen and (max-width: 480px) {
+  .product-item-name{
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
+  .campaigns-history-list{
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }

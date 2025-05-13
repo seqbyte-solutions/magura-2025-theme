@@ -15,6 +15,10 @@ $campaigns = [
     ],
     [
         'title' => '',
+        'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2023_oct.jpg',
+    ],
+    [
+        'title' => '',
         'image' => MAGURA_2025_THEME_URL . '/assets/img/imbratisari/ncp_2024.jpg',
     ]
 ]

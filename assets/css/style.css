@@ -181,7 +181,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 35px;
   margin-top: 20px;
 }
@@ -577,7 +577,6 @@
   margin-top: 20px;
 }
 .winners-list-group-winners-ul li {
-  width: calc(33.3333333333% - 20px);
   text-align: center;
   font-family: "Baloo2";
   font-size: 1.1rem;
