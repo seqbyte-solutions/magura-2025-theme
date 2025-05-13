@@ -68,7 +68,7 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
                 Rucsac XD Design personalizat Măgura, antifurt, material rPET, Volum 16L, buzunar căptușit pentru Laptop/Tabletă, dimensiune 15,6", multiple buzunare cu protecție RFID, port USB, material sustenabil rezistent la apă, bretele reglabile, Diverse Culori: vișiniu (100 bucăți), bej (100 bucăți), model fluturi Măgura (1300 bucăți).<br /><br />
                 Dimensiuni: 30 (h) x 18 (l) x 45 (a) cm, Greutate 645g;
                 <br/><br />
-                * Colorile se livreaza aleator.
+                * Culorile se livreaza aleator.
             </p>
         </div>
     </div>
