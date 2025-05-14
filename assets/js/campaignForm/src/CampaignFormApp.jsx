@@ -61,7 +61,7 @@ function CampaignFormApp() {
                 prizeRef.current.style.display = 'block'; 
             }
         }
-      }, "-=0.4")
+      }, "-=0.2")
      ;
     }
   }, [showPrize]);
