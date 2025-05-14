@@ -2344,7 +2344,7 @@ export function MapApp() {
       const entries = mapData.countiesData[key].entries;
 
       const percentage = (entries / maxEntries) * 100;
-      const scale = entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
+      const scale = entries === 0 ? 0 : entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
       
       if (fluture) {
        fluture.style.transform = `translateY(0) scale(${scale})`;
@@ -2396,7 +2396,7 @@ export function MapApp() {
       const entries = mapData.countiesData[targetId].entries;
 
       const percentage = (entries / maxCountyEntries) * 100;
-      const scale = entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
+      const scale = entries === 0 ? 0 : entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
       // const scale = percentage / 100;
       pin.querySelector(".fluture").style.transform = `translateY(0px) scale(${scale})`;
       setTooltipData({
