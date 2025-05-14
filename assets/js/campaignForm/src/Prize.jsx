@@ -2,123 +2,135 @@ import React from "react";
 
 function getPrizeImage(prize) {
   if (prize === "Vacanta") {
-    return <>
-    <div className="won-prize-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
-    <path
-      d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-    <path
-      d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-  </svg>
-  <div class="prize-item-content">
-                    <img src={campaignData.prize_img_vacanta}  alt="" />
-                </div>
-      </div></>;
+    return (
+      <>
+        <div className="won-prize-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
+            <path
+              d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+            <path
+              d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+          </svg>
+          <div class="prize-item-content">
+            <img src={campaignData.prize_img_vacanta} alt="" />
+          </div>
+        </div>
+      </>
+    );
   } else if (prize === "Set Magura") {
-    return <>
-    <div className="won-prize-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
-    <path
-      d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-    <path
-      d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-  </svg>
-  <div class="prize-item-content">
-                    <img src={campaignData.prize_img_cani}  alt="" />
-                </div>
-      </div></>;
+    return (
+      <>
+        <div className="won-prize-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
+            <path
+              d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+            <path
+              d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+          </svg>
+          <div class="prize-item-content">
+            <img src={campaignData.prize_img_cani} alt="" />
+          </div>
+        </div>
+      </>
+    );
   } else if (prize === "Rucsac visiniu") {
-    return <>
-      <div className="won-prize-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
-    <path
-      d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-    <path
-      d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-  </svg>
-  <div class="prize-item-content">
-                    <img src={campaignData.prize_img_rucsac}  alt="" />
-                </div>
-      </div>
-    </>;
+    return (
+      <>
+        <div className="won-prize-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
+            <path
+              d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+            <path
+              d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+          </svg>
+          <div class="prize-item-content">
+            <img src={campaignData.prize_img_rucsac} alt="" />
+          </div>
+        </div>
+      </>
+    );
   } else if (prize === "Rucsac bej") {
-    return <>
-      <div className="won-prize-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
-    <path
-      d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-    <path
-      d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-  </svg>
-  <div class="prize-item-content">
-                    <img src={campaignData.prize_img_rucsac}  alt="" />
-                </div>
-      </div>
-    </>;
+    return (
+      <>
+        <div className="won-prize-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
+            <path
+              d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+            <path
+              d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+          </svg>
+          <div class="prize-item-content">
+            <img src={campaignData.prize_img_rucsac} alt="" />
+          </div>
+        </div>
+      </>
+    );
   } else if (prize === "Rucsac model fluturi") {
-    return <>
-      <div className="won-prize-item">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
-    <path
-      d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-    <path
-      d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
-      style={{
-        fill: "#f9bac5",
-        opacity: 0.45,
-      }}
-    />
-  </svg>
-  <div class="prize-item-content">
-                    <img src={campaignData.prize_img_rucsac}  alt="" />
-                </div>
-      </div>
-    </>;
+    return (
+      <>
+        <div className="won-prize-item">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
+            <path
+              d="M239.01 341.86C118.48 337.48 59.32 219.14 65.89 140.25 71.87 68.58 87.81 0 197.38 0c135.87 0 258.58 116.14 262.97 181.89 3.07 46.12-111.69 163.96-221.33 159.97Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+            <path
+              d="M246.5 398.24c134.2-4.88 200.07-136.64 192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15C141.57 17.62 4.94 146.94.06 220.13c-3.42 51.36 124.35 182.55 246.43 178.11Z"
+              style={{
+                fill: "#f9bac5",
+                opacity: 0.45,
+              }}
+            />
+          </svg>
+          <div class="prize-item-content">
+            <img src={campaignData.prize_img_rucsac} alt="" />
+          </div>
+        </div>
+      </>
+    );
   } else {
     return (
       <svg
@@ -132,7 +144,7 @@ function getPrizeImage(prize) {
   }
 }
 
-function Prize({ prize = null, entry_id = null }) {
+function Prize({ prize = null, entry_id = null, is_banned = false }) {
   return (
     <>
       {prize !== null ? (
@@ -144,35 +156,58 @@ function Prize({ prize = null, entry_id = null }) {
               Urmează pasul de validare - ținem pumnii!
             </p>
             <div className="prize-image-container">{getPrizeImage(prize)}</div>
+            <h3 className="prize-name">Hei, se pare că norocul ți-a zâmbit!</h3>
             <h3 className="prize-name">
-              Hei, se pare că norocul ți-a zâmbit! 
-            </h3>
-            <h3 className="prize-name">
-            Ai pus mâna pe un premiu: {prize === 'Vacanta' ? <>Voucher Îmbrățisează România</> : prize === "Set Magura" ? <>Set Măgura</> : <>Rucsac Măgura</>}!
+              Ai pus mâna pe un premiu:{" "}
+              {prize === "Vacanta" ? (
+                <>Voucher Îmbrățisează România</>
+              ) : prize === "Set Magura" ? (
+                <>Set Măgura</>
+              ) : (
+                <>Rucsac Măgura</>
+              )}
+              !
             </h3>
             <p className="prize-desc">ID înscriere:</p>
             <span className="prize-entry-id">{entry_id}</span>
             <p className="prize-desc">
               Norocul nu stă pe loc, ai grijă să-l confirmi!
-              </p>
-              <br/>
-              <p className="prize-desc-alt">
-                * După validarea înscrierii, veți primi un email pentru confirmare.
-              </p>
+            </p>
+            <br />
+            <p className="prize-desc-alt">
+              * După validarea înscrierii, veți primi un email pentru
+              confirmare.
+            </p>
           </div>
         </>
       ) : (
         <>
-          <div className="prize-content">
-            <h2 className="prize-title">Norocul nu e aici azi!</h2>
-            <p className="prize-desc">De data aceasta nu ai câștigat!</p>
-            <p className="prize-desc">Mai încearcă și mâine.</p>
-            <p className="prize-desc">ID înscriere:</p>
-            <span className="prize-entry-id">{entry_id}</span>
-            <div className="prize-image-container">
-              {getPrizeImage(prize)}
+          {is_banned ? (
+            <>
+              <div className="prize-content">
+                <h2 className="prize-title">
+                  Se pare ca ai atins limita de înscrieri pe ziua de azi!
+                </h2>
+                <p className="prize-desc">Te asteptăm mâine cu alte premii.</p>
+                <div className="prize-image-container">
+                  {getPrizeImage(prize)}
+                </div>
               </div>
-          </div>
+            </>
+          ) : (
+            <>
+              <div className="prize-content">
+                <h2 className="prize-title">Norocul nu e aici azi!</h2>
+                <p className="prize-desc">De data aceasta nu ai câștigat!</p>
+                <p className="prize-desc">Mai încearcă și mâine.</p>
+                <p className="prize-desc">ID înscriere:</p>
+                <span className="prize-entry-id">{entry_id}</span>
+                <div className="prize-image-container">
+                  {getPrizeImage(prize)}
+                </div>
+              </div>
+            </>
+          )}
         </>
       )}
     </>
