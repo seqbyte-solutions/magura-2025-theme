@@ -21,6 +21,9 @@ class Magura2025ThemeSetup
         add_action('switch_theme', [$this, 'theme_deactivation']);
         add_action('wp', [$this, 'schedule_cron_job']);
         add_action('magura2025_cron_fetch_entries', [$this, 'fetch_entries']);
+        
+        // Add custom cron schedule
+        add_filter('cron_schedules', [$this, 'add_cron_interval']);
     }
 
     public function theme_activation() {
@@ -31,6 +34,7 @@ class Magura2025ThemeSetup
 
     public function register_options() {
         add_option('maintainance_mode', 'true');
+        add_option('campaign_entries', []);
     }
 
     public function theme_deactivation() {
@@ -40,7 +44,16 @@ class Magura2025ThemeSetup
         $this->theme_pages->remove_theme_pages();
     }
 
-    // schedule a cron job to run every hour
+    // Add custom minutely schedule
+    public function add_cron_interval($schedules) {
+        $schedules['minutely'] = array(
+            'interval' => 60, // 60 seconds
+            'display'  => esc_html__('Every Minute', 'magura-2025-theme'),
+        );
+        return $schedules;
+    }
+
+    // schedule a cron job to run every minute
     public function schedule_cron_job() {
         if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
             wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
@@ -48,7 +61,7 @@ class Magura2025ThemeSetup
     }
     
     public function fetch_entries() {
-        $api_url = 'https://api-magura.promoapp.ro/api/v1/entries';
+        $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries';
         $response = wp_remote_get($api_url);
 
         if (is_wp_error($response)) {
@@ -58,8 +71,8 @@ class Magura2025ThemeSetup
         $body = wp_remote_retrieve_body($response);
         $data = json_decode($body, true);
 
-        // if (isset($data['entries'])) {
-        //     update_option('magura2025_entries', $data['entries']);
-        // }
+        if (isset($data['data'])) {
+            update_option('campaign_entries', $data['data']);
+        }
     }
 }

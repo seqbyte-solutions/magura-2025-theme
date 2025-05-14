@@ -2329,7 +2329,7 @@ export function MapApp() {
   const [maxCountyEntries, setMaxCountyEntries] = useState(0);
   // foreach key of mapData.countiesData, set style of .county-pin[data-name="key"] 
   // to the value of mapData.countiesData[key].color
-  
+
   useEffect(() => {
     let maxEntries = 0;
     Object.values(mapData.countiesData).forEach(county => {
