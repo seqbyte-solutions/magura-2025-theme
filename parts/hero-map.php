@@ -1,33 +1,33 @@
 <?php
 wp_enqueue_script('magura-map', MAGURA_2025_THEME_URL . '/assets/js/magura-map.js');
 wp_localize_script('magura-map', 'mapData',[ 
-    'totalEntries' => 2600,
+    'totalEntries' => 0,
     'countiesData' => [
         
    'bucuresti-ilfov' => 
   array(
      'name' => 'Bucuresti și Ilfov',
-     'entries' => 1200,
+     'entries' => 0,
   ),
    'constanta' => 
   array(
      'name' => 'Constanța',
-     'entries' => 600,
+     'entries' => 0,
   ),
    'braila' => 
   array(
      'name' => 'Brăila',
-     'entries' => 200,
+     'entries' => 0,
   ),
    'vrancea' => 
   array(
      'name' => 'Vrancea',
-     'entries' => 13,
+     'entries' => 0,
   ),
    'neamt' => 
   array(
      'name' => 'Neamț',
-     'entries' => 600,
+     'entries' => 0,
   ),
    'botosani' => 
   array(
@@ -37,7 +37,7 @@ wp_localize_script('magura-map', 'mapData',[
    'maramures' => 
   array(
      'name' => 'Maramureș',
-     'entries' => 100,
+     'entries' => 0,
   ),
    'salaj' => 
   array(
@@ -62,7 +62,7 @@ wp_localize_script('magura-map', 'mapData',[
    'timis' => 
   array(
      'name' => 'Timiș',
-     'entries' => 14,
+     'entries' => 0,
   ),
    'mehedinti' => 
   array(
@@ -102,7 +102,7 @@ wp_localize_script('magura-map', 'mapData',[
    'brasov' => 
   array(
      'name' => 'Brașov',
-     'entries' => 2,
+     'entries' => 0,
   ),
    'covasna' => 
   array(
