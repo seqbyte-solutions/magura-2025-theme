@@ -19,6 +19,8 @@ class Magura2025ThemeSetup
         add_action('after_switch_theme', [$this, 'theme_activation']);
 
         add_action('switch_theme', [$this, 'theme_deactivation']);
+        add_action('wp', [$this, 'schedule_cron_job']);
+        add_action('magura2025_cron_fetch_entries', [$this, 'fetch_entries']);
     }
 
     public function theme_activation() {
@@ -36,6 +38,28 @@ class Magura2025ThemeSetup
         // remove menus and pages
         $this->theme_menus->remove_menus();
         $this->theme_pages->remove_theme_pages();
+    }
 
+    // schedule a cron job to run every hour
+    public function schedule_cron_job() {
+        if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
+            wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
+        }
+    }
+    
+    public function fetch_entries() {
+        $api_url = 'https://api-magura.promoapp.ro/api/v1/entries';
+        $response = wp_remote_get($api_url);
+
+        if (is_wp_error($response)) {
+            return;
+        }
+
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        // if (isset($data['entries'])) {
+        //     update_option('magura2025_entries', $data['entries']);
+        // }
     }
 }
