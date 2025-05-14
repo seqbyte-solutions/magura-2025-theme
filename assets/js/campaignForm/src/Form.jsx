@@ -268,10 +268,10 @@ function Form({handleEntrySubmit}) {
               <a href="/concurs/regulament/" target="_blank">
                 regulamentul
               </a>{" "}
-              campaniei și cu{" "}
-              <a href="https://gdpr-info.eu/" target="_blank">
-                reglementările GDPR
-              </a>
+              campaniei și cu reglementările <a href="https://gdpr-info.eu/" target="_blank">GDPR</a>
+              
+                
+              
             </label>
           </div>
 

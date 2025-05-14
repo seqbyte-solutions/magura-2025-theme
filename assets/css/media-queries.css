@@ -139,6 +139,10 @@
     top: unset;
     left: unset;
   }
+  .campaign-transition {
+    position: fixed;
+    top: 70px;
+  }
 }
 @media only screen and (max-width: 480px) {
   .product-item-name {

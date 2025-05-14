@@ -16,8 +16,9 @@ function CampaignFormApp() {
   const [prize, setPrize] = useState(null);
 
   useGSAP(() => {
-    // Initially hide the prize section
-    gsap.set(prizeRef.current, { autoAlpha: 0 });
+    // Initially hide the prize section and transition element
+    gsap.set(prizeRef.current, { autoAlpha: 0 }); // prizeRef also has inline display: 'none'
+    gsap.set(transitionRef.current, { autoAlpha: 0, display: 'none' }); // Explicitly hide transitionRef initially
   }, []);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ function CampaignFormApp() {
       tl.to(transitionRef.current, {
         duration: 0.4,
         autoAlpha: 1,
-        display: 'block',
+        display: 'block', // Ensure it's in the layout flow for animation
         scale: 1.4,
         ease: "power2.inOut",
       })
@@ -38,15 +39,17 @@ function CampaignFormApp() {
         ease: "power2.inOut",
         onComplete: () => {
           if (transitionRef.current) {
+            // After fading out, set display: none to remove from layout
             transitionRef.current.style.display = 'none';
           }
         }
-      }, ).to(campaignFormRef.current, { 
+      }) // Corrected: Removed extraneous comma that was here
+      .to(campaignFormRef.current, { 
         duration: 0.1, 
         autoAlpha: 0, 
         ease: "power2.inOut",
         onComplete: () => {
-          // Optionally hide the form completely or set display: none
+          // After fading out, set display: none to remove from layout
           if (campaignFormRef.current) {
             campaignFormRef.current.style.display = 'none';
           }
@@ -56,7 +59,8 @@ function CampaignFormApp() {
         autoAlpha: 1, 
         ease: "power2.inOut",
         onStart: () => {
-            // Ensure prizeRef is visible for animation
+            // Before fading in, ensure prizeRef is in the layout flow
+            // This overrides the initial inline style display: 'none'
             if (prizeRef.current) {
                 prizeRef.current.style.display = 'block'; 
             }

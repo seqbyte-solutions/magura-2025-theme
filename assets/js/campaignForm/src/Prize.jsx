@@ -154,7 +154,7 @@ function Prize({ prize = null }) {
               Norocul nu stă pe loc, ai grijă să-l confirmi!
               </p>
               <br/>
-              <p>
+              <p className="prize-desc-alt">
                 * După validarea înscrierii, veți primi un email pentru confirmare.
               </p>
           </div>
