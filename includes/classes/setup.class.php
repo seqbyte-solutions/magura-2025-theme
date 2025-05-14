@@ -56,7 +56,7 @@ class Magura2025ThemeSetup
     // schedule a cron job to run every minute
     public function schedule_cron_job() {
         if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
-            wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
+            wp_schedule_event(time(), 'minutely', 'magura2025_cron_fetch_entries');
         }
     }
     
