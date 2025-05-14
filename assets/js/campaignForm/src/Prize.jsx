@@ -144,7 +144,7 @@ function getPrizeImage(prize) {
   }
 }
 
-function Prize({ prize = null, entry_id = null, is_banned = false }) {
+function Prize({ prize = null, entry_id = null, is_banned = false, ban_type = null }) {
   return (
     <>
       {prize !== null ? (
@@ -184,7 +184,8 @@ function Prize({ prize = null, entry_id = null, is_banned = false }) {
         <>
           {is_banned ? (
             <>
-              <div className="prize-content">
+            {ban_type === 'limit' ? <>
+            <div className="prize-content">
                 <h2 className="prize-title">
                   Se pare ca ai atins limita de înscrieri pe ziua de azi!
                 </h2>
@@ -193,6 +194,18 @@ function Prize({ prize = null, entry_id = null, is_banned = false }) {
                   {getPrizeImage(prize)}
                 </div>
               </div>
+            </> : <>
+            <div className="prize-content">
+                <h2 className="prize-title">
+                  Acest număr de bon fiscal a mai fost înscris în campanie. 
+                </h2>
+                <p className="prize-desc">Pentru o inscriere validă, te rugăm să introduci alt bon fiscal.</p>
+                <div className="prize-image-container">
+                  {getPrizeImage(prize)}
+                </div>
+                <a href="/concurs/inscrie-te/">Înscriere nouă</a>
+              </div></>}
+              
             </>
           ) : (
             <>

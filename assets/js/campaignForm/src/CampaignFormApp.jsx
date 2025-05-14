@@ -12,6 +12,7 @@ function CampaignFormApp() {
   const prizeRef = useRef(null);
   const transitionRef = useRef(null);
 
+  const [banType, setBanType] = useState(null);
   const [isBanned, setIsBanned] = useState(false);
   const [entryId, setEntryId] = useState(null);
   const [showPrize, setShowPrize] = useState(false);
@@ -120,6 +121,7 @@ function CampaignFormApp() {
         setPrize(null);
         setShowPrize(true);
         setIsBanned(true);
+        setBanType(data.type);
         return true;
       }
       toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
