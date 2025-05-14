@@ -147,7 +147,7 @@ function CampaignFormApp() {
         pauseOnHover
         theme="colored"
         transition={Bounce}
-        stacked
+        // stacked
       />
     </div>
   );

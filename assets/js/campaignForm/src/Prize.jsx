@@ -153,6 +153,10 @@ function Prize({ prize = null }) {
             <p className="prize-desc">
               Norocul nu stă pe loc, ai grijă să-l confirmi!
               </p>
+              <br/>
+              <p>
+                * După validarea înscrierii, veți primi un email pentru confirmare.
+              </p>
           </div>
         </>
       ) : (

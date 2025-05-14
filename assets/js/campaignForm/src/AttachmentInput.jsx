@@ -43,11 +43,11 @@ function AttachmentInput({ name, onChange, value }) {
       return;
     }
 
-    // Check file size (6MB = 6 * 1024 * 1024 bytes)
-    if (file.size > 6 * 1024 * 1024) {
-      toast.error("Imaginea depășește dimensiunea maximă de 6MB.");
-      return;
-    }
+    // // Check file size (6MB = 6 * 1024 * 1024 bytes)
+    // if (file.size > 6 * 1024 * 1024) {
+    //   toast.error("Imaginea depășește dimensiunea maximă de 6MB.");
+    //   return;
+    // }
 
     onChange(file, name);
   reader.readAsDataURL(file);
@@ -135,7 +135,7 @@ function AttachmentInput({ name, onChange, value }) {
             </div>
           </>
         )}
-        <p>Dimensiunea maximă este 6MB.</p>
+        {/* <p>Dimensiunea maximă este 6MB.</p> */}
       </div>
       <input
         type="file"

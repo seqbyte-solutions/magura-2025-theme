@@ -28,6 +28,7 @@ function Form({handleEntrySubmit}) {
     phone: "",
     county: "",
     locality: "",
+    reciep_number: "",
     reciep_image: null,
     tc: false,
   });
@@ -38,6 +39,7 @@ function Form({handleEntrySubmit}) {
     phone: false,
     county: false,
     locality: false,
+    reciep_number: false,
     reciep_image: false,
     tc: false,
   });
@@ -90,11 +92,9 @@ function Form({handleEntrySubmit}) {
         formIsValid = false;
       }
     }
-    if (!formIsValid) {
-      toast.error("Vă rugăm să completați toate câmpurile.");
-    }
+
     if (formData.reciep_image === null) {
-      toast.error("Vă rugăm să atașați o imagine a bonului fiscal.");
+      // toast.error("Vă rugăm să atașați o imagine a bonului fiscal.");
       setFormErrors((prevData) => ({
         ...prevData,
         reciep_image: true,
@@ -102,7 +102,7 @@ function Form({handleEntrySubmit}) {
       formIsValid = false;
     }
     if (!formData.tc) {
-      toast.error("Vă rugăm să bifați acordul regulamentului.");
+      // toast.error("Vă rugăm să bifați acordul regulamentului.");
       setFormErrors((prevData) => ({
         ...prevData,
         tc: true,
@@ -110,6 +110,7 @@ function Form({handleEntrySubmit}) {
       formIsValid = false;
     }
     if (!formIsValid) {
+      toast.error("Vă rugăm să completați toate câmpurile.");
       setFormSubmitIsLoading(false);
       return;
     }
@@ -219,6 +220,23 @@ function Form({handleEntrySubmit}) {
                 formData.county !== "" ? [...localities[formData.county]] : []
               }
               disabled={formData.county === ""}
+            />
+          </div>
+
+          <div className="form-input-container">
+            <label
+              className={`${formErrors.reciep_number && "error"}`}
+              htmlFor="form_field_reciep_number"
+            >
+              Numărul bonului fiscal
+            </label>
+            <input
+              type="text"
+              name="reciep_number"
+              id="form_field_reciep_number"
+              value={formData.reciep_number}
+              onChange={handleInputChange}
+              required
             />
           </div>
 
