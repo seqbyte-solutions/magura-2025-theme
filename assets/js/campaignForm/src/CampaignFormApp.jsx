@@ -130,7 +130,9 @@ function CampaignFormApp() {
         <img src={campaignData.transition_img} /> 
       </div>
       <div ref={prizeRef} style={{ display: 'none' }}> {/* Initially hide with style */}
-        <Prize prize={prize} /> {/* Pass prize data to Prize component */}
+        <Prize 
+        prize={prize} 
+        /> {/* Pass prize data to Prize component */}
       </div>
 
       <ToastContainer

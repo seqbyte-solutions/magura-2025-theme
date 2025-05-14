@@ -777,12 +777,12 @@
   font-family: "Baloo2";
   color: var(--black);
 }
-
 .form-image-dropzone p {
   font-family: "Baloo2";
   color: var(--black);
   font-size: 1.15rem;
   pointer-events: none;
+  text-align: center;
 }
 
 .form-image-dropzone-icon {
@@ -907,7 +907,6 @@
 }
 
 .prize-title {
-  color: var;
   color: var(--red);
   font-family: "Baloo2";
   font-size: 2.5rem;

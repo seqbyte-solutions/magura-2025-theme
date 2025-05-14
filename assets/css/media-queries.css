@@ -149,4 +149,18 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
+  .won-prize-item .prize-item-content {
+    max-width: 240px;
+    max-height: 240px;
+  }
+  .prize-name {
+    font-size: 1.5rem;
+    line-height: 2rem;
+  }
+  .prize-title {
+    font-size: 2rem;
+  }
+  .prize-loss-icon {
+    max-width: 85%;
+  }
 }/*# sourceMappingURL=media-queries.css.map */

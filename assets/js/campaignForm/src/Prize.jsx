@@ -151,7 +151,7 @@ function Prize({ prize = null }) {
             Ai pus mâna pe un premiu: {prize === 'vacanta' ? <>Voucher Îmbrățisează România</> : prize === "set magura" ? <>Set Măgura</> : <>Rucsac Măgura</>}!
             </h3>
             <p className="prize-desc">
-              Norocul nu sta pe loc, ai grija să-l confirmi!
+              Norocul nu stă pe loc, ai grijă să-l confirmi!
               </p>
           </div>
         </>
