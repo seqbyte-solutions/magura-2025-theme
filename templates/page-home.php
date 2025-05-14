@@ -112,24 +112,18 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
 
 </section>
 
-<section class="magura-map-section section-lateral-padding" id="harta-imbratisarilor">
+<!-- <section class="magura-map-section section-lateral-padding" id="harta-imbratisarilor">
     <div class="content-box content-centered">
         <div class="heading-container heading-container-centered heading-white">
             <h2>Harta îmbtățișărilor Măgura</h2>
         </div>
         <div class="magura-map-container">
             <?php
-            get_template_part('parts/hero-map');
+            // get_template_part('parts/hero-map');
             ?>
         </div>
-        <!-- <div class="magura-map-container">
-            <?php
-            // get_template_part('parts/hero-map-2');
-            ?>
-        </div> -->
-
     </div>
-</section>
+</section> -->
 
 <section class="prizes-section section-lateral-padding">
     <div class="content-box content-centered">
