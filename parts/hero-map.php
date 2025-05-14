@@ -192,7 +192,7 @@ wp_localize_script('magura-map', 'mapData',[
    'dolj' => 
   array(
      'name' => 'Dolj',
-     'entries' => 231,
+     'entries' => 0,
   ),
    'calarasi' => 
   array(
