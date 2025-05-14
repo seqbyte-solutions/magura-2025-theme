@@ -890,4 +890,82 @@
 }
 .form-checkbox-container:has(input:checked) .checkbox-icon svg {
   opacity: 1;
+}
+
+.campaign-form-container {
+  position: relative;
+}
+
+.campaign-transition {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: scale(1.7);
+  opacity: 0;
+  display: none;
+}
+
+.prize-title {
+  color: var;
+  color: var(--red);
+  font-family: "Baloo2";
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+.prize-desc {
+  text-align: center;
+  font-family: "Baloo2";
+  font-family: "Baloo2";
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.prize-name {
+  text-align: center;
+  color: var(--red);
+  font-family: "Baloo2";
+  font-size: 1.8rem;
+  line-height: 2.5rem;
+}
+
+.prize-image-container {
+  padding-block: 30px;
+}
+
+.won-prize-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+.won-prize-item svg {
+  max-width: 450px;
+  width: 100%;
+}
+.won-prize-item .prize-item-content {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  max-width: 350px;
+  max-height: 350px;
+}
+.won-prize-item .prize-item-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.prize-loss-icon {
+  max-width: 300px;
+  margin-inline: auto;
+  display: block;
+  fill: var(--red);
 }/*# sourceMappingURL=style.css.map */

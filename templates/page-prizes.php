@@ -14,7 +14,7 @@ wp_enqueue_script('prizes-script', MAGURA_2025_THEME_URL . '/assets/js/prizes.js
                     <path d="m246.5,398.24c134.2-4.88,200.07-136.64,192.75-224.47-6.65-79.8-24.4-156.15-146.4-156.15-151.28,0-287.91,129.32-292.79,202.51-3.42,51.36,124.35,182.55,246.43,178.11Z" style="fill: #F9BAC5; opacity: .45;" />
                 </svg>
                 <div class="prize-item-content">
-                    <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_ghiozdan.png" alt="">
+                    <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_ghiozdan.png" alt="" />
                     <div class="prize-item-content-text">
                         <h4>1500x</h4>
                         <p>Rucsac Măgura<br />[Diverse culori]</p>

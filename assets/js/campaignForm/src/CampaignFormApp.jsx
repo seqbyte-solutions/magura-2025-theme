@@ -10,25 +10,83 @@ import { useGSAP } from '@gsap/react';
 function CampaignFormApp() {
   const campaignFormRef = useRef(null);
   const prizeRef = useRef(null);
+  const transitionRef = useRef(null);
 
   const [showPrize, setShowPrize] = useState(false);
   const [prize, setPrize] = useState(null);
 
-  const {contextSafe} = useGSAP();
+  useGSAP(() => {
+    // Initially hide the prize section
+    gsap.set(prizeRef.current, { autoAlpha: 0 });
+  }, []);
 
+  useEffect(() => {
+    if (showPrize) {
+      const tl = gsap.timeline();
+
+      tl.to(transitionRef.current, {
+        duration: 0.4,
+        autoAlpha: 1,
+        display: 'block',
+        scale: 1.4,
+        ease: "power2.inOut",
+      })
+      .to(transitionRef.current, {
+        duration: 0.4,
+        autoAlpha: 0,
+        scale: 1.2,
+        ease: "power2.inOut",
+        onComplete: () => {
+          if (transitionRef.current) {
+            transitionRef.current.style.display = 'none';
+          }
+        }
+      }, ).to(campaignFormRef.current, { 
+        duration: 0.1, 
+        autoAlpha: 0, 
+        ease: "power2.inOut",
+        onComplete: () => {
+          // Optionally hide the form completely or set display: none
+          if (campaignFormRef.current) {
+            campaignFormRef.current.style.display = 'none';
+          }
+        }
+      }, "-=0.6").to(prizeRef.current, { 
+        duration: 0.1, 
+        autoAlpha: 1, 
+        ease: "power2.inOut",
+        onStart: () => {
+            // Ensure prizeRef is visible for animation
+            if (prizeRef.current) {
+                prizeRef.current.style.display = 'block'; 
+            }
+        }
+      }, "-=0.4")
+     ;
+    }
+  }, [showPrize]);
 
   const handleEntrySubmit = async (formData) => {
     const formDataToSend = new FormData();
-    console.log("Form data to send:", formData);  
-    setShowPrize(true);
-    contextSafe(() => {
-    
-      console.log("showPrize is true");
-      gsap.fromTo(prizeRef.current, { opacity: 0 }, { opacity: 1, duration: 1 });
-      gsap.fromTo(campaignFormRef.current, { opacity: 1 }, { opacity: 0, duration: 1 });
-    
-  })
-    return;
+    console.log("Form data to send:", formData); 
+     setShowPrize(true);
+     
+    //  select random number between 0 and 5
+    const randomNumber = Math.floor(Math.random() * 6);
+    const prizes = [
+      'vacanta',
+      'set magura',
+      'rucsac visiniu',
+      'rucsac bej',
+      'rucsac model fluturi'
+    ]
+    if(randomNumber === 0){
+      setPrize(null);
+    } else {
+      setPrize(prizes[randomNumber]);
+    }
+
+     return;
     Object.entries(formData).forEach(([key, value]) => {
       if (value) {
         formDataToSend.append(key, value);
@@ -54,8 +112,8 @@ function CampaignFormApp() {
 
       const data = await response.json();
       if(data.status === "success") {
-        setShowPrize(true);
-        setPrize(data.prize);
+        setPrize(data.prize); // Set prize data first
+        setShowPrize(true); // Then trigger the animation
       }
       console.log("Form submitted successfully:", data);
     } catch (error) {
@@ -63,15 +121,16 @@ function CampaignFormApp() {
     }
   };
 
-
-
   return (
-    <div>
+    <div className="campaign-form-container">
       <div ref={campaignFormRef}>
-      <Form handleEntrySubmit={handleEntrySubmit} />
+        <Form handleEntrySubmit={handleEntrySubmit} />
       </div>
-      <div ref={prizeRef}>
-      <Prize />
+      <div className="campaign-transition" ref={transitionRef}>
+        <img src={campaignData.transition_img} /> 
+      </div>
+      <div ref={prizeRef} style={{ display: 'none' }}> {/* Initially hide with style */}
+        <Prize prize={prize} /> {/* Pass prize data to Prize component */}
       </div>
 
       <ToastContainer
