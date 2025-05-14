@@ -12,6 +12,7 @@ function CampaignFormApp() {
   const prizeRef = useRef(null);
   const transitionRef = useRef(null);
 
+  const [entryId, setEntryId] = useState(null);
   const [showPrize, setShowPrize] = useState(false);
   const [prize, setPrize] = useState(null);
 
@@ -73,24 +74,11 @@ function CampaignFormApp() {
   const handleEntrySubmit = async (formData) => {
     const formDataToSend = new FormData();
     console.log("Form data to send:", formData); 
-     setShowPrize(true);
-     
-    //  select random number between 0 and 5
-    const randomNumber = Math.floor(Math.random() * 6);
-    const prizes = [
-      'vacanta',
-      'set magura',
-      'rucsac visiniu',
-      'rucsac bej',
-      'rucsac model fluturi'
-    ]
-    if(randomNumber === 0){
-      setPrize(null);
-    } else {
-      setPrize(prizes[randomNumber]);
-    }
 
-     return;
+    setShowPrize(true); // Then trigger the animation
+      setPrize(null);
+      return;
+ 
     Object.entries(formData).forEach(([key, value]) => {
       if (value) {
         formDataToSend.append(key, value);
@@ -114,11 +102,14 @@ function CampaignFormApp() {
         throw new Error("Network response was not ok");
       }
 
-      const data = await response.json();
-      if(data.status === "success") {
-        setPrize(data.prize); // Set prize data first
-        setShowPrize(true); // Then trigger the animation
-      }
+      setShowPrize(true); // Then trigger the animation
+      setPrize(null);
+      // const data = await response.json();
+      // if(data.status === "success") {
+      //   setEntryId(data.entry_id); // Set entry ID
+      //   setPrize(data.prize); // Set prize data first
+      //   setShowPrize(true); // Then trigger the animation
+      // }
       console.log("Form submitted successfully:", data);
     } catch (error) {
       console.error("Error submitting form:", error);
@@ -136,6 +127,7 @@ function CampaignFormApp() {
       <div ref={prizeRef} style={{ display: 'none' }}> {/* Initially hide with style */}
         <Prize 
         prize={prize} 
+        entry_id={entryId}
         /> {/* Pass prize data to Prize component */}
       </div>
 

@@ -44,10 +44,6 @@ function Form({handleEntrySubmit}) {
     tc: false,
   });
 
-  useEffect(() => {
-    console.log("Form data changed:", formData);
-  }, [formData]);
-
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
     if (type === "checkbox") {
