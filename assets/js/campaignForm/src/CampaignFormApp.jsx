@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import Form from "./Form";
-import { ToastContainer, Bounce } from "react-toastify";
+import { ToastContainer, Bounce, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Prize from "./Prize";
 
@@ -73,25 +73,24 @@ function CampaignFormApp() {
 
   const handleEntrySubmit = async (formData) => {
     const formDataToSend = new FormData();
-    console.log("Form data to send:", formData); 
-
-    setShowPrize(true); // Then trigger the animation
-      setPrize(null);
-      return;
- 
     Object.entries(formData).forEach(([key, value]) => {
       if (value) {
-        formDataToSend.append(key, value);
+        // Special handling for File objects
+        if (value instanceof File) {
+          formDataToSend.append(key, value, value.name);
+        } else {
+          formDataToSend.append(key, value);
+        }
       }
     });
 
     try {
       const response = await fetch(
-        campaignData.api_url,
+        `${campaignData.api_url}campaign/submit`,
         {
           method: "POST",
           headers: {
-            "X-api-token": campaignData.api_token,
+            // "X-api-token": campaignData.api_token,
             "Accept": "application/json",
           },
           body: formDataToSend,
@@ -102,17 +101,21 @@ function CampaignFormApp() {
         throw new Error("Network response was not ok");
       }
 
-      setShowPrize(true); // Then trigger the animation
-      setPrize(null);
-      // const data = await response.json();
-      // if(data.status === "success") {
-      //   setEntryId(data.entry_id); // Set entry ID
-      //   setPrize(data.prize); // Set prize data first
-      //   setShowPrize(true); // Then trigger the animation
-      // }
-      console.log("Form submitted successfully:", data);
+      const data = await response.json();
+      if(data.status === "success") {
+        setEntryId(data.entry_id); 
+
+        if(data.type === "winner")
+        setPrize(data.prize); 
+        setShowPrize(true); 
+        return true;
+      } 
+        toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
+        return false;
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
+      return false;
     }
   };
 

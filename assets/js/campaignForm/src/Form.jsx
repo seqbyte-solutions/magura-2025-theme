@@ -111,8 +111,8 @@ function Form({handleEntrySubmit}) {
       return;
     }
 
-
-    await handleEntrySubmit(formData);
+    const response = await handleEntrySubmit(formData);
+     
     setFormSubmitIsLoading(false);
   };
   return (

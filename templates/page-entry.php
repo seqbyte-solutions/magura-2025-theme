@@ -4,7 +4,7 @@ wp_localize_script(
     'campaign-form',
     'campaignData',
     [
-        'api_url' => "https://api.promoapp.ro/v1/campaigns/magura2025/submit",
+        'api_url' => "https://api-magura.promoapp.ro/api/v1/",
         'api_token' => "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0",
         'transition_img' => MAGURA_2025_THEME_URL . '/assets/img/campaign-transition.svg',
         'prize_img_rucsac' => MAGURA_2025_THEME_URL . '/assets/img/prize_ghiozdan.png',

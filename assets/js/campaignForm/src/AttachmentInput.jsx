@@ -94,10 +94,7 @@ function AttachmentInput({ name, onChange, value }) {
     dropzoneImagePreview.current.src = e.target.result;
   };
 
-  useEffect(() => {
-    console.log("value", value);
-  
-  }, [value])
+
   
   return (
     <>

@@ -1,7 +1,7 @@
 import React from "react";
 
 function getPrizeImage(prize) {
-  if (prize === "vacanta") {
+  if (prize === "Vacanta") {
     return <>
     <div className="won-prize-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
@@ -24,7 +24,7 @@ function getPrizeImage(prize) {
                     <img src={campaignData.prize_img_vacanta}  alt="" />
                 </div>
       </div></>;
-  } else if (prize === "set magura") {
+  } else if (prize === "Set Magura") {
     return <>
     <div className="won-prize-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
@@ -47,7 +47,7 @@ function getPrizeImage(prize) {
                     <img src={campaignData.prize_img_cani}  alt="" />
                 </div>
       </div></>;
-  } else if (prize === "rucsac visiniu") {
+  } else if (prize === "Rucsac visiniu") {
     return <>
       <div className="won-prize-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
@@ -71,7 +71,7 @@ function getPrizeImage(prize) {
                 </div>
       </div>
     </>;
-  } else if (prize === "rucsac bej") {
+  } else if (prize === "Rucsac bej") {
     return <>
       <div className="won-prize-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
@@ -95,7 +95,7 @@ function getPrizeImage(prize) {
                 </div>
       </div>
     </>;
-  } else if (prize === "rucsac model fluturi") {
+  } else if (prize === "Rucsac model fluturi") {
     return <>
       <div className="won-prize-item">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35" >
@@ -132,7 +132,7 @@ function getPrizeImage(prize) {
   }
 }
 
-function Prize({ prize = null }) {
+function Prize({ prize = null, entry_id = null }) {
   return (
     <>
       {prize !== null ? (
@@ -148,8 +148,10 @@ function Prize({ prize = null }) {
               Hei, se pare că norocul ți-a zâmbit! 
             </h3>
             <h3 className="prize-name">
-            Ai pus mâna pe un premiu: {prize === 'vacanta' ? <>Voucher Îmbrățisează România</> : prize === "set magura" ? <>Set Măgura</> : <>Rucsac Măgura</>}!
+            Ai pus mâna pe un premiu: {prize === 'Vacanta' ? <>Voucher Îmbrățisează România</> : prize === "Set Magura" ? <>Set Măgura</> : <>Rucsac Măgura</>}!
             </h3>
+            <p className="prize-desc">ID înscriere:</p>
+            <span className="prize-entry-id">{entry_id}</span>
             <p className="prize-desc">
               Norocul nu stă pe loc, ai grijă să-l confirmi!
               </p>
@@ -165,6 +167,8 @@ function Prize({ prize = null }) {
             <h2 className="prize-title">Norocul nu e aici azi!</h2>
             <p className="prize-desc">De data aceasta nu ai câștigat!</p>
             <p className="prize-desc">Mai încearcă și mâine.</p>
+            <p className="prize-desc">ID înscriere:</p>
+            <span className="prize-entry-id">{entry_id}</span>
             <div className="prize-image-container">
               {getPrizeImage(prize)}
               </div>
