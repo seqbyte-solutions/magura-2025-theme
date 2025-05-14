@@ -1,7 +1,7 @@
 <?php
 wp_enqueue_script('magura-map', MAGURA_2025_THEME_URL . '/assets/js/magura-map.js');
 wp_localize_script('magura-map', 'mapData',[ 
-    'totalEntries' => 0,
+    'totalEntries' => 1,
     'countiesData' => [
         
    'bucuresti-ilfov' => 
