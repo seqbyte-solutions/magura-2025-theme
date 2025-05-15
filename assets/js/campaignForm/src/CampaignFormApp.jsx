@@ -138,6 +138,12 @@ function CampaignFormApp() {
           setShowPrize(true);
           await sendPrizeEmail(formData.email, data.prize);
           return true;
+        } else {
+          setPrize(null);
+          setShowPrize(true);
+          setIsBanned(false);
+          setBanType(null);
+          return true;
         }
       } else if (data?.status === "banned") {
         setPrize(null);
