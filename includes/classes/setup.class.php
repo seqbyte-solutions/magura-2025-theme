@@ -39,7 +39,7 @@ class Magura2025ThemeSetup
 
     public function register_options()
     {
-        add_option('maintainance_mode', 'true');
+        add_option('maintainance_mode', 'false');
         add_option('campaign_entries', []);
     }
 
