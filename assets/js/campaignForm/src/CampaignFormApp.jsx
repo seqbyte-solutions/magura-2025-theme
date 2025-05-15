@@ -131,7 +131,7 @@ function CampaignFormApp() {
 
       const data = await response.json();
       // console.log("Response data:", data);
-      if (data.status === "success") {
+      if (data?.status === "success") {
         setEntryId(data.entry_id);
         if (data.type === "winner") {
           setPrize(data.prize);
@@ -139,15 +139,14 @@ function CampaignFormApp() {
           await sendPrizeEmail(formData.email, data.prize);
           return true;
         }
-      } else if (data.status === "banned") {
+      } else if (data?.status === "banned") {
         setPrize(null);
         setShowPrize(true);
         setIsBanned(true);
         setBanType(data.type);
         return true;
       }
-      toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
-      return false;
+      throw new Error("If statements passed ", data);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
