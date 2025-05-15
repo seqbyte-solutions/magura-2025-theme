@@ -6,7 +6,7 @@ $total_entries = 0;
 $counties = [
    'bucuresti-ilfov' =>
    array(
-      'name' => 'Bucuresti și Ilfov',
+      'name' => 'București și Ilfov',
       'entries' => 0,
    ),
    'constanta' =>
