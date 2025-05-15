@@ -10,6 +10,8 @@ wp_localize_script(
         'prize_img_rucsac' => MAGURA_2025_THEME_URL . '/assets/img/prize_ghiozdan.png',
         'prize_img_vacanta' => MAGURA_2025_THEME_URL . '/assets/img/prize_vacanta.png',
         'prize_img_cani' => MAGURA_2025_THEME_URL . '/assets/img/prize_cani.png',
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'security' => wp_create_nonce('send_email_nonce'),
     ]
 );
 // wp_enqueue_style('campaign-form', MAGURA_2025_THEME_URL . '/assets/js/campaign-form.css');

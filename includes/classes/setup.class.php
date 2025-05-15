@@ -2,7 +2,7 @@
 
 namespace Magura2025;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
 class Magura2025ThemeSetup
@@ -21,23 +21,30 @@ class Magura2025ThemeSetup
         add_action('switch_theme', [$this, 'theme_deactivation']);
         add_action('wp', [$this, 'schedule_cron_job']);
         add_action('magura2025_cron_fetch_entries', [$this, 'fetch_entries']);
-        
+
         // Add custom cron schedule
         add_filter('cron_schedules', [$this, 'add_cron_interval']);
+
+        // open ajax endpoint to send an email
+        add_action("wp_ajax_magura_send_email", [$this, 'send_email']);
+        add_action("wp_ajax_nopriv_magura_send_email", [$this, 'send_email']);
     }
 
-    public function theme_activation() {
+    public function theme_activation()
+    {
         $this->theme_menus->register_menus();
         $this->theme_pages->create_theme_pages();
         $this->theme_menus->create_default_menus();
     }
 
-    public function register_options() {
+    public function register_options()
+    {
         add_option('maintainance_mode', 'true');
         add_option('campaign_entries', []);
     }
 
-    public function theme_deactivation() {
+    public function theme_deactivation()
+    {
         delete_option('maintainance_mode');
         // remove menus and pages
         $this->theme_menus->remove_menus();
@@ -45,7 +52,8 @@ class Magura2025ThemeSetup
     }
 
     // Add custom minutely schedule
-    public function add_cron_interval($schedules) {
+    public function add_cron_interval($schedules)
+    {
         $schedules['minutely'] = array(
             'interval' => 60, // 60 seconds
             'display'  => esc_html__('Every Minute', 'magura-2025-theme'),
@@ -54,13 +62,15 @@ class Magura2025ThemeSetup
     }
 
     // schedule a cron job to run every minute
-    public function schedule_cron_job() {
+    public function schedule_cron_job()
+    {
         if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
             wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
         }
     }
-    
-    public function fetch_entries() {
+
+    public function fetch_entries()
+    {
         $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries';
         $response = wp_remote_get($api_url);
 
@@ -73,6 +83,36 @@ class Magura2025ThemeSetup
 
         if (isset($data['data'])) {
             update_option('campaign_entries', $data['data']);
+        }
+    }
+
+    public function send_email()
+    {
+        check_ajax_referer('send_email_nonce', 'security');
+
+        $to = sanitize_email($_POST['email']);
+        $prize = sanitize_text_field($_POST['prize']);
+        $prize = $prize === 'Vacanta' ? "Voucher Îmbrățisează România" : ($prize === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
+        $subject = 'Ai pus mâna pe un premiu!';
+
+        $message = "Felicitări!
+
+Hei, se pare că norocul ți-a zâmbit!
+Ai pus mâna pe un premiu: " . $prize . "\n\n
+
+O zi plină de îmbrățișări!
+Echipa Măgura";
+
+
+        $headers = array('Content-Type: text/plain; charset=UTF-8');
+        $headers[] = 'From: Măgura <contact@magura.ro>';
+        $headers[] = 'Reply-To: Măgura <contact@magura.ro>';
+        $headers[] = 'X-Mailer: PHP/' . phpversion();
+
+        if (wp_mail($to, $subject, $message, $headers)) {
+            wp_send_json_success('Email sent successfully');
+        } else {
+            wp_send_json_error('Failed to send email');
         }
     }
 }

@@ -81,6 +81,27 @@ function CampaignFormApp() {
     }
   }, [showPrize]);
 
+  const sendPrizeEmail = async (email, prize) => {
+    try {
+      const formData = new FormData();
+      formData.append('action', 'magura_send_email');
+      formData.append('email', email);
+      formData.append('prize', prize);
+      formData.append('security', campaignData.security);
+
+      const response = await fetch(campaignData.ajax_url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error("Error sending prize email:", error);
+    }
+  };
+
   const handleEntrySubmit = async (formData) => {
     const formDataToSend = new FormData();
     Object.entries(formData).forEach(([key, value]) => {
@@ -115,6 +136,7 @@ function CampaignFormApp() {
         if (data.type === "winner") {
           setPrize(data.prize);
           setShowPrize(true);
+          await sendPrizeEmail(formData.email, data.prize);
           return true;
         }
       } else if (data.status === "banned") {
@@ -144,7 +166,7 @@ function CampaignFormApp() {
       <div ref={prizeRef} style={{ display: "none" }}>
         {" "}
         {/* Initially hide with style */}
-        <Prize prize={prize} entry_id={entryId} is_banned={isBanned} />{" "}
+        <Prize prize={prize} entry_id={entryId} is_banned={isBanned} ban_type={banType} />{" "}
         {/* Pass prize data to Prize component */}
       </div>
 
