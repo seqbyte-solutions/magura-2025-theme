@@ -217,9 +217,9 @@ foreach ($counties as $key => $county) {
    $countyName = $county['name'];
 
    if ($key === 'bucuresti-ilfov') {
+      $countyEntries = 0;
+      $countyEntries2 = 0;
       foreach ($entries as $entry) {
-         $countyEntries = 0;
-         $countyEntries2 = 0;
          if (isset($entry['county']) && $entry['county'] === "București") {
             $countyEntries = $entry['entry_count'];
          }
