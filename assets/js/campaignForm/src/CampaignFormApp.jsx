@@ -130,7 +130,6 @@ function CampaignFormApp() {
       }
 
       const data = await response.json();
-      console.log("Response data:", data);
       if (data?.status === "success") {
         setEntryId(data.entry_id);
         if (data.type === "winner") {
