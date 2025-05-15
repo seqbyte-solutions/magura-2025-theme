@@ -130,7 +130,7 @@ function CampaignFormApp() {
       }
 
       const data = await response.json();
-      // console.log("Response data:", data);
+      console.log("Response data:", data);
       if (data?.status === "success") {
         setEntryId(data.entry_id);
         if (data.type === "winner") {
@@ -152,7 +152,7 @@ function CampaignFormApp() {
         setBanType(data.type);
         return true;
       }
-      throw new Error("If statements passed ", data);
+      throw new Error("If statements passed", data);
     } catch (error) {
       console.error("Error submitting form:", error);
       toast.error("A apărut o eroare. Te rugăm să încerci din nou mai târziu.");
