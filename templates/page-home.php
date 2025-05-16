@@ -115,7 +115,7 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
 <section class="magura-map-section section-lateral-padding" id="harta-imbratisarilor">
     <div class="content-box content-centered">
         <div class="heading-container heading-container-centered heading-white">
-            <h2>Harta îmbtățișărilor Măgura</h2>
+            <h2>Harta îmbrățișărilor Măgura</h2>
         </div>
         <div class="magura-map-container">
             <?php
