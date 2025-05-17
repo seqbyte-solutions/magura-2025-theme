@@ -1,9 +1,9 @@
 <?php
 
-if (!current_user_can('manage_options')) {
-    wp_die(__('You do not have sufficient permissions to access this page.'));
-    return;
-}
+if (!current_user_can('can_see_analitics')) {
+        wp_die(__('You do not have sufficient permissions to access this page.'));
+        return;
+    }
 
 class Inscrieri_List_Table extends WP_List_Table
 {

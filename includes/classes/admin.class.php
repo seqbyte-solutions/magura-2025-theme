@@ -57,7 +57,7 @@ class Magura2025ThemeAdmin
             'magura-2025-campaign',
             'Înscrieri',
             'Înscrieri',
-            'manage_options',
+            'can_see_analitics',
             'magura-2025-campaign-entries',
             [$this, 'campaign_entries']
         );

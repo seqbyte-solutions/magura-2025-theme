@@ -27,7 +27,8 @@
                     max-height: 300px;" id="typeChart"></canvas>
                 </div>
             </div>
-            <canvas id="perCountyChart" style="height: 500px;"></canvas>
+            <canvas id="perCountyChart" style="max-height: 800px; min-height:400px; height: 100%;"></canvas>
+            <canvas id="bannedChart" style="height: 200px;"></canvas>
         </div>
         <div id="admin-charts-app">
 
@@ -46,8 +47,8 @@ const dailyData = {
       {
         label: "Înscrieri",
         data: sortedDailyData?.map((entry) => entry.entry_count),
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        borderColor: "#DB0632",
+        backgroundColor: "#DB0632",
         tension: 0.4
       },
     ],
@@ -204,5 +205,46 @@ new Chart(
     }
   );
 
+const bannedData = {
+  labels: [
+    'Bon deja înscris',
+    'Limită maximă de înscriere pe zi depășită',
+  ],
+  datasets: [
+    {
+      label: 'Înscrieri',
+      data: [    
+        parseInt(adminChartsData?.data?.banned_entries[0]?.entry_count),
+        parseInt(adminChartsData?.data?.banned_entries?.[1]?.entry_count),
+      ],
+      backgroundColor: ['#F9BAC5', '#DB0632'],
+      borderColor: ['#DB0632', '#DB0632'],
+      borderWidth: 1,
+      barThickness: 50,
+    },
+  ],
+}
+
+const bannedOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      display: false,
+      position: 'top',
+    },
+    title: {
+      display: true,
+      text: 'Înscrieri blocate',
+    },
+  },
+}
+new Chart(
+    document.getElementById("bannedChart"),
+    {
+      type: "bar",
+      data: bannedData,
+      options: bannedOptions,
+    }
+  );
 </script>
 
