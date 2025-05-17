@@ -78,7 +78,7 @@ class Magura2025ThemeAdmin
     public function campaign_entries()
     {
         // Check if the user has the required capability
-        if (!current_user_can('manage_options')) {
+        if (!current_user_can('can_see_analitics')) {
             return;
         }
 
