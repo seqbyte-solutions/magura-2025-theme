@@ -1,6 +1,5 @@
 <?php
-
-if (!current_user_can('can_see_analitics')) {
+    if (!current_user_can('can_see_analitics')) {
         wp_die(__('You do not have sufficient permissions to access this page.'));
         return;
     }

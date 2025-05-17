@@ -28,7 +28,7 @@
                 </div>
             </div>
             <canvas id="perCountyChart" style="max-height: 800px; min-height:400px; height: 100%;"></canvas>
-            <canvas id="bannedChart" style="height: 200px;"></canvas>
+            <canvas id="bannedChart" style="height: 100%; max-height:300px;"></canvas>
         </div>
         <div id="admin-charts-app">
 
