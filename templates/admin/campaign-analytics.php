@@ -82,7 +82,7 @@ new Chart(
 const uniqueData = {
     labels: [
         "Înscrieri totale",
-        "Înscrieri unice",
+        "Participanți unici",
     ],
     datasets: [
       {
