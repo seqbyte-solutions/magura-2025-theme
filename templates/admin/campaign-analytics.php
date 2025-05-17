@@ -1,59 +1,64 @@
 <?php
-    if (!current_user_can('can_see_analitics')) {
-        wp_die(__('You do not have sufficient permissions to access this page.'));
-        return;
-    }
+if (!current_user_can('can_see_analitics')) {
+  wp_die(__('You do not have sufficient permissions to access this page.'));
+  return;
+}
 
-    $url = 'https://api-magura.promoapp.ro/api/v1/campaign/analytics';
-    $response = wp_remote_get($url);
-    $data = json_decode(wp_remote_retrieve_body($response), true);
+$url = 'https://api-magura.promoapp.ro/api/v1/campaign/analytics';
+$headers = [
+  'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+  'Content-Type' => 'application/json',
+  'Accept' => 'application/json'
+];
+$response = wp_remote_get($url, [
+  'headers' => $headers
+]);
+$data = json_decode(wp_remote_retrieve_body($response), true);
 ?>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <div class="wrap">
-    <h2>Rapoarte</h2>
-    <br/>
+  <h2>Rapoarte</h2>
+  <br />
+  <div>
     <div>
-        <div>
-            <canvas style="max-height: 300px; height:100%" id="perDayChart"></canvas>
-            <div style="display: flex; justify-content: space-between; margin-top: 50px; margin-bottom: 50px; gap: 10px">
-                <div style="width: 50%">
-                    <canvas style="width: 100%;
+      <canvas style="max-height: 300px; height:100%" id="perDayChart"></canvas>
+      <div style="display: flex; justify-content: space-between; margin-top: 50px; margin-bottom: 50px; gap: 10px">
+        <div style="width: 50%">
+          <canvas style="width: 100%;
                     max-height: 300px;" id="uniqueChart"></canvas>
-                </div>
-                <div style="width: 50%">
-                    <canvas style="width: 100%;
+        </div>
+        <div style="width: 50%">
+          <canvas style="width: 100%;
                     max-height: 300px;" id="typeChart"></canvas>
-                </div>
-            </div>
-            <canvas id="perCountyChart" style="max-height: 800px; min-height:400px; height: 100%;"></canvas>
-            <canvas id="bannedChart" style="height: 100%; max-height:300px;"></canvas>
         </div>
-        <div id="admin-charts-app">
-
-        </div>
+      </div>
+      <canvas id="perCountyChart" style="max-height: 800px; min-height:400px; height: 100%;"></canvas>
+      <canvas id="bannedChart" style="height: 100%; max-height:300px;"></canvas>
     </div>
+    <div id="admin-charts-app">
+
+    </div>
+  </div>
 </div>
 
 <script>
-    const adminChartsData = <?php echo json_encode($data); ?>;
+  const adminChartsData = <?php echo json_encode($data); ?>;
   const sortedDailyData = adminChartsData?.data?.entries_by_date?.sort(
     (a, b) => new Date(a.entry_date) - new Date(b.entry_date)
   );
-const dailyData = {
-  labels: sortedDailyData?.map((entry) => entry.entry_date),
-    datasets: [
-      {
-        label: "Înscrieri",
-        data: sortedDailyData?.map((entry) => entry.entry_count),
-        borderColor: "#DB0632",
-        backgroundColor: "#DB0632",
-        tension: 0.4
-      },
-    ],
-};
-const dailyOptions = {
+  const dailyData = {
+    labels: sortedDailyData?.map((entry) => entry.entry_date),
+    datasets: [{
+      label: "Înscrieri",
+      data: sortedDailyData?.map((entry) => entry.entry_count),
+      borderColor: "#DB0632",
+      backgroundColor: "#DB0632",
+      tension: 0.4
+    }, ],
+  };
+  const dailyOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -65,41 +70,38 @@ const dailyOptions = {
         text: "Înscrieri pe zile",
       },
     },
-};
-// how can i set chart heiht to 300px?
-const chartHeight = 300;
-new Chart(
-    document.getElementById("perDayChart"),
-    {
+  };
+  // how can i set chart heiht to 300px?
+  const chartHeight = 300;
+  new Chart(
+    document.getElementById("perDayChart"), {
       type: "line",
       data: dailyData,
       options: dailyOptions,
-        height: chartHeight,
+      height: chartHeight,
     }
   );
 
 
-const uniqueData = {
+  const uniqueData = {
     labels: [
-        "Înscrieri totale",
-        "Participanți unici",
+      "Înscrieri totale",
+      "Participanți unici",
     ],
-    datasets: [
-      {
-        label: "Înscrieri",
-        data: [
-            parseInt(adminChartsData?.data?.total_entries),
-            parseInt(adminChartsData?.data?.unique_entries)
-        ],
-        backgroundColor: ["#F9BAC5", "#DB0632"],
-        borderColor: ["#DB0632", "#F9BAC5"],
-        borderWidth: 1,
-        barThickness: 100,
-      }
-    ],
-};
+    datasets: [{
+      label: "Înscrieri",
+      data: [
+        parseInt(adminChartsData?.data?.total_entries),
+        parseInt(adminChartsData?.data?.unique_entries)
+      ],
+      backgroundColor: ["#F9BAC5", "#DB0632"],
+      borderColor: ["#DB0632", "#F9BAC5"],
+      borderWidth: 1,
+      barThickness: 100,
+    }],
+  };
 
-const uniqueOptions = {
+  const uniqueOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -111,32 +113,29 @@ const uniqueOptions = {
         text: "Statistici înscrieri",
       },
     },
-}
-new Chart(
-    document.getElementById("uniqueChart"),
-    {
+  }
+  new Chart(
+    document.getElementById("uniqueChart"), {
       type: "bar",
       data: uniqueData,
       options: uniqueOptions,
     }
   );
 
-const perCountyData = {
+  const perCountyData = {
     labels: adminChartsData?.data?.by_counties?.map((entry) => entry.county),
-    datasets: [
-      {
-        label: "Înscrieri",
-        data: adminChartsData?.data?.by_counties?.map((entry) => entry.entry_count),
-        backgroundColor: "#F9BAC5",
-        borderColor: "#DB0632",
-        borderWidth: 1, 
-      },
-    ],
-};
+    datasets: [{
+      label: "Înscrieri",
+      data: adminChartsData?.data?.by_counties?.map((entry) => entry.entry_count),
+      backgroundColor: "#F9BAC5",
+      borderColor: "#DB0632",
+      borderWidth: 1,
+    }, ],
+  };
 
-const perCountyOptions = {
+  const perCountyOptions = {
     responsive: true,
-    aspectRatio: 1 / 2, 
+    aspectRatio: 1 / 2,
     indexAxis: 'y',
     plugins: {
       legend: {
@@ -148,10 +147,9 @@ const perCountyOptions = {
         text: "Înscrieri pe judete",
       },
     },
-}
-new Chart(
-    document.getElementById("perCountyChart"),
-    {
+  }
+  new Chart(
+    document.getElementById("perCountyChart"), {
       type: "bar",
       data: perCountyData,
       options: perCountyOptions,
@@ -161,29 +159,27 @@ new Chart(
 
 
 
-const typeData = {
+  const typeData = {
     labels: [
-        "Necâștigătoare",
-        "Câștigătoare",
-        "Rezerve",
+      "Necâștigătoare",
+      "Câștigătoare",
+      "Rezerve",
     ],
-    datasets: [
-      {
-        label: "Înscrieri",
-        data: [
-            parseInt(adminChartsData?.data?.count_by_type[0]?.regular_entries),
-            parseInt(adminChartsData?.data?.count_by_type[0]?.winner_entries),
-            parseInt(adminChartsData?.data?.count_by_type[0]?.reserve_entries),
-        ],
-        backgroundColor: ["#F9BAC5", "#DB0632"],
-        borderColor: ["#DB0632", "#DB0632"],
-        borderWidth: 1,
-        barThickness: 50,
-      }
-    ],
-};
+    datasets: [{
+      label: "Înscrieri",
+      data: [
+        parseInt(adminChartsData?.data?.count_by_type[0]?.regular_entries),
+        parseInt(adminChartsData?.data?.count_by_type[0]?.winner_entries),
+        parseInt(adminChartsData?.data?.count_by_type[0]?.reserve_entries),
+      ],
+      backgroundColor: ["#F9BAC5", "#DB0632"],
+      borderColor: ["#DB0632", "#DB0632"],
+      borderWidth: 1,
+      barThickness: 50,
+    }],
+  };
 
-const typeOptions = {
+  const typeOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -195,25 +191,23 @@ const typeOptions = {
         text: "Tipuri de înscrieri",
       },
     },
-}
-new Chart(
-    document.getElementById("typeChart"),
-    {
+  }
+  new Chart(
+    document.getElementById("typeChart"), {
       type: 'pie',
       data: typeData,
       options: typeOptions,
     }
   );
 
-const bannedData = {
-  labels: [
-    'Bon deja înscris',
-    'Limită maximă de înscriere pe zi depășită',
-  ],
-  datasets: [
-    {
+  const bannedData = {
+    labels: [
+      'Bon deja înscris',
+      'Limită maximă de înscriere pe zi depășită',
+    ],
+    datasets: [{
       label: 'Înscrieri',
-      data: [    
+      data: [
         parseInt(adminChartsData?.data?.banned_entries[0]?.entry_count),
         parseInt(adminChartsData?.data?.banned_entries?.[1]?.entry_count),
       ],
@@ -221,30 +215,27 @@ const bannedData = {
       borderColor: ['#DB0632', '#DB0632'],
       borderWidth: 1,
       barThickness: 50,
-    },
-  ],
-}
+    }, ],
+  }
 
-const bannedOptions = {
-  responsive: true,
-  plugins: {
-    legend: {
-      display: false,
-      position: 'top',
+  const bannedOptions = {
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Înscrieri blocate',
+      },
     },
-    title: {
-      display: true,
-      text: 'Înscrieri blocate',
-    },
-  },
-}
-new Chart(
-    document.getElementById("bannedChart"),
-    {
+  }
+  new Chart(
+    document.getElementById("bannedChart"), {
       type: "bar",
       data: bannedData,
       options: bannedOptions,
     }
   );
 </script>
-
