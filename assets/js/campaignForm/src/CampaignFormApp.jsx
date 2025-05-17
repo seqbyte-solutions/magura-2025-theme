@@ -81,12 +81,13 @@ function CampaignFormApp() {
     }
   }, [showPrize]);
 
-  const sendPrizeEmail = async (email, prize) => {
+  const sendPrizeEmail = async (email, prize, entry_id) => {
     try {
       const formData = new FormData();
       formData.append('action', 'magura_send_email');
       formData.append('email', email);
       formData.append('prize', prize);
+      formData.append('entry_id', entry_id);
       formData.append('security', campaignData.security);
 
       const response = await fetch(campaignData.ajax_url, {
@@ -135,7 +136,7 @@ function CampaignFormApp() {
         if (data.type === "winner") {
           setPrize(data.prize);
           setShowPrize(true);
-          await sendPrizeEmail(formData.email, data.prize);
+          await sendPrizeEmail(formData.email, data.prize, data.entry_id);
           return true;
         } else {
           setPrize(null);

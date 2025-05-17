@@ -92,13 +92,16 @@ class Magura2025ThemeSetup
 
         $to = sanitize_email($_POST['email']);
         $prize = sanitize_text_field($_POST['prize']);
+        $entry_id = sanitize_text_field($_POST['entry_id']);
         $prize = $prize === 'Vacanta' ? "Voucher Îmbrățisează România" : ($prize === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
         $subject = 'Ai pus mâna pe un premiu!';
 
         $message = "Felicitări!
 
 Hei, se pare că norocul ți-a zâmbit!
-Ai pus mâna pe un premiu: " . $prize . "\n\n
+Ai pus mâna pe un premiu: " . $prize . "
+
+ID înscriere: " . $entry_id . "\n\n
 
 O zi plină de îmbrățișări!
 Echipa Măgura";
