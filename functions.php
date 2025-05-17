@@ -12,6 +12,7 @@ class Magura2025Theme{
 
     private Magura2025ThemeSetup $setup;
     private Magura2025TemplateHandler $template_handler;
+    private Magura2025ThemeAdmin $admin;
     
     // Make constructor private to prevent direct instantiation
     private function __construct() {
@@ -20,6 +21,7 @@ class Magura2025Theme{
 
         $this->setup = new Magura2025ThemeSetup();
         $this->template_handler = new Magura2025TemplateHandler();
+        $this->admin = new Magura2025ThemeAdmin();
     }
     
     /**
@@ -35,6 +37,7 @@ class Magura2025Theme{
     }
 
     private function load_dependencies() {
+        require_once get_theme_file_path('/includes/classes/admin.class.php');
         require_once get_theme_file_path('/includes/classes/pages.class.php');
         require_once get_theme_file_path('/includes/classes/menus.class.php');
         require_once get_theme_file_path('/includes/classes/setup.class.php');
