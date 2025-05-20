@@ -15,6 +15,7 @@ class Inscrieri_List_Table extends WP_List_Table
             'first_name' => 'Prenume',
             'phone' => 'Telefon',
             'email' => 'Email',
+            'metadata' => 'Metadate',
             'type' => "Tip",
             'prize' => "Premiu",
             'poza_bon' => 'Imagine'
@@ -157,6 +158,22 @@ class Inscrieri_List_Table extends WP_List_Table
         return '<button onclick="openLightBox(event)" data-src="' . $image_url . '" class="lightbox" style="cursor:pointer;background:none;border:none;outline:none;"><img src="' . $image_url . '" width="50" height="50" style="object-fit: cover;"></button>';
     }
 
+    public function column_metadata($item)
+    {
+        $metadata = $item['metadata'];
+        if (empty($metadata)) {
+            return "-";
+        }
+        $metadata = json_decode($metadata, true);
+
+        $output = "<ul>
+        <li>IP: " . $metadata['ip_address'] . "</li>
+        <li>User Agent: " . $metadata['user_agent'] . "</li>
+        <li>Reffer URL: " . $metadata['reffer'] . "</li>
+       </ul>";
+        return $output;
+    }
+
     public function extra_tablenav($which)
     {
         if ($which == "top") {
@@ -231,6 +248,15 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+
+    .column-poza_bon {
+        max-width: 60px;
+        width: 60px;
+    }
+
+    .column-metadata {
+        width: 300px;
     }
 </style>
 <div class="wrap">
