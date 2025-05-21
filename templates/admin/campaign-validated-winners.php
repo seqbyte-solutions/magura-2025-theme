@@ -4,9 +4,9 @@ if (!current_user_can('can_see_analitics')) {
     return;
 }
 
-class Inscrieri_List_Table extends WP_List_Table
+class Castigatori_List_Table extends WP_List_Table
 {
-    public function get_columns()
+ public function get_columns()
     {
         $columns = [
             'entry_id' => 'ID',
@@ -15,40 +15,28 @@ class Inscrieri_List_Table extends WP_List_Table
             'first_name' => 'Prenume',
             'phone' => 'Telefon',
             'email' => 'Email',
-            'type' => "Tip",
+            'status' => 'Status',
+            // 'type' => "Tip",
             'prize' => "Premiu",
+            'poza_bon' => 'Imagine',
             'actions' => 'Acțiuni',
         ];
         return $columns;
     }
 
-    // Define sortable columns
-    public function get_sortable_columns()
-    {
-        $sortable_columns = array(
-            'created_at'  => array('created_at', false), // true means it's already sorted
-            // 'last_name' => array('last_name', false),
-            // 'first_name'   => array('first_name', false)
-        );
-        return $sortable_columns;
-    }
-
-    // Define the primary column
-    public function get_primary_column_name()
+     public function get_primary_column_name()
     {
         return 'entry_id'; // Or 'last_name' if you prefer
     }
 
     public function prepare_items()
     {
-
-
         // Set up pagination
         $per_page = 10;
         $current_page = $this->get_pagenum();
         $offset = ($current_page - 1) * $per_page;
 
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/paginate';
+        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/validated/paginate';
 
         // Preia datele de filtrare
         $type_filter = isset($_REQUEST['type_filter']) ? sanitize_text_field($_REQUEST['type_filter']) : '';
@@ -60,9 +48,7 @@ class Inscrieri_List_Table extends WP_List_Table
         // $url .= '&per_page=' . $per_page . '&offset=' . $offset;
 
         $url .= '?page=' . $current_page;
-        if (!empty($type_filter)) {
-            $url .= '&type=' . $type_filter;
-        }
+        $url .= '&type=winner';
         if (!empty($prize_won_filter)) {
             $url .= '&prize=' . $prize_won_filter;
         }
@@ -149,17 +135,28 @@ class Inscrieri_List_Table extends WP_List_Table
         return '<a href="tel: ' . $item['phone'] . '">' . $item['phone'] . '</a>';
     }
 
-    // public function column_poza_bon($item)
-    // {
-
-    //     $image_url = 'https://api-magura.promoapp.ro/uploads/' . $item['additional_data']['reciep_image'];
-    //     // return '<img src="'.$image_url.'" />';
-    //     return '<button onclick="openLightBox(event)" data-src="' . $image_url . '" class="lightbox" style="cursor:pointer;background:none;border:none;outline:none;"><img src="' . $image_url . '" width="50" height="50" style="object-fit: cover;"></button>';
-    // }
-
-    public function column_actions($item)
+    public function column_poza_bon($item)
     {
-        return sprintf('<button type="button" onclick="openPreviewModal(%s)">Vizualizează</button>',  $item['id']);
+
+        $image_url = 'https://api-magura.promoapp.ro/uploads/' . $item['additional_data']['reciep_image'];
+        // return '<img src="'.$image_url.'" />';
+        return '<button onclick="openLightBox(event)" data-src="' . $image_url . '" class="lightbox" style="cursor:pointer;background:none;border:none;outline:none;"><img src="' . $image_url . '" width="50" height="50" style="object-fit: cover;"></button>';
+    }
+
+    public function column_metadata($item)
+    {
+         $metadata = $item['metadata'];
+        if (empty($metadata)) {
+            return "-";
+        }
+        $metadata = json_decode($metadata, true);
+
+        $output = "<ul>
+        <li>IP: " . $metadata['ip_address'] . "</li>
+        <li>User Agent: " . $metadata['user_agent'] . "</li>
+        <li>Reffer URL: " . $metadata['reffer'] . "</li>
+       </ul>";
+        return $output;
     }
 
     public function extra_tablenav($which)
@@ -169,11 +166,6 @@ class Inscrieri_List_Table extends WP_List_Table
             <div class="alignleft actions">
                 <form method="get">
                     <input type="hidden" name="page" value="<?php echo $_REQUEST['page'] ?>" />
-                    <select name="type_filter">
-                        <option value="">Toate Tipurile</option>
-                        <option value="winner" <?php echo (isset($_REQUEST['type_filter']) && $_REQUEST['type_filter'] == 'winner') ? 'selected' : ''; ?>>Câștigător</option>
-                        <option value="reserve" <?php echo (isset($_REQUEST['type_filter']) && $_REQUEST['type_filter'] == 'reserve') ? 'selected' : ''; ?>>Rezervă</option>
-                    </select>
                     <select name="prize_won_filter">
                         <option value="">Toate Premiile</option>
                         <option value="1" <?php echo (isset($_REQUEST['prize_won_filter']) && $_REQUEST['prize_won_filter'] == '1') ? 'selected' : ''; ?>>Circuit turistic "Îmbrățișează România"</option>
@@ -193,11 +185,11 @@ class Inscrieri_List_Table extends WP_List_Table
     }
 }
 
-// Instanțiem clasa tabelului
-$inscrieri_list_table = new Inscrieri_List_Table();
+$castigatori_list_table = new Castigatori_List_Table();
 ?>
+
 <style>
-    .sgs-lightbox {
+     .sgs-lightbox {
         position: fixed;
         top: 0;
         left: 0;
@@ -246,101 +238,20 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     .column-metadata {
         width: 300px;
     }
-    
-    /* Modal styles */
-    .entry-preview-modal {
-        display: none;
-        position: fixed;
-        z-index: 10000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
-    }
-    
-    .modal-content {
-        background-color: #fefefe;
-        margin: 10% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        max-width: 800px;
-        border-radius: 5px;
-    }
-    
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    .modal-body {
-        margin-top: 20px;
-    }
-    
-    .modal-body table {
-        width: 100%;
-        border-collapse: collapse;
-    }
-    
-    .modal-body table td, .modal-body table th {
-        padding: 8px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    
-    .modal-body .receipt-image {
-        max-width: 100%;
-        margin-top: 20px;
-    }
 </style>
+
 <div class="wrap">
-    <h2>Inscrieri</h2>
+    <h2>Statusuri validari</h2>
     <br />
     <div>
         <?php
-
-        if (is_wp_error($response)) {
-            $error_message = $response->get_error_message();
-            echo "Something went wrong: $error_message";
-        } else {
-            $body = wp_remote_retrieve_body($response);
-            $data = json_decode($body, true);
-            // Process the data as needed
-            // For example, you can print it out
-            // echo '<pre>';
-            // print_r($data);
-            // echo '</pre>';
-
             $inscrieri_list_table->prepare_items();
             // Display the table
             $inscrieri_list_table->display();
-        }
-
         ?>
     </div>
 </div>
 
-<div class="entry-preview-modal" id="entry-preview-modal" style="display:none;">
-    <div class="modal-content">
-        <span class="close" onclick="closePreviewModal(event)">&times;</span>
-        <h2>Preview</h2>
-        <div class="modal-body">
-
-        </div>
-    </div>
-</div>
 
 <div class="sgs-lightbox" style="display:none;">
     <button onclick="closeLightBox(event)">
@@ -349,12 +260,9 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     <img src="" />
 </div>
 
-
-
 <script>
     const customLightbox = document.querySelector(".sgs-lightbox");
-    const entryPreviewModal = document.getElementById("entry-preview-modal");
-    
+
     function openLightBox(e) {
         e.preventDefault();
 
@@ -374,86 +282,4 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         console.log("imgel", imgEl);
         imgEl.setAttribute("src", "");
     }
-
-    async function openPreviewModal(id) {
-        try {
-            // Use correct case for headers and append as specified in API requirements
-            const response = await fetch('https://api-magura.promoapp.ro/api/v1/campaign/entries/single?id=' + id, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    // Make sure the header name matches exactly what the API expects
-                    'X-API-KEY': 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
-                }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            
-            const result = await response.json();
-            
-            if (result.status === 'success' && result.data) {
-                const entry = result.data.entry;
-                const validation = result.data.validation;
-                
-                let modalContent = `
-                    <h3>Detalii Înregistrare #${entry.id}</h3>
-                    <table>
-                        <tr>
-                            <th>Nume</th>
-                            <td>${entry.last_name}</td>
-                        </tr>
-                        <tr>
-                            <th>Prenume</th>
-                            <td>${entry.first_name}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>${entry.email}</td>
-                        </tr>
-                        <tr>
-                            <th>Telefon</th>
-                            <td>${entry.phone}</td>
-                        </tr>
-                        <tr>
-                            <th>Data Înregistrării</th>
-                            <td>${entry.created_at}</td>
-                        </tr>
-                    </table>`;
-                
-                if (entry.additional_data && entry.additional_data.reciep_image) {
-                    const imageUrl = 'https://api-magura.promoapp.ro/uploads/' + entry.additional_data.reciep_image;
-                    modalContent += `<h3>Imaginea Bonului</h3>
-                        <div class="receipt-image">
-                            <img src="${imageUrl}" alt="Bon fiscal" style="max-width: 100%;">
-                        </div>`;
-                }
-                
-                document.querySelector('#entry-preview-modal .modal-body').innerHTML = modalContent;
-                entryPreviewModal.style.display = "block";
-            } else {
-                console.error('Invalid response format:', result);
-                alert('Nu s-au putut încărca detaliile înregistrării.');
-            }
-        } catch(error) {
-            console.error('Error fetching data:', error);
-            alert('A apărut o eroare la încărcarea detaliilor înregistrării.');
-        }
-    }
-    
-    function closePreviewModal(e) {
-        e.preventDefault();
-        entryPreviewModal.style.display = "none";
-        document.querySelector('#entry-preview-modal .modal-body').innerHTML = '';
-    }
-    
-    // Close modal when clicking outside of it
-    window.onclick = function(event) {
-        if (event.target === entryPreviewModal) {
-            entryPreviewModal.style.display = "none";
-            document.querySelector('#entry-preview-modal .modal-body').innerHTML = '';
-        }
-    };
 </script>

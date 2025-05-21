@@ -61,6 +61,22 @@ class Magura2025ThemeAdmin
             'magura-2025-campaign-entries',
             [$this, 'campaign_entries']
         );
+        add_submenu_page(
+            'magura-2025-campaign',
+            'Câștigători',
+            'Câștigători',
+            'can_see_analitics',
+            'magura-2025-campaign-winners',
+            [$this, 'campaign_winners']
+        );
+        add_submenu_page(
+            'magura-2025-campaign',
+            'Validare câștigători',
+            'Validare câștigători',
+            'can_see_analitics',
+            'magura-2025-campaign-validated-winners',
+            [$this, 'campaign_validated_winners']
+        );
     }
 
     public function campaign_analytics()
@@ -84,5 +100,25 @@ class Magura2025ThemeAdmin
 
         // Include the HTML template for the admin page
         include MAGURA_2025_THEME_PATH . '/templates/admin/campaign-entries.php';
+    }
+    public function campaign_winners()
+    {
+        // Check if the user has the required capability
+        if (!current_user_can('can_see_analitics')) {
+            return;
+        }
+
+        // Include the HTML template for the admin page
+        include MAGURA_2025_THEME_PATH . '/templates/admin/campaign-winners.php';
+    }
+    public function campaign_validated_winners()
+    {
+        // Check if the user has the required capability
+        if (!current_user_can('can_see_analitics')) {
+            return;
+        }
+
+        // Include the HTML template for the admin page
+        include MAGURA_2025_THEME_PATH . '/templates/admin/campaign-validated-winners.php';
     }
 }

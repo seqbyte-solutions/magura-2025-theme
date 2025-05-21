@@ -2,23 +2,27 @@
 
 namespace Magura2025;
 
-if ( ! defined( 'ABSPATH' ) ) {
+if (! defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-class Magura2025TemplateHandler {
-    
-    public function __construct() {
+class Magura2025TemplateHandler
+{
+
+    public function __construct()
+    {
         add_action('wp_head', [$this, 'set_head']);
 
         add_action('wp_enqueue_scripts', [$this, 'enqueue_styles']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
     }
 
-    public function set_head() {
+    public function set_head()
+    {
         include get_theme_file_path('/parts/head.php');
     }
 
-    public function enqueue_scripts() {
+    public function enqueue_scripts()
+    {
         wp_enqueue_script('gsap', MAGURA_2025_THEME_URL . '/assets/js/gsap-public/minified/gsap.min.js', [], '3.13.0');
 
         wp_enqueue_script('magura-script', MAGURA_2025_THEME_URL . '/assets/js/script.js', ['gsap']);
@@ -27,12 +31,13 @@ class Magura2025TemplateHandler {
         ]);
     }
 
-    public function enqueue_styles() {
-        wp_enqueue_style('theme-globals', MAGURA_2025_THEME_URL . '/assets/css/globals.css'); 
-        wp_enqueue_style('theme-styles', MAGURA_2025_THEME_URL . '/assets/css/style.css',['theme-globals']); 
-        wp_enqueue_style('theme-header-styles', MAGURA_2025_THEME_URL . '/assets/css/header.css',['theme-globals']); 
-        wp_enqueue_style('theme-footer-styles', MAGURA_2025_THEME_URL . '/assets/css/footer.css',['theme-globals']); 
-        wp_enqueue_style('theme-media-queries', MAGURA_2025_THEME_URL . '/assets/css/media-queries.css',['theme-globals', 'theme-styles', 'theme-header-styles', 'theme-footer-styles']);
+    public function enqueue_styles()
+    {
+        wp_enqueue_style('theme-globals', MAGURA_2025_THEME_URL . '/assets/css/globals.css');
+        wp_enqueue_style('theme-styles', MAGURA_2025_THEME_URL . '/assets/css/style.css', ['theme-globals']);
+        wp_enqueue_style('theme-header-styles', MAGURA_2025_THEME_URL . '/assets/css/header.css', ['theme-globals']);
+        wp_enqueue_style('theme-footer-styles', MAGURA_2025_THEME_URL . '/assets/css/footer.css', ['theme-globals']);
+        wp_enqueue_style('theme-media-queries', MAGURA_2025_THEME_URL . '/assets/css/media-queries.css', ['theme-globals', 'theme-styles', 'theme-header-styles', 'theme-footer-styles']);
     }
 
     public function render(): void
@@ -50,28 +55,48 @@ class Magura2025TemplateHandler {
         //     $this->render_maintenance_page();
         //     return;
         // }
+        
+        // check if page slug is "validare-castigator"
+        if (isset($post->post_name) && $post->post_name === 'validare-castigator') {
+            if (!isset($_GET['entry_id'])) {
+                $this->render404();
+                return;
+            }
+            $entry_id = $_GET['entry_id'];
+
+            $response = wp_remote_get('https://api-magura.promoapp.ro/api/v1/campaign/entry/validation/data?entry_id=' . $entry_id, [
+                'headers' => [
+                    'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                    'Content-Type' => 'application/json']
+                ]);
+            $body = wp_remote_retrieve_body($response);
+            $validation_data = json_decode($body, true);
+            
+        }
 
         ob_start();
-        ?>
+?>
         <!DOCTYPE html>
         <html lang="ro">
+
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>
-               <?php
-                if(is_front_page()) {
+                <?php
+                if (is_front_page()) {
                     echo 'Câștigă cu Măgura dintr-o îmbratișare! | Măgura';
                 } else {
                     echo get_the_title($post->ID) . ' | Măgura';
                 }
-               ?> 
+                ?>
             </title>
 
             <?php
             wp_head();
             ?>
         </head>
+
         <body>
             <?php
             get_template_part('parts/header');
@@ -79,7 +104,14 @@ class Magura2025TemplateHandler {
 
             <main class="page-main">
                 <?php
+                if (isset($post->post_name) && $post->post_name === 'vizualizare-castigator') {
+                    get_template_part('teplates/page-validate-winner', null, [
+                        'entry_id' => $entry_id,
+                        'validation_data' => $validation_data
+                    ]);
+                } else {
                     $this->render_page_template();
+                }
                 ?>
             </main>
 
@@ -88,8 +120,9 @@ class Magura2025TemplateHandler {
             wp_footer();
             ?>
         </body>
+
         </html>
-        <?php
+<?php
         $output = ob_get_clean();
         echo $output;
         ob_end_flush();
@@ -106,7 +139,7 @@ class Magura2025TemplateHandler {
         $pages = $theme_pages->get_theme_pages();
 
         foreach ($pages as $page) {
-            if($page['slug'] === $page_slug) {
+            if ($page['slug'] === $page_slug) {
                 $page_template = strtr($page['template'], ['.php' => '']);
                 break;
             }
