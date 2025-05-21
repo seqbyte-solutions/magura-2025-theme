@@ -12,6 +12,9 @@ class Magura2025ThemeAdmin
     {
         add_action('admin_menu', [$this, 'add_admin_menu']);
         add_action('init', [$this, 'register_custom_role']);
+
+        add_action('wp_ajax_get_campaign_entry_data', [$this, 'get_campaign_entry_data']);
+        add_action('wp_ajax_no_priv_get_campaign_entry_data', [$this, 'get_campaign_entry_data']);
     }
 
     /**
@@ -120,5 +123,43 @@ class Magura2025ThemeAdmin
 
         // Include the HTML template for the admin page
         include MAGURA_2025_THEME_PATH . '/templates/admin/campaign-validated-winners.php';
+    }
+
+    public function get_campaign_entry_data()
+    {
+        // Check if the user has the required capability
+        // if (!current_user_can('can_see_analitics')) {
+        //     wp_send_json_error('Unauthorized', 401);
+        //     return;
+        // }
+
+        // Check nonce for security
+        check_ajax_referer('entry_data', 'security');
+
+        $entry_id = isset($_POST['entry_id']) ? sanitize_text_field($_POST['entry_id']) : '';
+        if (empty($entry_id)) {
+            wp_send_json_error('Entry ID is required', 400);
+            return;
+        }
+
+        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/single?id=' . $entry_id;
+        $response = wp_remote_get($url, [
+            'headers' => [
+                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'Content-Type' => 'application/json',
+                'Accept' => 'application/json'
+            ]
+        ]);
+        if (is_wp_error($response)) {
+            wp_send_json_error('Error fetching data', 500);
+            return;
+        }
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+        if (isset($data['error'])) {
+            wp_send_json_error($data['error'], 400);
+            return;
+        }
+        wp_send_json_success($data);
     }
 }

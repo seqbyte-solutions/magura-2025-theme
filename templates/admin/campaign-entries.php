@@ -246,63 +246,35 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     .column-metadata {
         width: 300px;
     }
-    
-    /* Modal styles */
-    .entry-preview-modal {
-        display: none;
-        position: fixed;
-        z-index: 10000;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgba(0, 0, 0, 0.4);
+
+    .entry-preview-modal{
+          background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none
+;
+    justify-content: center;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    padding: 20px;
+    overflow: auto;
+    z-index: 99999;
     }
-    
-    .modal-content {
+    .modal-content{
         background-color: #fefefe;
-        margin: 10% auto;
+        margin: 0 auto;
         padding: 20px;
         border: 1px solid #888;
-        width: 80%;
-        max-width: 800px;
-        border-radius: 5px;
-    }
-    
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-    
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-    
-    .modal-body {
-        margin-top: 20px;
-    }
-    
-    .modal-body table {
         width: 100%;
-        border-collapse: collapse;
+        max-width: 600px;
+            height: max-content;
     }
-    
-    .modal-body table td, .modal-body table th {
-        padding: 8px;
-        border: 1px solid #ddd;
-        text-align: left;
-    }
-    
-    .modal-body .receipt-image {
-        max-width: 100%;
-        margin-top: 20px;
+
+    .modal-header{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
     }
 </style>
 <div class="wrap">
@@ -311,12 +283,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     <div>
         <?php
 
-        if (is_wp_error($response)) {
-            $error_message = $response->get_error_message();
-            echo "Something went wrong: $error_message";
-        } else {
-            $body = wp_remote_retrieve_body($response);
-            $data = json_decode($body, true);
+    
             // Process the data as needed
             // For example, you can print it out
             // echo '<pre>';
@@ -326,7 +293,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
             $inscrieri_list_table->prepare_items();
             // Display the table
             $inscrieri_list_table->display();
-        }
+        
 
         ?>
     </div>
@@ -334,8 +301,12 @@ $inscrieri_list_table = new Inscrieri_List_Table();
 
 <div class="entry-preview-modal" id="entry-preview-modal" style="display:none;">
     <div class="modal-content">
-        <span class="close" onclick="closePreviewModal(event)">&times;</span>
-        <h2>Preview</h2>
+        <div class="modal-header">
+            <h2>Vizualizare inscriere</h2>
+            
+            <span class="close" onclick="closePreviewModal(event)">&times;</span>
+
+        </div>
         <div class="modal-body">
 
         </div>
@@ -353,8 +324,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
 
 <script>
     const customLightbox = document.querySelector(".sgs-lightbox");
-    const entryPreviewModal = document.getElementById("entry-preview-modal");
-    
+
     function openLightBox(e) {
         e.preventDefault();
 
@@ -375,85 +345,90 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         imgEl.setAttribute("src", "");
     }
 
-    async function openPreviewModal(id) {
-        try {
-            // Use correct case for headers and append as specified in API requirements
-            const response = await fetch('https://api-magura.promoapp.ro/api/v1/campaign/entries/single?id=' + id, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    // Make sure the header name matches exactly what the API expects
-                    'X-API-KEY': 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
+    function openPreviewModal(id) {
+        const modal = document.getElementById('entry-preview-modal');
+                modal.style.display = "flex";
+        const modalBody = document.querySelector('.modal-body');
+        modalBody.innerHTML = '<p>Loading...</p>';
+        jQuery.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            type: 'POST',
+            data: {
+                action: 'get_campaign_entry_data',
+                entry_id: id,
+                _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+            },
+            success: function(response) {
+                console.log(response);
+                
+                const entry = response?.data?.data?.entry;
+                const validation = response?.data?.data?.validation;
+                if (!entry) {
+                 console.error('No entry data found');
+                    return;
                 }
-            });
-            
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+
+                const additionalData = JSON.parse(entry?.additional_data);
+                const metadata = JSON.parse(entry?.metadata);
+                // Populate the modal with the data
+                let output = `
+                <h3>ID Inscriere: ${entry?.entry_id}</h3>
+                <p><strong>Data inscriere:</strong> ${entry?.created_at}</p>
+                <p><strong>Nume:</strong> ${entry?.last_name}</p>
+                <p><strong>Prenume:</strong> ${entry?.first_name}</p>
+                <p><strong>Telefon:</strong> ${entry?.phone}</p>
+                <p><strong>Email:</strong> ${entry?.email}</p>
+                <p><strong>Tip:</strong> ${entry?.type}</p>
+            ${entry?.type === "winner" || entry?.type === "reserve" ? `
+                <p><strong>Premiu:</strong> ${entry?.prize_id}</p>
+                ` : ''}
+                <br/>
+                <h4>Detalii suplimentare</h4>
+                <p><strong>Judet:</strong> ${additionalData?.county}</p>
+                <p><strong>Localitate:</strong> ${additionalData?.locality}</p>
+                <p><strong>Nr. bon:</strong> ${additionalData?.reciep_number}</p>
+                <br/>
+                <h4>Metadata</h4>
+                <p><strong>Adresa IP:</strong> ${metadata?.ip_address}</p>
+                <p><strong>User agent:</strong> ${metadata?.user_agent}</p>
+                <p><strong>Reffer URL:</strong> ${metadata?.reffer}</p>
+
+                <br/>
+                <h4>Poza bonului fiscal</h4>
+                <img src="https://api-magura.promoapp.ro/uploads/${additionalData?.reciep_image}" alt="Bon" style="max-width: 100%; height: auto; cursor: pointer;" onclick="openLightBox(event)" data-src="https://api-magura.promoapp.ro/uploads/${additionalData?.reciep_image}" />
+                `;
+                
+                <?php
+                    if(current_user_can('manage_options')){
+                        ?>
+                        if(validation === null){
+                            output += `
+                            <div>
+                            <button>Valideaza</button>
+                            </div>
+                            `;
+                        }
+
+                        <?php
+                    }
+                ?>
+
+                modalBody.innerHTML = output;
+                
+                // Show the modal
+                
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching entry data');
             }
-            
-            const result = await response.json();
-            
-            if (result.status === 'success' && result.data) {
-                const entry = result.data.entry;
-                const validation = result.data.validation;
-                
-                let modalContent = `
-                    <h3>Detalii Înregistrare #${entry.id}</h3>
-                    <table>
-                        <tr>
-                            <th>Nume</th>
-                            <td>${entry.last_name}</td>
-                        </tr>
-                        <tr>
-                            <th>Prenume</th>
-                            <td>${entry.first_name}</td>
-                        </tr>
-                        <tr>
-                            <th>Email</th>
-                            <td>${entry.email}</td>
-                        </tr>
-                        <tr>
-                            <th>Telefon</th>
-                            <td>${entry.phone}</td>
-                        </tr>
-                        <tr>
-                            <th>Data Înregistrării</th>
-                            <td>${entry.created_at}</td>
-                        </tr>
-                    </table>`;
-                
-                if (entry.additional_data && entry.additional_data.reciep_image) {
-                    const imageUrl = 'https://api-magura.promoapp.ro/uploads/' + entry.additional_data.reciep_image;
-                    modalContent += `<h3>Imaginea Bonului</h3>
-                        <div class="receipt-image">
-                            <img src="${imageUrl}" alt="Bon fiscal" style="max-width: 100%;">
-                        </div>`;
-                }
-                
-                document.querySelector('#entry-preview-modal .modal-body').innerHTML = modalContent;
-                entryPreviewModal.style.display = "block";
-            } else {
-                console.error('Invalid response format:', result);
-                alert('Nu s-au putut încărca detaliile înregistrării.');
-            }
-        } catch(error) {
-            console.error('Error fetching data:', error);
-            alert('A apărut o eroare la încărcarea detaliilor înregistrării.');
-        }
+        });
     }
-    
     function closePreviewModal(e) {
         e.preventDefault();
-        entryPreviewModal.style.display = "none";
-        document.querySelector('#entry-preview-modal .modal-body').innerHTML = '';
+        const modal = document.getElementById('entry-preview-modal');
+        modal.style.display = "none";
+        const modalBody = document.querySelector('.modal-body');
+        modalBody.innerHTML = '';
     }
-    
-    // Close modal when clicking outside of it
-    window.onclick = function(event) {
-        if (event.target === entryPreviewModal) {
-            entryPreviewModal.style.display = "none";
-            document.querySelector('#entry-preview-modal .modal-body').innerHTML = '';
-        }
-    };
-</script>
+        </script>
