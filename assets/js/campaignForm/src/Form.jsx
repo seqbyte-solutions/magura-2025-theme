@@ -56,6 +56,12 @@ function Form({handleEntrySubmit}) {
         ...prevData,
         [name]: value,
       }));
+      if(name === "county") {
+        setFormData((prevData) => ({
+          ...prevData,
+          locality: "",
+        }));
+      }
     }
     setFormErrors((prevData) => ({
       ...prevData,

@@ -121,6 +121,12 @@ function ValidateFormApp({ api_url, validation_data, entry_data, entry_id }) {
         ...prevData,
         [name]: value,
       }));
+      if(name === "county") {
+        setFormData((prevData) => ({
+          ...prevData,
+          locality: "",
+        }));
+      }
     }
 
     setFormErrors((prevData) => ({
