@@ -1,4 +1,8 @@
 <?php
+$entry_id = isset($args['entry_id']) ? $args['entry_id'] : null;
+$validation_data = isset($args['validation_data']) ? $args['validation_data'] : null;
+$entry_data = isset($args['entry_data']) ? $args['entry_data'] : null;
+
 wp_enqueue_script('validate-form', MAGURA_2025_THEME_URL . '/assets/js/validate-form.js');
 wp_localize_script(
     'validate-form',
@@ -8,6 +12,9 @@ wp_localize_script(
         'api_token' => "a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0",
         'ajax_url' => admin_url('admin-ajax.php'),
         'security' => wp_create_nonce('send_email_nonce'),
+        'validationData' => $validation_data,
+        'entryData' => $entry_data,
+        'entryId' => $entry_id,
     ]
 );
 ?>

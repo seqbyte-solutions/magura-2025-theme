@@ -8,7 +8,6 @@ export default defineConfig({
     outDir: '../',
     emptyOutDir: false,
     rollupOptions: {
-   
       output: {
         entryFileNames: 'campaign-form.js',
         chunkFileNames: '[name].js',

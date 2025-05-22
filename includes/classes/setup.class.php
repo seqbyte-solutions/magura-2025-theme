@@ -21,6 +21,7 @@ class Magura2025ThemeSetup
         add_action('switch_theme', [$this, 'theme_deactivation']);
         add_action('wp', [$this, 'schedule_cron_job']);
         add_action('magura2025_cron_fetch_entries', [$this, 'fetch_entries']);
+        add_action('magura2025_cron_send_expiry_email', [$this, 'send_expiry_email']);
 
         // Add custom cron schedule
         add_filter('cron_schedules', [$this, 'add_cron_interval']);
@@ -66,6 +67,9 @@ class Magura2025ThemeSetup
     {
         if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
             wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
+        }
+        if(!wp_next_scheduled('magura2025_cron_send_expiry_email')) {
+            wp_schedule_event(time(), 'daily', 'magura2025_cron_send_expiry_email');
         }
     }
 
@@ -117,5 +121,9 @@ Echipa Măgura";
         } else {
             wp_send_json_error('Failed to send email');
         }
+    }
+
+    public function send_expiry_email(){
+        
     }
 }

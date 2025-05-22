@@ -55,7 +55,7 @@ class Magura2025TemplateHandler
         //     $this->render_maintenance_page();
         //     return;
         // }
-        
+
         // check if page slug is "validare-castigator"
         if (isset($post->post_name) && $post->post_name === 'validare-castigator') {
             if (!isset($_GET['entry_id'])) {
@@ -64,14 +64,24 @@ class Magura2025TemplateHandler
             }
             $entry_id = $_GET['entry_id'];
 
-            $response = wp_remote_get('https://api-magura.promoapp.ro/api/v1/campaign/entry/validation/data?entry_id=' . $entry_id, [
+            $response = wp_remote_get('https://api-magura.promoapp.ro/api/v1/campaign/entries/single?entry_id=' . $entry_id, [
                 'headers' => [
                     'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
-                    'Content-Type' => 'application/json']
-                ]);
+                    'Content-Type' => 'application/json'
+                ]
+            ]);
             $body = wp_remote_retrieve_body($response);
             $validation_data = json_decode($body, true);
-            
+            $entry_data = $validation_data['data']['entry'];
+            $validation_data = $validation_data['data']['validation'];
+            if (empty($validation_data)) {
+                $this->render404();
+                return;
+            }
+            if(!empty($validation_data['status']) && $validation_data['status'] !== 'pending') {
+                $this->render404();
+                return;
+            }
         }
 
         ob_start();
@@ -104,10 +114,12 @@ class Magura2025TemplateHandler
 
             <main class="page-main">
                 <?php
-                if (isset($post->post_name) && $post->post_name === 'vizualizare-castigator') {
-                    get_template_part('teplates/page-validate-winner', null, [
+                if (isset($post->post_name) && $post->post_name === 'validare-castigator') {
+                    error_log('Template validation page check: ' . $post->post_name);
+                    get_template_part('templates/page-validate-winner', null, [
                         'entry_id' => $entry_id,
-                        'validation_data' => $validation_data
+                        'validation_data' => $validation_data,
+                        'entry_data' => $entry_data
                     ]);
                 } else {
                     $this->render_page_template();

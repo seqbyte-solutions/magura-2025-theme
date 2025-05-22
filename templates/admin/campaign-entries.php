@@ -159,7 +159,9 @@ class Inscrieri_List_Table extends WP_List_Table
 
     public function column_actions($item)
     {
-        return sprintf('<button class="table-validate-button" type="button" onclick="openPreviewModal(%s)">Vizualizează</button>',  $item['id']);
+
+        return '<button class="button button-primary" type="button" onclick="openPreviewModal(\''.$item['entry_id'].'\')">Vizualizează</button>';
+        return sprintf('<button class="button button-primary" type="button" onclick="openPreviewModal("%s")">Vizualizează</button>',$item['entry_id']);
     }
 
     public function extra_tablenav($which)
@@ -231,7 +233,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     }
 
     .sgs-lightbox img {
-        max-height: 80vh;
+        max-height: 95vh;
         max-width: 80vw;
         width: 100%;
         height: 100%;
@@ -364,6 +366,8 @@ $inscrieri_list_table = new Inscrieri_List_Table();
 <script>
     const customLightbox = document.querySelector(".sgs-lightbox");
 
+    let isLoading = false;
+
     function openLightBox(e) {
         e.preventDefault();
 
@@ -384,11 +388,26 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         imgEl.setAttribute("src", "");
     }
 
+    function getPrizeById(id) {
+        if (id === "1") {
+            return 'Circuit turistic "Îmbrățișează România"';
+        } else if (id === "2") {
+            return "Set Măgura";
+        } else if (id === "3") {
+            return "Rucsac vișiniu";
+        } else if (id === "4") {
+            return "Rucsac Bej";
+        } else if (id === "5") {
+            return "Rucsac Model Fluturi";
+        }
+        return id;
+    }
+
     function openPreviewModal(id) {
         const modal = document.getElementById('entry-preview-modal');
         modal.style.display = "flex";
         const modalBody = document.querySelector('.modal-body');
-        modalBody.innerHTML = '<p>Loading...</p>';
+        modalBody.innerHTML = '<p>Se încarcă...</p>';
         jQuery.ajax({
             url: '<?php echo admin_url('admin-ajax.php'); ?>',
             type: 'POST',
@@ -418,8 +437,8 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 <p><strong>Telefon:</strong> ${entry?.phone}</p>
                 <p><strong>Email:</strong> ${entry?.email}</p>
                 ${entry?.type === "winner" || entry?.type === "reserve" ? `
-                <p><strong>Tip:</strong> ${entry?.type}</p>
-                <p><strong>Premiu:</strong> ${entry?.prize_id}</p>
+                <p><strong>Tip:</strong> ${entry?.type === "winner" ? "Câștigător" : "Rezervă"}</p>
+                <p><strong>Premiu:</strong> ${getPrizeById(entry?.prize_id)}</p>
                 ` : ''}
                 <br/>
                 <h3>Detalii suplimentare</h3>
@@ -443,7 +462,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                     if (validation === null && entry?.type === "winner") {
                         output += `
                             <div style="margin-top:15px;">
-                            <button class="validate-button" onclick="validateWinner(${entry.id}">Valideaza</button>
+                            <button id="validate-button" class="button button-primary button-large" onclick="validateWinner(${entry.id})">Validează</button>
                             </div>
                             `;
                     }
@@ -475,12 +494,15 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         if(confirm("Sigur vrei sa validezi acest castigator?") === false){
             return;
         }
+        document.getElementById('validate-button').innerHTML = "Se valideaza...";
+        document.getElementById('validate-button').disabled = true;
+        document.getElementById('validate-button').style.cursor = "not-allowed";
 
         jQuery.ajax({
             url: '<?php echo admin_url('admin-ajax.php'); ?>',
             type: 'POST',
             data: {
-                action: 'validate_winner',
+                action: 'validate_campaign_winner',
                 entry_id: id,
                 _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
             },
@@ -489,31 +511,17 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 if (response?.success) {
                     alert("Castigator validat cu succes!");
                     closePreviewModal();
-
-                    // Do another ajax call with action "send_validation_email" to send the email
-                    jQuery.ajax({
-                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
-                        type: 'POST',
-                        data: {
-                            action: 'send_validation_email',
-                            entry_id: id,
-                            _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
-                        },
-                        success: function(response) {
-                            console.log(response);
-                     
-                        },
-                        error: function(error) {
-                            console.error('Error sending email:', error);
-                        }
-                    });
                 } else {
                     alert("Eroare la validare");
                 }
+              
             },
             error: function(error) {
                 console.error('Error fetching data:', error);
                 alert('Error fetching entry data');
+                 document.getElementById('validate-button').innerHTML = "Validează";
+                document.getElementById('validate-button').disabled = false;
+                document.getElementById('validate-button').style.cursor = "pointer";
             }
         });
     }
