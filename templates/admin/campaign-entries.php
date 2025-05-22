@@ -159,7 +159,7 @@ class Inscrieri_List_Table extends WP_List_Table
 
     public function column_actions($item)
     {
-        return sprintf('<button type="button" onclick="openPreviewModal(%s)">Vizualizează</button>',  $item['id']);
+        return sprintf('<button class="table-validate-button" type="button" onclick="openPreviewModal(%s)">Vizualizează</button>',  $item['id']);
     }
 
     public function extra_tablenav($which)
@@ -247,34 +247,73 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         width: 300px;
     }
 
-    .entry-preview-modal{
-          background-color: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    top: 0;
-    left: 0;
-    display: none
-;
-    justify-content: center;
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    padding: 20px;
-    overflow: auto;
-    z-index: 99999;
+    .entry-preview-modal {
+        background-color: rgba(0, 0, 0, 0.5);
+        position: fixed;
+        top: 0;
+        left: 0;
+        display: none;
+        justify-content: center;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        padding: 20px;
+        overflow: auto;
+        z-index: 99999;
     }
-    .modal-content{
+
+    .modal-content {
         background-color: #fefefe;
         margin: 0 auto;
         padding: 20px;
         border: 1px solid #888;
         width: 100%;
         max-width: 600px;
-            height: max-content;
+        height: max-content;
     }
 
-    .modal-header{
+    .modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    .modal-header .close {
+        font-size: 34px;
+    }
+
+    .modal-body img {
+        max-height: 400px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .validate-button {
+        color: #fafafa;
+        border-radius: 7px;
+        background: #00b000;
+        font-size: 18px;
+        padding: 7px 15px;
+        outline: none;
+        border: 1px solid #1a1a1a55;
+        cursor: pointer;
+        transition: 0.2s ease;
+    }
+
+    .validate-button:hover {
+        background: #00b00095;
+    }
+
+    .table-validate-button {
+        color: #fafafa;
+        border-radius: 4px;
+        border: 1px solid #1a1a1a55;
+        background: #00b000;
+        padding: 3px 10px;
+        transition: 0.2s ease;
+    }
+
+    .table-validate-button:hover {
+        background: #00b00095;
     }
 </style>
 <div class="wrap">
@@ -283,17 +322,17 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     <div>
         <?php
 
-    
-            // Process the data as needed
-            // For example, you can print it out
-            // echo '<pre>';
-            // print_r($data);
-            // echo '</pre>';
 
-            $inscrieri_list_table->prepare_items();
-            // Display the table
-            $inscrieri_list_table->display();
-        
+        // Process the data as needed
+        // For example, you can print it out
+        // echo '<pre>';
+        // print_r($data);
+        // echo '</pre>';
+
+        $inscrieri_list_table->prepare_items();
+        // Display the table
+        $inscrieri_list_table->display();
+
 
         ?>
     </div>
@@ -303,8 +342,8 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     <div class="modal-content">
         <div class="modal-header">
             <h2>Vizualizare inscriere</h2>
-            
-            <span class="close" onclick="closePreviewModal(event)">&times;</span>
+
+            <span class="close" onclick="closePreviewModal()">&times;</span>
 
         </div>
         <div class="modal-body">
@@ -347,7 +386,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
 
     function openPreviewModal(id) {
         const modal = document.getElementById('entry-preview-modal');
-                modal.style.display = "flex";
+        modal.style.display = "flex";
         const modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '<p>Loading...</p>';
         jQuery.ajax({
@@ -360,11 +399,11 @@ $inscrieri_list_table = new Inscrieri_List_Table();
             },
             success: function(response) {
                 console.log(response);
-                
+
                 const entry = response?.data?.data?.entry;
                 const validation = response?.data?.data?.validation;
                 if (!entry) {
-                 console.error('No entry data found');
+                    console.error('No entry data found');
                     return;
                 }
 
@@ -372,51 +411,51 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 const metadata = JSON.parse(entry?.metadata);
                 // Populate the modal with the data
                 let output = `
-                <h3>ID Inscriere: ${entry?.entry_id}</h3>
+                <h2>ID Inscriere: ${entry?.entry_id}</h2>
                 <p><strong>Data inscriere:</strong> ${entry?.created_at}</p>
                 <p><strong>Nume:</strong> ${entry?.last_name}</p>
                 <p><strong>Prenume:</strong> ${entry?.first_name}</p>
                 <p><strong>Telefon:</strong> ${entry?.phone}</p>
                 <p><strong>Email:</strong> ${entry?.email}</p>
+                ${entry?.type === "winner" || entry?.type === "reserve" ? `
                 <p><strong>Tip:</strong> ${entry?.type}</p>
-            ${entry?.type === "winner" || entry?.type === "reserve" ? `
                 <p><strong>Premiu:</strong> ${entry?.prize_id}</p>
                 ` : ''}
                 <br/>
-                <h4>Detalii suplimentare</h4>
+                <h3>Detalii suplimentare</h3>
                 <p><strong>Judet:</strong> ${additionalData?.county}</p>
                 <p><strong>Localitate:</strong> ${additionalData?.locality}</p>
                 <p><strong>Nr. bon:</strong> ${additionalData?.reciep_number}</p>
                 <br/>
-                <h4>Metadata</h4>
+                <h3>Metadata</h3>
                 <p><strong>Adresa IP:</strong> ${metadata?.ip_address}</p>
                 <p><strong>User agent:</strong> ${metadata?.user_agent}</p>
                 <p><strong>Reffer URL:</strong> ${metadata?.reffer}</p>
 
                 <br/>
-                <h4>Poza bonului fiscal</h4>
+                <h3>Poza bonului fiscal</h3>
                 <img src="https://api-magura.promoapp.ro/uploads/${additionalData?.reciep_image}" alt="Bon" style="max-width: 100%; height: auto; cursor: pointer;" onclick="openLightBox(event)" data-src="https://api-magura.promoapp.ro/uploads/${additionalData?.reciep_image}" />
                 `;
-                
+
                 <?php
-                    if(current_user_can('manage_options')){
-                        ?>
-                        if(validation === null){
-                            output += `
-                            <div>
-                            <button>Valideaza</button>
+                if (current_user_can('manage_options')) {
+                ?>
+                    if (validation === null && entry?.type === "winner") {
+                        output += `
+                            <div style="margin-top:15px;">
+                            <button class="validate-button" onclick="validateWinner(${entry.id}">Valideaza</button>
                             </div>
                             `;
-                        }
-
-                        <?php
                     }
+
+                <?php
+                }
                 ?>
 
                 modalBody.innerHTML = output;
-                
+
                 // Show the modal
-                
+
             },
             error: function(error) {
                 console.error('Error fetching data:', error);
@@ -424,11 +463,58 @@ $inscrieri_list_table = new Inscrieri_List_Table();
             }
         });
     }
-    function closePreviewModal(e) {
-        e.preventDefault();
+
+    function closePreviewModal() {
         const modal = document.getElementById('entry-preview-modal');
         modal.style.display = "none";
         const modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '';
     }
-        </script>
+
+    function validateWinner(id){
+        if(confirm("Sigur vrei sa validezi acest castigator?") === false){
+            return;
+        }
+
+        jQuery.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            type: 'POST',
+            data: {
+                action: 'validate_winner',
+                entry_id: id,
+                _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+            },
+            success: function(response) {
+                console.log(response);
+                if (response?.success) {
+                    alert("Castigator validat cu succes!");
+                    closePreviewModal();
+
+                    // Do another ajax call with action "send_validation_email" to send the email
+                    jQuery.ajax({
+                        url: '<?php echo admin_url('admin-ajax.php'); ?>',
+                        type: 'POST',
+                        data: {
+                            action: 'send_validation_email',
+                            entry_id: id,
+                            _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+                        },
+                        success: function(response) {
+                            console.log(response);
+                     
+                        },
+                        error: function(error) {
+                            console.error('Error sending email:', error);
+                        }
+                    });
+                } else {
+                    alert("Eroare la validare");
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching entry data');
+            }
+        });
+    }
+</script>
