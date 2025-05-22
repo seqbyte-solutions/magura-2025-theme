@@ -35,6 +35,7 @@ function Autocomplete({
 
   const handleSelectOption = (e) => {
     onChange(e);
+    setSearchValue("");
     setIsOpen(false);
   };
 
