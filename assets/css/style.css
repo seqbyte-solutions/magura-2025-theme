@@ -722,6 +722,12 @@
   height: 100%;
   overflow: auto;
 }
+.autocomplete-options-container .autocomplete-options p {
+  width: 100%;
+  font-family: "Baloo2";
+  font-size: 1rem;
+  text-align: center;
+}
 .autocomplete-options-container .autocomplete-options .autocomplete-option {
   width: 100%;
   font-family: "Baloo2";

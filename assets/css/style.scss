@@ -768,6 +768,14 @@
     flex-direction: column;
     height: 100%;
     overflow: auto;
+
+    p{
+      width: 100%;
+      font-family: "Baloo2";
+        font-size: 1rem;
+        text-align: center;
+    }
+
     .autocomplete-option {
       width: 100%;
       font-family: "Baloo2";
