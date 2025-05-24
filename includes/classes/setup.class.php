@@ -153,7 +153,7 @@ Echipa Măgura";
 
         foreach ($data['data'] as $entry) {
             $entry_id = $entry['entry_uuid'];
-            $expires_at = strtotime($entry['expires_at']);
+            $expires_at = $entry['expires_at'];
 
             $to = sanitize_email($entry['email']);
             $prize = $entry['prize_name'] === 'Vacanta' ? "Voucher Îmbrățisează România" : ($entry['prize_name'] === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
@@ -180,7 +180,7 @@ Echipa Măgura";
         }
         foreach ($data['expired_validations'] as $entry) {
             $entry_id = $entry['entry_uuid'];
-            $expires_at = strtotime($entry['expires_at']);
+            $expires_at = $entry['expires_at'];
 
             $to = sanitize_email($entry['email']);
             $prize = $entry['prize_name'] === 'Vacanta' ? "Voucher Îmbrățisează România" : ($entry['prize_name'] === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
