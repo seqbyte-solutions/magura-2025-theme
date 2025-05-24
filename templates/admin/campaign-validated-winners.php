@@ -169,6 +169,16 @@ class Castigatori_List_Table extends WP_List_Table
         return $output;
     }
 
+    public function column_awb($item)
+    {
+        if (empty($item['awb'])) {
+            return "-";
+        }
+        $awb = $item['awb'];
+
+        return '<a href="https://www.fancourier.ro/awb-tracking/?tracking=' . $awb . '" target="_blank">' . $awb . '</a>';
+    }
+
     public function column_actions($item)
     {
         $entry_id = $item['entry_id'];
@@ -496,5 +506,32 @@ $castigatori_list_table = new Castigatori_List_Table();
         modal.style.display = "none";
         const modalBody = document.querySelector('.modal-body');
         modalBody.innerHTML = '';
+    }
+
+    function generateAwb(id) {
+        if (confirm("Sigur doriți să generați AWB pentru acest câștigător?") === false) {
+            return;
+        }
+        jQuery.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            type: 'POST',
+            data: {
+                action: 'generate_awb',
+                entry_id: id,
+                _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+            },
+            success: function(response) {
+                if (response.success) {
+                    alert('AWB generat cu succes!');
+                    location.reload();
+                } else {
+                    alert('Eroare la generarea AWB: ' + response.data);
+                }
+            },
+            error: function(error) {
+                console.error('Error generating AWB:', error);
+                alert('Eroare la generarea AWB');
+            }
+        });
     }
 </script>

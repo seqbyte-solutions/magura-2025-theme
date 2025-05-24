@@ -40,17 +40,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: -moz-max-content;
   width: max-content;
   padding: 10px 0;
 }
 .header-logo-container a {
   display: block;
   height: 100%;
+  width: -moz-max-content;
   width: max-content;
 }
 .header-logo-container svg {
   height: 100%;
   display: block;
+  width: -moz-max-content;
   width: max-content;
   fill: var(--white);
 }
@@ -79,6 +82,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  width: -moz-max-content;
   width: max-content;
   position: relative;
 }
@@ -98,6 +102,7 @@
   position: absolute;
   top: 100%;
   left: 0%;
+  width: -moz-max-content;
   width: max-content;
   opacity: 0;
   transform: translateY(-20px);
@@ -226,7 +231,9 @@
 
 .header-mobile-menu-button-container {
   display: none;
+  width: -moz-max-content;
   width: max-content;
+  height: -moz-max-content;
   height: max-content;
 }
 

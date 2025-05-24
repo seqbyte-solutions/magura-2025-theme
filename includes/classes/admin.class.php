@@ -18,6 +18,8 @@ class Magura2025ThemeAdmin
 
         add_action('wp_ajax_validate_campaign_winner', [$this, 'validate_campaign_winner']);
         add_action('wp_ajax_no_priv_validate_campaign_winner', [$this, 'validate_campaign_winner']);
+        add_action('wp_ajax_generate_awb', [$this, 'generate_awb']);
+        add_action('wp_ajax_no_priv_generate_awb', [$this, 'generate_awb']);
     }
 
     /**
@@ -234,5 +236,45 @@ Echipa Măgura";
         } else {
             wp_send_json_error('Failed to send email');
         }
+    }
+
+    public function generate_awb()
+    {
+        check_ajax_referer('entry_data', 'security');
+
+        $entry_id = isset($_POST['entry_id']) ? sanitize_text_field($_POST['entry_id']) : '';
+        if (empty($entry_id)) {
+            wp_send_json_error('Entry ID is required', 400);
+            return;
+        }
+        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/generate-awb';
+        $response = wp_remote_post($url, [
+            'headers' => [
+                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'Content-Type' => 'application/x-www-form-urlencoded',
+                'Accept' => 'application/json'
+            ],
+            'body' => [ // Direct array instead of json_encode
+                'entry_id' => $entry_id,
+            ]
+        ]);
+        if (is_wp_error($response)) {
+            wp_send_json_error('Error fetching data', 500);
+            return;
+        }
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        error_log(print_r($data, true)); // Log the response for debugging
+
+        if (isset($data['error'])) {
+            wp_send_json_error($data['error'], 400);
+            return;
+        }
+        if (empty($data['awb'])) {
+            wp_send_json_error('Entry ID is missing in the response', 400);
+            return;
+        }
+        wp_send_json_success($data);
     }
 }

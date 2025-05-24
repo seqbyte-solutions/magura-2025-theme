@@ -58,6 +58,7 @@
     justify-content: center;
   }
   .magura-map-container {
+    height: -moz-max-content;
     height: max-content;
     padding-block: 25px;
   }

@@ -693,6 +693,19 @@
     }
   }
 }
+
+.form-input-row{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  .form-input-container {
+    width: 50%;
+  }
+}
 .form-attachment-container {
   display: flex;
   flex-direction: column;

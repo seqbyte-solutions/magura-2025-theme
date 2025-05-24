@@ -279,6 +279,7 @@
   width: 100%;
   max-width: 800px;
   height: 100%;
+  max-height: -moz-max-content;
   max-height: max-content;
   background: var(--white);
   border-radius: 13px;
@@ -376,6 +377,7 @@
 .hero-scrolldown-btn-content svg {
   position: absolute;
   width: 28px;
+  height: -moz-max-content;
   height: max-content;
   display: block;
   fill: var(--white);
@@ -542,7 +544,8 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   display: block;
 }
 
@@ -650,6 +653,18 @@
 }
 .form-input-container button:disabled input {
   border-color: var(--light-red);
+}
+
+.form-input-row {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-input-row .form-input-container {
+  width: 50%;
 }
 
 .form-attachment-container {
@@ -815,7 +830,8 @@
 .form-image-dropzone-preview img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .form-image-dropzone-remove {
@@ -994,7 +1010,8 @@
 .won-prize-item .prize-item-content img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .prize-loss-icon {
