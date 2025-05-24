@@ -68,7 +68,7 @@ class Magura2025ThemeSetup
         if (!wp_next_scheduled('magura2025_cron_fetch_entries')) {
             wp_schedule_event(time(), 'hourly', 'magura2025_cron_fetch_entries');
         }
-        if(!wp_next_scheduled('magura2025_cron_send_expiry_email')) {
+        if (!wp_next_scheduled('magura2025_cron_send_expiry_email')) {
             wp_schedule_event(time(), 'daily', 'magura2025_cron_send_expiry_email');
         }
     }
@@ -76,7 +76,15 @@ class Magura2025ThemeSetup
     public function fetch_entries()
     {
         $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries';
-        $response = wp_remote_get($api_url);
+        $headers = [
+            'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
+        ];
+        $response = wp_remote_get(
+            $api_url,
+            [
+                'headers' => $headers,
+            ]
+        );
 
         if (is_wp_error($response)) {
             return;
@@ -123,7 +131,75 @@ Echipa Măgura";
         }
     }
 
-    public function send_expiry_email(){
-        
+    public function send_expiry_email()
+    {
+        $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/validations/pending';
+        $headers = [
+            'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
+        ];
+        $response = wp_remote_get(
+            $api_url,
+            [
+                'headers' => $headers,
+            ]
+        );
+
+        if (is_wp_error($response)) {
+            error_log('Error fetching pending validations: ' . $response->get_error_message());
+            return;
+        }
+        $body = wp_remote_retrieve_body($response);
+        $data = json_decode($body, true);
+
+        foreach ($data['data'] as $entry) {
+            $entry_id = $entry['entry_uuid'];
+            $expires_at = strtotime($entry['expires_at']);
+
+            $to = sanitize_email($entry['email']);
+            $prize = $entry['prize_name'] === 'Vacanta' ? "Voucher Îmbrățisează România" : ($entry['prize_name'] === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
+            $subject = 'Revendicarea premiului dvs. expiră în curând!';
+            $message = "Hei,
+            
+            Se pare că încă nu ai completat formularul de revendicare a premiului tău: " . $prize . "
+            Poți completa formularul aici: 
+            https://magura.ro/validare-castigator/?entry_id=" . $entry_id . "
+            
+            Acest link este valabil până la data de " . date('d.m.Y', strtotime($expires_at)) . ". După această dată, înscrierea dvs. va fi considerată invalidă și nu veți mai putea revendica premiul.
+
+            O zi plină de îmbrățișări!
+            Echipa Măgura
+            ";
+
+
+            $headers = array('Content-Type: text/plain; charset=UTF-8');
+            $headers[] = 'From: Măgura <contact@magura.ro>';
+            $headers[] = 'Reply-To: Măgura <contact@magura.ro>';
+            $headers[] = 'X-Mailer: PHP/' . phpversion();
+
+            wp_mail($to, $subject, $message, $headers);
+        }
+        foreach ($data['expired_validations'] as $entry) {
+            $entry_id = $entry['entry_uuid'];
+            $expires_at = strtotime($entry['expires_at']);
+
+            $to = sanitize_email($entry['email']);
+            $prize = $entry['prize_name'] === 'Vacanta' ? "Voucher Îmbrățisează România" : ($entry['prize_name'] === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
+            $subject = 'Revendicarea premiului dvs. a expirat!';
+            $message = "Hei,
+            
+            Se pare că încă nu ai completat formularul de revendicare a premiului tău: " . $prize . ".
+            Din păcate, acest link a expirat pe " . date('d.m.Y', strtotime($expires_at)) . " și nu mai puteți revendica premiul dvs.. 
+
+            O zi plină de îmbrățișări!
+            Echipa Măgura
+            ";
+
+
+            $headers = array('Content-Type: text/plain; charset=UTF-8');
+            $headers[] = 'From: Măgura <contact@magura.ro>';
+            $headers[] = 'Reply-To: Măgura <contact@magura.ro>';
+            $headers[] = 'X-Mailer: PHP/' . phpversion();
+            wp_mail($to, $subject, $message, $headers);
+        }
     }
 }
