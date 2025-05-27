@@ -49,6 +49,24 @@ class Magura2025ThemeAdmin
             $analytics_role = get_role('analytics_viewer');
             $analytics_role->remove_cap('manage_options');
         }
+
+        // add another role "campaign_manager" with "can_manage_campaigns" capability
+        if (!get_role('campaign_manager')) {
+            add_role(
+                'campaign_manager',
+                'Campaign Manager',
+                [
+                    'read' => true,
+                    'can_manage_campaigns' => true,
+                    'can_see_analitics' => true,
+                    'manage_options' => false
+                ]
+            );
+        } else {
+            // Update existing role to ensure manage_options is false
+            $campaign_manager_role = get_role('campaign_manager');
+            $campaign_manager_role->remove_cap('manage_options');
+        }
     }
 
     public function add_admin_menu()

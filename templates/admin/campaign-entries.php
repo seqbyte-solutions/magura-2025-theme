@@ -160,8 +160,8 @@ class Inscrieri_List_Table extends WP_List_Table
     public function column_actions($item)
     {
 
-        return '<button class="button button-primary" type="button" onclick="openPreviewModal(\''.$item['entry_id'].'\')">Vizualizează</button>';
-        return sprintf('<button class="button button-primary" type="button" onclick="openPreviewModal("%s")">Vizualizează</button>',$item['entry_id']);
+        return '<button class="button button-primary" type="button" onclick="openPreviewModal(\'' . $item['entry_id'] . '\')">Vizualizează</button>';
+        return sprintf('<button class="button button-primary" type="button" onclick="openPreviewModal("%s")">Vizualizează</button>', $item['entry_id']);
     }
 
     public function extra_tablenav($which)
@@ -457,7 +457,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 `;
 
                 <?php
-                if (current_user_can('manage_options')) {
+                if (current_user_can('manage_options') || current_user_can('can_manage_campaigns')) {
                 ?>
                     if (validation === null && entry?.type === "winner") {
                         output += `
@@ -490,8 +490,8 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         modalBody.innerHTML = '';
     }
 
-    function validateWinner(id){
-        if(confirm("Sigur vrei sa validezi acest castigator?") === false){
+    function validateWinner(id) {
+        if (confirm("Sigur vrei sa validezi acest castigator?") === false) {
             return;
         }
         document.getElementById('validate-button').innerHTML = "Se valideaza...";
@@ -514,12 +514,12 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 } else {
                     alert("Eroare la validare");
                 }
-              
+
             },
             error: function(error) {
                 console.error('Error fetching data:', error);
                 alert('Error fetching entry data');
-                 document.getElementById('validate-button').innerHTML = "Validează";
+                document.getElementById('validate-button').innerHTML = "Validează";
                 document.getElementById('validate-button').disabled = false;
                 document.getElementById('validate-button').style.cursor = "pointer";
             }

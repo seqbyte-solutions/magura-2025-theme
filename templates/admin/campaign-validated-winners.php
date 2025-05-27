@@ -183,7 +183,7 @@ class Castigatori_List_Table extends WP_List_Table
     {
         $entry_id = $item['entry_id'];
         $output = '<div class="actions" style="display: flex; gap: 5px;flex-wrap:wrap;">';
-        if (empty($item['awb']) && current_user_can('manage_options') && $item['status'] === "validated") {
+        if (empty($item['awb']) && (current_user_can('manage_options') || current_user_can('can_manage_campaigns')) && $item['status'] === "validated") {
             $output .= '<button class="button" type="button" onclick="generateAwb(\'' . $entry_id . '\')" data-entry-id="' . $item['entry_id'] . '">Generează AWB</button>';
         }
         $output .= '<button class="button button-primary" type="button" onclick="openPreviewModal(\'' . $item['entry_uuid'] . '\')">Vizualizează</button>';
