@@ -17,6 +17,7 @@ class Inscrieri_List_Table extends WP_List_Table
             'email' => 'Email',
             'type' => "Tip",
             'prize' => "Premiu",
+            'status' => 'Status',
             'actions' => 'Acțiuni',
         ];
         return $columns;
@@ -147,6 +148,19 @@ class Inscrieri_List_Table extends WP_List_Table
     public function column_phone($item)
     {
         return '<a href="tel: ' . $item['phone'] . '">' . $item['phone'] . '</a>';
+    }
+
+    public function column_status($item)
+    {
+        if ($item['is_validated'] === '0') {
+            return '<span class="entries-status-dot" style="background: gray;">Nevizualizat</span>';
+        } else if ($item['is_validated'] === '-1') {
+            return '<span class="entries-status-dot"  style="background: red;">Invalidat</span>';
+        } else if ($item['is_validated'] === '1') {
+            return '<span class="entries-status-dot"  style="background: orange;">În așteptare</span>';
+        } else if ($item['is_validated'] === '2') {
+            return '<span class="entries-status-dot"  style="background: green;">Validat</span>';
+        }
     }
 
     // public function column_poza_bon($item)
@@ -316,6 +330,15 @@ $inscrieri_list_table = new Inscrieri_List_Table();
 
     .table-validate-button:hover {
         background: #00b00095;
+    }
+
+    .entries-status-dot {
+        padding: 2px 10px 3px;
+        text-align: center;
+        color: #fff;
+        border-radius: 100px;
+        display: block;
+        width: max-content;
     }
 </style>
 <div class="wrap">
