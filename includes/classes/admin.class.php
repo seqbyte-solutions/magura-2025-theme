@@ -227,22 +227,26 @@ class Magura2025ThemeAdmin
         $prize = $data['prize_name'];
         $entry_id = $data['entry_id'];
 
-        $subject = 'Felicitări! Înscriere validată!';
+        $subject = 'Felicitări! Premiul tău din campania "Câștigă cu Măgura dintr-o îmbrățișare" a fost VALIDAT!';
 
-        $message = "Felicitări!
+        $message = 'Dragă câștigătorule,
 
-Hei, se pare că norocul ți-a zâmbit!
-Înscrierea dvs. cu ID-ul " . $entry_id . " a fost validată cu succes!
-Ai pus mâna pe un premiu: " . $prize . "
+Avem vești excelente pentru tine!
 
-Pentru a intra în posesia premiului, te rugăm să completezi formularul de validare a câștigătorului, accesând următorul link:
-https://magura.ro/validare-castigator/?entry_id=" . $entry_id . "
+Suntem încântați să te anunțăm că premiul ('.$prize.') pe care l-ai câștigat în cadrul campaniei noastre "Câștigă cu Măgura dintr-o îmbrățișare" a fost validat cu succes de către echipa Măgura. Felicitări încă o dată!
 
-Acest link este valabil timp de 14 zile, după expirarea acestuia, înscrierea ta va fi invalidată și premiul nu va mai putea fi revendicat.\n\n
+Ne apropiem de momentul în care te vei putea bucura de el!
 
-O zi plină de îmbrățișări!
-Echipa Măgura";
+Pentru a putea expedia premiul către tine, următorul pas este să completezi adresa de livrare. Te rugăm să accesezi linkul de mai jos pentru a ne furniza detaliile necesare:
+https://magura.ro/validare-castigator/?entry_id=' . $entry_id . '
 
+Te încurajăm să completezi aceste informații cât mai curând posibil, ideal în următoarele 5 zile lucratoare, pentru a ne asigura că premiul ajunge la tine în cel mai scurt timp.
+
+Încă o dată, felicitări pentru câștig și îți mulțumim pentru participarea la campania noastră!
+
+
+Cu drag,
+Echipa Măgura';
 
         $headers = array('Content-Type: text/plain; charset=UTF-8');
         $headers[] = 'From: Măgura <contact@magura.ro>';
