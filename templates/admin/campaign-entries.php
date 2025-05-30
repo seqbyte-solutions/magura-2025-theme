@@ -135,6 +135,8 @@ class Inscrieri_List_Table extends WP_List_Table
     {
         if ($item['type'] === "winner") {
             return "Câștigător";
+        } else if ($item['status'] === 'rejected') {
+            return "RESPINS";
         } else if ($item['type'] === "reserve") {
             return "Rezervă";
         }
@@ -152,6 +154,10 @@ class Inscrieri_List_Table extends WP_List_Table
 
     public function column_status($item)
     {
+        if ($item['status'] === 'rejected') {
+            return '<span class="entries-status-dot"  style="background: red;">Invalidat</span>';
+        }
+
         if ($item['is_validated'] === '0') {
             return '<span class="entries-status-dot" style="background: gray;">Nevizualizat</span>';
         } else if ($item['is_validated'] === '-1') {
@@ -376,6 +382,19 @@ $inscrieri_list_table = new Inscrieri_List_Table();
         </div>
     </div>
 </div>
+<div class="entry-preview-modal" id="reserves-preview-modal" style="display:none;">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Rezerve disponibile </h2>
+
+            <span class="close" onclick="closeReserveSelector()">&times;</span>
+
+        </div>
+        <div class="modal-body">
+
+        </div>
+    </div>
+</div>
 
 <div class="sgs-lightbox" style="display:none;">
     <button onclick="closeLightBox(event)">
@@ -486,6 +505,8 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                         output += `
                             <div style="margin-top:15px;">
                             <button id="validate-button" class="button button-primary button-large" onclick="validateWinner(${entry.id})">Validează</button>
+                            <button id="reject-button" class="button button-secondary button-large" onclick="openReserveSelector(${entry.id})" style="color: red; border: 1px solid #ff1a1a55;">Respinge</button> 
+                            </button>
                             </div>
                             `;
                     }
@@ -509,7 +530,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
     function closePreviewModal() {
         const modal = document.getElementById('entry-preview-modal');
         modal.style.display = "none";
-        const modalBody = document.querySelector('.modal-body');
+        const modalBody = document.querySelector('#entry-preview-modal .modal-body');
         modalBody.innerHTML = '';
     }
 
@@ -547,5 +568,114 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 document.getElementById('validate-button').style.cursor = "pointer";
             }
         });
+    }
+
+    function openReserveSelector(id) {
+        const modal = document.getElementById('reserves-preview-modal');
+        modal.style.display = "flex";
+        const modalBody = document.querySelector('#reserves-preview-modal .modal-body');
+        modalBody.innerHTML = '<p>Se încarcă...</p>';
+        jQuery.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            type: 'POST',
+            data: {
+                action: 'get_campaign_entry_reserves',
+                entry_id: id,
+                _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+            },
+            success: function(response) {
+                console.log(response);
+
+                const reserves = response?.data?.data;
+                console.log("reserves", reserves);
+
+                let output = `
+                <form onSubmit="saveSelectedRserve(this.reserve_id.value, ${id}); return false;">
+                    <ul>`;
+
+                reserves.forEach(reserve => {
+                    output += `
+                        <li>
+                            <label style="display: flex; gap:10px; padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 5px;">
+                                <input type="radio" style="margin-top:7px" name="reserve_id" value="${reserve.id}" />
+                                <div>
+                                <h4 style="margin: 0; font-size: 16px; font-weight: bold;">
+                                ${reserve.last_name} ${reserve.first_name}
+                                </h4>
+                                <p style="margin: 0; font-size: 14px; color: #555;">
+                                ${getPrizeById(reserve.prize_id)} - ${reserve.entry_id} - ${reserve.created_at}
+                                </p>
+                                
+                                </div>
+                            </label>
+                        </li>`;
+                });
+
+
+                output += `</ul>
+                <button type="submit" class="button button-primary large" id="validate-button"  >Selectează</button>
+                </form>
+
+               `;
+
+                modalBody.innerHTML = output;
+
+                // Show the modal
+
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching entry data');
+            }
+        });
+    }
+
+    function closeReserveSelector() {
+        const modal = document.getElementById('reserves-preview-modal');
+        modal.style.display = "none";
+        const modalBody = document.querySelector('#reserves-preview-modal .modal-body');
+        modalBody.innerHTML = '';
+    }
+
+    async function saveSelectedRserve(id, entry_id) {
+        if (confirm("Sigur vrei sa selectezi aceasta rezerva?") === false) {
+            return;
+        }
+
+        console.log("Selected reserve ID:", id, " for entry ID:", entry_id);
+        document.getElementById('validate-button').innerHTML = "Se încarcă...";
+        document.getElementById('validate-button').disabled = true;
+        document.getElementById('validate-button').style.cursor = "not-allowed";
+
+        jQuery.ajax({
+            url: '<?php echo admin_url('admin-ajax.php'); ?>',
+            type: 'POST',
+            data: {
+                action: 'switch_campaign_entry_reserve',
+                entry_id: entry_id,
+                reserve_id: id,
+                _wpnonce: '<?php echo wp_create_nonce('entry_data'); ?>'
+            },
+            success: function(response) {
+                console.log(response);
+                if (response?.success) {
+                    alert("Rezerva selectata cu succes!");
+                    console.log("Rezerva selectata cu succes!");
+                    location.reload();
+                } else {
+                    alert("Eroare la selectarea rezervei");
+                }
+            },
+            error: function(error) {
+                console.error('Error fetching data:', error);
+                alert('Error fetching entry data');
+                document.getElementById('validate-button').innerHTML = "Validează";
+                document.getElementById('validate-button').disabled = false;
+                document.getElementById('validate-button').style.cursor = "pointer";
+            }
+        });
+
+
+
     }
 </script>
