@@ -29,6 +29,7 @@ function Form({handleEntrySubmit}) {
     county: "",
     locality: "",
     reciep_number: "",
+    reciep_date: "",
     reciep_image: null,
     tc: false,
   });
@@ -40,6 +41,7 @@ function Form({handleEntrySubmit}) {
     county: false,
     locality: false,
     reciep_number: false,
+    reciep_date: false,
     reciep_image: false,
     tc: false,
   });
@@ -238,6 +240,24 @@ function Form({handleEntrySubmit}) {
               id="form_field_reciep_number"
               value={formData.reciep_number}
               onChange={handleInputChange}
+              required
+            />
+          </div>
+          <div className="form-input-container">
+            <label
+              className={`${formErrors.reciep_date && "error"}`}
+              htmlFor="form_field_reciep_date"
+            >
+              Data bonului fiscal
+            </label>
+            <input
+              type="date"
+              name="reciep_date"
+              id="form_field_reciep_date"
+              value={formData.reciep_date}
+              onChange={handleInputChange}
+              min="2025-05-15"
+              max="2025-08-15"
               required
             />
           </div>
