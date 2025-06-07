@@ -487,6 +487,7 @@ $inscrieri_list_table = new Inscrieri_List_Table();
                 <p><strong>Judet:</strong> ${additionalData?.county}</p>
                 <p><strong>Localitate:</strong> ${additionalData?.locality}</p>
                 <p><strong>Nr. bon:</strong> ${additionalData?.reciep_number}</p>
+                <p><strong>Data bon:</strong> ${additionalData?.reciep_date ? additionalData?.reciep_date : "-"}</p>
                 <br/>
                 <h3>Metadata</h3>
                 <p><strong>Adresa IP:</strong> ${metadata?.ip_address}</p>
