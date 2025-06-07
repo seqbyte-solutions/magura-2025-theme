@@ -51,6 +51,9 @@ class Magura2025Theme{
         if ( ! defined( 'MAGURA_2025_THEME_PATH' ) ) {
             define( 'MAGURA_2025_THEME_PATH', get_template_directory() );
         }
+        if ( ! defined('MAGURA_API_KEY')) {
+            define('MAGURA_API_KEY', 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI');
+        }
     }
 
     public function get_template_handler(): Magura2025TemplateHandler

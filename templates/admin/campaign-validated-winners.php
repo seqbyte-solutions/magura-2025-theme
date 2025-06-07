@@ -53,11 +53,9 @@ class Castigatori_List_Table extends WP_List_Table
         }
         if (!empty($search_filter)) {
             $url .= '&search=' . $search_filter;
-        }
-
-        // add header X-API-KEY
+        }        // add header X-API-KEY
         $headers = [
-            'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+            'X-API-KEY' => defined('MAGURA_API_KEY') ? MAGURA_API_KEY : get_option('magura_api_key', 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'),
             'Content-Type' => 'application/json',
             'Accept' => 'application/json'
         ];

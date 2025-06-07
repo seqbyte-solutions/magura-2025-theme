@@ -71,7 +71,29 @@ class Magura2025ThemeAdmin
             // Update existing role to ensure manage_options is false
             $campaign_manager_role = get_role('campaign_manager');
             $campaign_manager_role->remove_cap('manage_options');
+        }    }
+
+    /**
+     * Get the API key from WordPress options or environment variable
+     * This is more secure than hardcoding the key in the source code
+     */
+    private function get_api_key()
+    {
+        // Try to get from WordPress options first
+        $api_key = get_option('magura_api_key');
+        
+        // If not found in options, try environment variable
+        if (empty($api_key)) {
+            $api_key = defined('MAGURA_API_KEY') ? MAGURA_API_KEY : '';
         }
+        
+        // Fallback to the original key if neither option is set
+        // Remove this fallback once you've properly configured the key
+        if (empty($api_key)) {
+            $api_key = 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI';
+        }
+        
+        return $api_key;
     }
 
     public function add_admin_menu()
@@ -162,12 +184,10 @@ class Magura2025ThemeAdmin
         if (empty($entry_id)) {
             wp_send_json_error('Entry ID is required', 400);
             return;
-        }
-
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/single?entry_id=' . $entry_id;
+        }        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/single?entry_id=' . $entry_id;
         $response = wp_remote_get($url, [
             'headers' => [
-                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'X-API-KEY' => $this->get_api_key(),
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json'
             ]
@@ -193,12 +213,10 @@ class Magura2025ThemeAdmin
         if (empty($entry_id)) {
             wp_send_json_error('Entry ID is required', 400);
             return;
-        }
-
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/available-reserves?entry_id=' . $entry_id;
+        }        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/available-reserves?entry_id=' . $entry_id;
         $response = wp_remote_get($url, [
             'headers' => [
-                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'X-API-KEY' => $this->get_api_key(),
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json'
             ]
@@ -226,12 +244,10 @@ class Magura2025ThemeAdmin
         if (empty($entry_id)) {
             wp_send_json_error('Entry ID is required', 400);
             return;
-        }
-
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/validate';
+        }        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/validate';
         $response = wp_remote_post($url, [
             'headers' => [
-                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'X-API-KEY' => $this->get_api_key(),
                 'Content-Type' => 'application/x-www-form-urlencoded', // Changed content type
                 'Accept' => 'application/json'
             ],
@@ -311,11 +327,10 @@ Echipa Măgura';
         if (empty($reserve_id)) {
             wp_send_json_error('Reserve ID is required', 400);
             return;
-        }
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/switch-reserve';
+        }        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/switch-reserve';
         $response = wp_remote_post($url, [
             'headers' => [
-                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'X-API-KEY' => $this->get_api_key(),
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Accept' => 'application/json'
             ],
@@ -351,11 +366,10 @@ Echipa Măgura';
         if (empty($entry_id)) {
             wp_send_json_error('Entry ID is required', 400);
             return;
-        }
-        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/generate-awb';
+        }        $url = 'https://api-magura.promoapp.ro/api/v1/campaign/generate-awb';
         $response = wp_remote_post($url, [
             'headers' => [
-                'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI',
+                'X-API-KEY' => $this->get_api_key(),
                 'Content-Type' => 'application/x-www-form-urlencoded',
                 'Accept' => 'application/json'
             ],
