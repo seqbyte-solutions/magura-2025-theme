@@ -77,7 +77,7 @@ class Magura2025ThemeSetup
     {
         $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries';
         $headers = [
-            'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
+            'X-API-KEY' => MAGURA_API_KEY
         ];
         $response = wp_remote_get(
             $api_url,
@@ -135,7 +135,7 @@ Echipa Măgura";
     {
         $api_url = 'https://api-magura.promoapp.ro/api/v1/campaign/entries/validations/pending';
         $headers = [
-            'X-API-KEY' => 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'
+            'X-API-KEY' => MAGURA_API_KEY
         ];
         $response = wp_remote_get(
             $api_url,

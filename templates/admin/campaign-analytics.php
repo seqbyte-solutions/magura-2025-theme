@@ -6,7 +6,7 @@ if (!current_user_can('can_see_analitics')) {
 
 $url = 'https://api-magura.promoapp.ro/api/v1/campaign/analytics';
 $headers = [
-  'X-API-KEY' => defined('MAGURA_API_KEY') ? MAGURA_API_KEY : get_option('magura_api_key', 'tUBP2HIACXBvhc6LD47cPQrX7YSk4iBEn7prR7GmtbgOSPN1XtZEMR9u7g65N57OoJx2IEWdCJeV2EJTl9MYH3CL8Q5njzMqqvjRX7b23AOQjhEauLuRvbXT1xXb2qQI'),
+  'X-API-KEY' => MAGURA_API_KEY,
   'Content-Type' => 'application/json',
   'Accept' => 'application/json'
 ];
