@@ -189,6 +189,16 @@ class Castigatori_List_Table extends WP_List_Table
         return $output . '</div>';
     }
 
+    public function column_awb_status($item)
+    {
+        if (empty($item['awb'])) {
+            return "-";
+        }
+        $awb = $item['awb'];
+
+        return "<div data-awb='" . $awb . "' class='awb-status-container'><img src=" . esc_url(get_admin_url() . 'images/loading.gif') . " </div>";
+    }
+
     public function extra_tablenav($which)
     {
         if ($which == "top") {
@@ -533,4 +543,32 @@ $castigatori_list_table = new Castigatori_List_Table();
             }
         });
     }
+
+    jQuery(document).ready(function() {
+        jQuery('.awb-status-container').each(function() {
+            const awb = jQuery(this).data('awb');
+            if (!awb) {
+                this.innerHTML = "-";
+                return;
+            }
+            const element = this;
+            jQuery.ajax({
+                url: 'https://api-magura.promoapp.ro/api/v1/campaign/track-awb?awb=' + awb,
+                type: 'GET',
+                headers: {
+                    'X-API-KEY': '<?php echo MAGURA_API_KEY; ?>',
+                    'Accept': 'application/json'
+                },
+                success: function(response) {
+                    const status = response.message;
+                    if (!status || status.length === 0) {
+                        element.innerHTML = "<span class='awb-status'>-</span>";
+                        return;
+                    }
+                    const lastStatus = status[status.length - 1]
+                    element.innerHTML = "<span class='awb-status '>" + lastStatus.name + "</span>";
+                }
+            });
+        });
+    });
 </script>
