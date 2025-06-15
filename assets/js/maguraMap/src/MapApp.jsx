@@ -2324,34 +2324,41 @@ const countiesGroup = [
 ];
 
 export function MapApp() {
-
-  const entriesForMaxSize  = 1000;
+  const entriesForMaxSize = 1000;
   const [maxCountyEntries, setMaxCountyEntries] = useState(0);
-  // foreach key of mapData.countiesData, set style of .county-pin[data-name="key"] 
+  // foreach key of mapData.countiesData, set style of .county-pin[data-name="key"]
   // to the value of mapData.countiesData[key].color
 
   useEffect(() => {
     let maxEntries = 0;
-    Object.values(mapData.countiesData).forEach(county => {
+    Object.values(mapData.countiesData).forEach((county) => {
       if (county.entries > maxEntries) {
-        maxEntries= county.entries;
+        maxEntries = county.entries;
       }
     });
     setMaxCountyEntries(maxEntries);
 
     Object.keys(mapData.countiesData).forEach((key) => {
-      const fluture = document.querySelector(`.county-pin[data-name="${key}"] .fluture`);
+      const fluture = document.querySelector(
+        `.county-pin[data-name="${key}"] .fluture`
+      );
       const entries = mapData.countiesData[key].entries;
 
       const percentage = (entries / maxEntries) * 100;
-      const scale = entries === 0 ? 0 : entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
-      
+      const scale =
+        entries === 0
+          ? 0
+          : entries > 0 && entries < 100
+          ? 10 / 100
+          : percentage / 100 < 35 / 100
+          ? 35 / 100
+          : percentage / 100;
+
       if (fluture) {
-       fluture.style.transform = `translateY(0) scale(${scale})`;
+        fluture.style.transform = `translateY(0) scale(${scale})`;
       }
     });
-  },[])
-
+  }, []);
 
   const [tooltipData, setTooltipData] = useState({
     anchorSelector: null,
@@ -2370,16 +2377,18 @@ export function MapApp() {
     const data = mapData.countiesData[dataName];
     if (pin) {
       pin.classList.add("isActive");
-      pin.querySelector(".fluture").style.transform = `translateY(-80px) scale(1)`;
+      pin.querySelector(
+        ".fluture"
+      ).style.transform = `translateY(-80px) scale(1)`;
       setTooltipData({
         anchorSelector: `#${tooltip.id}`,
-        content: (<>
-          <h3>{data.name}</h3>
-          <p>Nr. înscrieri: {data.entries}</p>
-          <div className="tooltip-arrow-down">
-
-          </div>
-        </>),
+        content: (
+          <>
+            <h3>{data.name}</h3>
+            <p>Nr. înscrieri: {data.entries}</p>
+            <div className="tooltip-arrow-down"></div>
+          </>
+        ),
         isVisible: true,
       });
     }
@@ -2396,9 +2405,18 @@ export function MapApp() {
       const entries = mapData.countiesData[targetId].entries;
 
       const percentage = (entries / maxCountyEntries) * 100;
-      const scale = entries === 0 ? 0 : entries > 0 && entries < 100 ? 5 / 100 : percentage / 100 < 5 / 100 ? 1/100 : percentage / 100;
+      const scale =
+        entries === 0
+          ? 0
+          : entries > 0 && entries < 100
+          ? 10 / 100
+          : percentage / 100 < 35 / 100
+          ? 35 / 100
+          : percentage / 100;
       // const scale = percentage / 100;
-      pin.querySelector(".fluture").style.transform = `translateY(0px) scale(${scale})`;
+      pin.querySelector(
+        ".fluture"
+      ).style.transform = `translateY(0px) scale(${scale})`;
       setTooltipData({
         anchorSelector: null,
         content: "",
