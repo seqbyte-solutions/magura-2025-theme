@@ -110,15 +110,12 @@ class Magura2025ThemeSetup
 
         $message = "Felicitări!
 
-Hei, se pare că norocul ți-a zâmbit!
-Ai pus mâna pe un premiu: " . $prize . "
+Ești potențialul câștigător al unui " . $prize . "! În perioada următoare vom derula procesul de validare a înscrierii – verificăm bonul fiscal, autenticitatea acestuia și respectarea regulamentului. 
 
 ID înscriere: " . $entry_id . "\n\n
 
 O zi plină de îmbrățișări!
 Echipa Măgura";
-
-
         $headers = array('Content-Type: text/plain; charset=UTF-8');
         $headers[] = 'From: Măgura <contact@magura.ro>';
         $headers[] = 'Reply-To: Măgura <contact@magura.ro>';
@@ -158,7 +155,7 @@ Echipa Măgura";
             $to = sanitize_email($entry['email']);
             $prize = $entry['prize_name'] === 'Vacanta' ? "Voucher Îmbrățisează România" : ($entry['prize_name'] === 'Set Magura' ? 'Set Măgura' : 'Rucsac Măgura');
             $subject = 'Revendicarea premiului dvs. expiră în curând!';
-            $message = "Hei,
+            $message = "Felicitări!
             
             Se pare că încă nu ai completat formularul de revendicare a premiului tău: " . $prize . "
             Poți completa formularul aici: 

@@ -340,11 +340,6 @@ Echipa Măgura';
             ]
         ]);
 
-        error_log(print_r($url, true)); // Log the response for debugging
-        error_log(print_r($response, true)); // Log the response for debugging
-
-        // Check if the response is an error
-
         if (is_wp_error($response)) {
             wp_send_json_error('Error fetching data', 500);
             return;
@@ -355,7 +350,34 @@ Echipa Măgura';
             wp_send_json_error($data['error'], 400);
             return;
         }
+
+        $this->send_reject_email($data['rejectEmail']);
+
         wp_send_json_success($data);
+    }
+
+    private function send_reject_email($emailTo) {
+ $to = sanitize_email($emailTo);
+        // $to = 'bucel.ionsebastian@gmail.com';
+ 
+        $subject = 'Ne pare rău!';
+
+        $message = 'Ne pare rău!
+
+În urma procesului de validare, înscrierea ta în concurs nu a putut fi acceptată, deoarece nu respectă regulamentul oficial al campaniei (bon fiscal invalid, incomplet sau înscriere incorectă/frauduloasă).
+
+Prin urmare, nu poți fi declarat câștigător. Mai poți încerca până la finalul campaniei având grijă să respecți regulamentul oficial al campaniei.
+
+
+Cu drag,
+Echipa Măgura';
+
+        $headers = array('Content-Type: text/plain; charset=UTF-8');
+        $headers[] = 'From: Măgura <contact@magura.ro>';
+        $headers[] = 'Reply-To: Măgura <contact@magura.ro>';
+        $headers[] = 'X-Mailer: PHP/' . phpversion();
+
+        wp_mail($to, $subject, $message, $headers);
     }
 
     public function generate_awb()
