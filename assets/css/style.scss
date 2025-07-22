@@ -16,6 +16,36 @@
   align-items: center;
 }
 
+.hero-section-headliner{
+  width: 100%;
+  position: relative;
+  padding-bottom: 100px;
+  svg{
+    position: relative;
+    display: block;
+    width: 70%;
+    margin: 0 auto 0px; 
+  }
+}
+
+.hero-floating-elements{
+    position: absolute;
+    width: 100%;
+    display: flex
+;
+    justify-content: space-between;
+    top: 80%;
+}
+
+.hero-prize-item {
+    width: 40%;
+    position: relative;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
+}
+
 .hero-cta {
   overflow: visible;
   margin-inline: auto;
@@ -118,6 +148,8 @@
     line-height: 1.5rem;
   }
 }
+
+
 
 .prize-item {
   position: relative;

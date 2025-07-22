@@ -56,9 +56,11 @@
   }
   .hero-section-content {
     justify-content: center;
+    min-height: calc(100dvh - var(--hero-section-padding-top));
+    height: max-content;
+    padding-top: 15px;
   }
   .magura-map-container {
-    height: -moz-max-content;
     height: max-content;
     padding-block: 25px;
   }
@@ -86,6 +88,17 @@
   }
   .winners-list-group-winners {
     width: 100%;
+  }
+  .hero-section-headliner {
+    padding-bottom: 10px;
+  }
+  .hero-section-headliner svg {
+    width: 90%;
+  }
+  .hero-floating-elements {
+    position: relative;
+    top: auto;
+    justify-content: center;
   }
 }
 @media only screen and (max-width: 768px) {

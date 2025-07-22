@@ -62,6 +62,9 @@
 
   .hero-section-content{
     justify-content: center;
+    min-height: calc(100dvh - var(--hero-section-padding-top));
+    height: max-content;
+    padding-top: 15px;
   }
 
   .magura-map-container{
@@ -97,6 +100,18 @@
     width: 100%;
   }
 
+  .hero-section-headliner{
+    padding-bottom: 10px;
+    svg{
+      width: 90%;
+    }
+  }
+  .hero-floating-elements{
+    position: relative;
+    top: auto;
+    justify-content: center;
+  }
+
 }
 @media only screen and (max-width: 768px) {
   .maintenance-content {
@@ -124,6 +139,7 @@
     font-size: 1.5rem;
     line-height: 1.8rem;
 }
+
 
 .product-item{
   width: 100%;
