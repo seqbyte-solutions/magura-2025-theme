@@ -66,7 +66,19 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                     </g>
 
                 </svg>
-                <div class="hero-floating-elements">
+                <div class="hero-prizes">
+                    <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/hero_prizes.png" alt="">
+                    <a href="/inscrie-te" class="hero-cta">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 395.64 241.73">
+                                    <path class="hero-cta-bubble-1" d="m198.43,237.81C79.67,258.58,6.14,192.64,2.25,139.65-1.29,91.51,5.35,43.44,112.79,21.95c133.23-26.65,258.78,2.73,281.7,67.62,13.11,37.11-88.03,129.35-196.06,148.24Z" style="fill: #fff; opacity: .45;" />
+                                    <path class="hero-cta-bubble-2" d="m3.73,45.23C30.52-13.33,217.89-19.15,322.32,52.22c18.15,12.4,46.43,32.29,46.87,59.8.83,51.91-97.76,110.2-184.71,104.96C71.83,210.19-19.88,96.85,3.73,45.23Z" style="fill: #fff; opacity: .45;" />
+                                </svg>
+                                <span>
+                                    Înscrie-te
+                                </span>
+                            </a>
+                </div>
+                <!-- <div class="hero-floating-elements">
                     <div class="hero-prize-item">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 460.4 398.35">
                             <path d="m239.01,341.86c-120.53-4.38-179.69-122.72-173.12-201.61C71.87,68.58,87.81,0,197.38,0c135.87,0,258.58,116.14,262.97,181.89,3.07,46.12-111.69,163.96-221.33,159.97Z" style="fill: #F9BAC5; opacity: .45;" />
@@ -86,20 +98,12 @@ wp_enqueue_script('frontpage-script', MAGURA_2025_THEME_URL . '/assets/js/frontp
                         </svg>
                         <div class="prize-item-content">
                             <img src="<?= MAGURA_2025_THEME_URL ?>/assets/img/prize_vacanta.png" alt="" style="width: 80%">
+                            
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
-            <a href="/inscrie-te" class="hero-cta">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 395.64 241.73">
-                    <path class="hero-cta-bubble-1" d="m198.43,237.81C79.67,258.58,6.14,192.64,2.25,139.65-1.29,91.51,5.35,43.44,112.79,21.95c133.23-26.65,258.78,2.73,281.7,67.62,13.11,37.11-88.03,129.35-196.06,148.24Z" style="fill: #fff; opacity: .45;" />
-                    <path class="hero-cta-bubble-2" d="m3.73,45.23C30.52-13.33,217.89-19.15,322.32,52.22c18.15,12.4,46.43,32.29,46.87,59.8.83,51.91-97.76,110.2-184.71,104.96C71.83,210.19-19.88,96.85,3.73,45.23Z" style="fill: #fff; opacity: .45;" />
-                </svg>
-                <span>
-                    Înscrie-te
-                </span>
-            </a>
 
             <a href="#harta-imbratisarilor" class="hero-scrolldown-btn" id="hero-scrolldown-btn">
                 <div class="hero-scrolldown-btn-content">
