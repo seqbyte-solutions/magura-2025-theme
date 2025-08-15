@@ -1059,4 +1059,13 @@
   margin-inline: auto;
   display: block;
   fill: var(--red);
+}
+
+.campaign-form-container h4 {
+  text-align: center;
+  font-family: "Baloo2";
+  font-size: 1.5rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+  color: var(--red);
 }/*# sourceMappingURL=style.css.map */
