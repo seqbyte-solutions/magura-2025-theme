@@ -23,7 +23,8 @@
             <h2>Înscrie-te</h2>
         </div>
         <div class="campaign-form-container">
-            <h4>Campania s-a încheiat pe 15 august 2025</h4>
-                </div>
+            <h4>Campania “Câștigă cu Măgura dintr-o îmbrățișare!” s-a încheiat pe data de 15 august 2025. </h4>
+            <h3>Ramâi aproape de Magura, urmează noi provocări!</h3>
+        </div>
     </div>
 </section>
