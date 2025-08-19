@@ -52,8 +52,8 @@ class Magura2025TemplateHandler
         // error_log('Template maintenance mode check: ' . get_option('maintainance_mode'));
 
         // if (get_option('maintainance_mode') === 'true' && !is_user_logged_in() && !is_admin() && !(current_user_can('administrator') || current_user_can('editor'))) {
-            // $this->render_maintenance_page();
-            // return;
+            $this->render_maintenance_page();
+            return;
         // }
 
         // check if page slug is "validare-castigator"
